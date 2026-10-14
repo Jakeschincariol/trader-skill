@@ -1,0 +1,16 @@
+{
+  "budget": 5000,
+  "cash_buffer_pct": 10,
+  "max_position_pct": 25,
+  "max_order_usd": 2000,
+  "min_order_usd": 5,
+  "max_orders_per_day": 10,
+  "fractional": true,
+  "broker": "alpaca",
+  "paper": true,
+  "blocked": [],
+  "allow_options": false,
+  "allow_margin": false,
+  "allow_short": false,
+  "sec_user_agent": "Your Name you@example.com"
+}

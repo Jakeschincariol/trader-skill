@@ -1,0 +1,29 @@
+{
+  "note": "Well-known 13F filers. Every CIK was checked against SEC's submissions API (data.sec.gov) on 2026-10-13, and last_13f is the newest 13F-HR seen that day. A 13F is filed by the FIRM, not the person: the person is who the firm is known for, and some of them no longer run it. Add your own rows; find any CIK with: edgar13f.py find \"name\" --sec",
+  "verified": "2026-10-13",
+  "filers": [
+    {"cik": "0001067983", "name": "Berkshire Hathaway Inc", "person": "Warren Buffett (Chairman Emeritus since 2026-09-18) and Greg Abel (CEO since 2026-01-01)", "aliases": ["berkshire", "buffett", "warren buffett", "greg abel"], "last_13f": "2026-08-14"},
+    {"cik": "0001336528", "name": "Pershing Square Capital Management, L.P.", "person": "Bill Ackman", "aliases": ["pershing", "ackman", "bill ackman"], "last_13f": "2026-05-15"},
+    {"cik": "0001649339", "name": "Scion Asset Management, LLC", "person": "Michael Burry", "aliases": ["scion", "burry", "michael burry"], "last_13f": "2025-11-03", "status": "no 13F-HR filed since 2025-11-03 (quarter ended 2025-09-30)"},
+    {"cik": "0001350694", "name": "Bridgewater Associates, LP", "person": "founded by Ray Dalio", "aliases": ["bridgewater", "dalio", "ray dalio"], "last_13f": "2026-08-14"},
+    {"cik": "0001697748", "name": "ARK Investment Management LLC", "person": "Cathie Wood", "aliases": ["ark", "ark invest", "cathie wood", "wood"], "last_13f": "2026-08-14"},
+    {"cik": "0001536411", "name": "Duquesne Family Office LLC", "person": "Stanley Druckenmiller", "aliases": ["duquesne", "druckenmiller", "stanley druckenmiller"], "last_13f": "2026-08-14"},
+    {"cik": "0001656456", "name": "Appaloosa LP", "person": "David Tepper", "aliases": ["appaloosa", "tepper", "david tepper"], "last_13f": "2026-08-14"},
+    {"cik": "0001061768", "name": "Baupost Group LLC/MA", "person": "Seth Klarman", "aliases": ["baupost", "klarman", "seth klarman"], "last_13f": "2026-08-13"},
+    {"cik": "0001040273", "name": "Third Point LLC", "person": "Dan Loeb", "aliases": ["third point", "loeb", "dan loeb"], "last_13f": "2026-08-14"},
+    {"cik": "0001709323", "name": "Himalaya Capital Management LLC", "person": "Li Lu", "aliases": ["himalaya", "li lu"], "last_13f": "2026-08-14"},
+    {"cik": "0000921669", "name": "Icahn Carl C", "person": "Carl Icahn", "aliases": ["icahn", "carl icahn"], "last_13f": "2026-08-14"},
+    {"cik": "0001029160", "name": "Soros Fund Management LLC", "person": "George Soros (family office)", "aliases": ["soros", "george soros"], "last_13f": "2026-08-14"},
+    {"cik": "0001037389", "name": "Renaissance Technologies LLC", "person": "founded by Jim Simons", "aliases": ["renaissance", "rentec", "jim simons"], "last_13f": "2026-08-13"},
+    {"cik": "0001167483", "name": "Tiger Global Management LLC", "person": "Chase Coleman", "aliases": ["tiger global", "chase coleman"], "last_13f": "2026-08-14"},
+    {"cik": "0001135730", "name": "Coatue Management LLC", "person": "Philippe Laffont", "aliases": ["coatue", "laffont"], "last_13f": "2026-08-14"},
+    {"cik": "0001061165", "name": "Lone Pine Capital LLC", "person": "founded by Stephen Mandel", "aliases": ["lone pine"], "last_13f": "2026-08-14"},
+    {"cik": "0001791786", "name": "Elliott Investment Management L.P.", "person": "founded by Paul Singer", "aliases": ["elliott", "paul singer"], "last_13f": "2026-08-14"},
+    {"cik": "0001569205", "name": "Fundsmith LLP", "person": "Terry Smith", "aliases": ["fundsmith", "terry smith"], "last_13f": "2026-08-14"},
+    {"cik": "0001096343", "name": "Markel Group Inc.", "person": "Tom Gayner", "aliases": ["markel", "gayner", "tom gayner"], "last_13f": "2026-07-31"},
+    {"cik": "0001166559", "name": "Gates Foundation Trust", "person": "Bill & Melinda Gates Foundation Trust", "aliases": ["gates", "gates foundation", "bill gates"], "last_13f": "2026-08-14"},
+    {"cik": "0001549575", "name": "Dalal Street, LLC", "person": "Mohnish Pabrai", "aliases": ["pabrai", "mohnish pabrai", "dalal street"], "last_13f": "2026-08-13"},
+    {"cik": "0001112520", "name": "Akre Capital Management LLC", "person": "founded by Chuck Akre", "aliases": ["akre"], "last_13f": "2026-08-14"},
+    {"cik": "0000949509", "name": "Oaktree Capital Management LP", "person": "Howard Marks", "aliases": ["oaktree", "howard marks"], "last_13f": "2026-08-14"}
+  ]
+}

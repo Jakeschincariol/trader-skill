@@ -1,0 +1,27 @@
+{
+  "note": "CUSIP to ticker for companies with more than one listed share class, where a name match cannot tell the classes apart. Each row was checked against OpenFIGI (api.openfigi.com/v3/mapping, exchCode US) on 2026-10-13. Tickers use a dot for the class, the way brokers like Alpaca take them (BRK.B).",
+  "verified": "2026-10-13",
+  "cusips": {
+    "02079K305": "GOOGL",
+    "02079K107": "GOOG",
+    "084670108": "BRK.A",
+    "084670702": "BRK.B",
+    "526057104": "LEN",
+    "526057302": "LEN.B",
+    "530909100": "LLYVA",
+    "530909308": "LLYVK",
+    "531229755": "FWONK",
+    "35137L105": "FOXA",
+    "35137L204": "FOX",
+    "65249B109": "NWSA",
+    "65249B208": "NWS",
+    "904311107": "UAA",
+    "904311206": "UA",
+    "422806109": "HEI",
+    "422806208": "HEI.A",
+    "98954M101": "ZG",
+    "98954M200": "Z",
+    "115637100": "BF.A",
+    "115637209": "BF.B"
+  }
+}

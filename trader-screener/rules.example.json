@@ -1,0 +1,16 @@
+{
+  "name": "Growing, profitable, not priced for perfection",
+  "rules": [
+    {"metric": "revenue_growth_yoy", "op": ">=", "value": 10},
+    {"metric": "operating_margin", "op": ">=", "value": 25},
+    {"metric": "eps_ttm", "op": ">", "value": 0},
+    {"metric": "pe", "op": "<=", "value": 35}
+  ],
+  "rank": [
+    {"metric": "revenue_growth_yoy", "order": "desc", "weight": 2},
+    {"metric": "pe", "order": "asc", "weight": 1},
+    {"metric": "operating_margin", "order": "desc", "weight": 1}
+  ],
+  "missing": "fail",
+  "top": 10
+}

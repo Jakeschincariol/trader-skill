@@ -1,0 +1,22 @@
+{
+  "name": "trader-skill",
+  "description": "11 Claude skills that copy the investors you trust, watch the news and Congress, size every trade to your budget, and never place an order without your yes.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jake Schincariol",
+    "url": "https://opusjake.ai"
+  },
+  "homepage": "https://github.com/Jakeschincariol/trader-skill",
+  "repository": "https://github.com/Jakeschincariol/trader-skill",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-skills",
+    "investing",
+    "13f",
+    "stock-market",
+    "congress-trades",
+    "portfolio"
+  ],
+  "skills": "./"
+}

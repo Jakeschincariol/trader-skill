@@ -1,0 +1,182 @@
+{
+  "source": "BERKSHIRE HATHAWAY INC 13F-HR, quarter ending 2026-06-30, filed 2026-08-14 (accession 0001193125-26-352200)",
+  "as_of": "2026-06-30",
+  "filed": "2026-08-14",
+  "cik": "0001067983",
+  "method": "top 5 stock positions by value, share classes combined, pct_of_13f scaled to 100",
+  "weights": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple",
+      "weight": 30.67,
+      "pct_of_13f": 22.04,
+      "value": 65950296923.0,
+      "shares": 227917808.0,
+      "cusips": [
+        "037833100"
+      ]
+    },
+    {
+      "ticker": "AXP",
+      "name": "American Express",
+      "weight": 23.85,
+      "pct_of_13f": 17.14,
+      "value": 51282319275.0,
+      "shares": 151610700.0,
+      "cusips": [
+        "025816109"
+      ]
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet",
+      "weight": 17.56,
+      "pct_of_13f": 12.62,
+      "value": 37764088383.0,
+      "shares": 105979600.0,
+      "cusips": [
+        "02079K305",
+        "02079K107"
+      ],
+      "classes": [
+        "GOOGL",
+        "GOOG"
+      ]
+    },
+    {
+      "ticker": "KO",
+      "name": "Coca Cola",
+      "weight": 15.11,
+      "pct_of_13f": 10.86,
+      "value": 32508000000.0,
+      "shares": 400000000.0,
+      "cusips": [
+        "191216100"
+      ]
+    },
+    {
+      "ticker": "BAC",
+      "name": "Bank of America",
+      "weight": 12.8,
+      "pct_of_13f": 9.2,
+      "value": 27543790975.0,
+      "shares": 483394015.0,
+      "cusips": [
+        "060505104"
+      ]
+    }
+  ],
+  "skipped": [
+    {
+      "issuer": "CHEVRON CORPORATION",
+      "ticker": "CVX",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "OCCIDENTAL PETE CORP",
+      "ticker": "OXY",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "CHUBB LIMITED",
+      "ticker": "CB",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "MOODYS CORP",
+      "ticker": "MCO",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "KRAFT HEINZ CO",
+      "ticker": "KHC",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "DAVITA INC",
+      "ticker": "DVA",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "DELTA AIR LINES INC",
+      "ticker": "DAL",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "SIRIUSXM HOLDINGS INC",
+      "ticker": "SIRI",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "VERISIGN INC",
+      "ticker": "VRSN",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "KROGER CO",
+      "ticker": "KR",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "LIBERTY LIVE HOLDINGS INC",
+      "ticker": "LLYVK",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "ALLY FINL INC",
+      "ticker": "ALLY",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "LENNAR CORP",
+      "ticker": "LEN",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "NEW YORK TIMES CO MTN BE",
+      "ticker": "NYT",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "CAPITAL ONE FINL CORP",
+      "ticker": "COF",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "LOUISIANA PAC CORP",
+      "ticker": "LPX",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "NUCOR CORP",
+      "ticker": "NUE",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "MACYS INC",
+      "ticker": "M",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "NVR INC",
+      "ticker": "NVR",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "JEFFERIES FINANCIAL GROUP IN",
+      "ticker": "JEF",
+      "why": "outside the top 5"
+    },
+    {
+      "issuer": "D R HORTON INC",
+      "ticker": "DHI",
+      "why": "outside the top 5"
+    }
+  ],
+  "caveats": [
+    "A 13F is a snapshot of the last day of the quarter, filed up to 45 days later. The investor may have sold or added since.",
+    "It shows long positions in US-listed stocks only: no shorts, cash, bonds, foreign stocks, private companies or trades made inside the quarter.",
+    "It is filed by the firm, not by the person it is known for.",
+    "Education and tooling, not financial advice. Nothing here places an order."
+  ]
+}

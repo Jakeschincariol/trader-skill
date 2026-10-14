@@ -1,0 +1,9 @@
+{
+  "rules": [
+    {"id": "opening-bell", "type": "opening_bell"},
+    {"id": "aapl-above-350", "symbol": "AAPL", "type": "above", "price": 350},
+    {"id": "bac-stop-50", "symbol": "BAC", "type": "stop", "price": 50, "note": "my stop"},
+    {"id": "ko-move-3", "symbol": "KO", "type": "pct_move", "pct": 3},
+    {"id": "googl-dip-320", "symbol": "GOOGL", "type": "below", "price": 320, "rearm": true}
+  ]
+}

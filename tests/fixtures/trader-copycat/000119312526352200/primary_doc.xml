@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edgarSubmission xsi:schemaLocation="http://www.sec.gov/edgar/thirteenffiler eis_13F_Filer.xsd" xmlns:ns1="http://www.sec.gov/edgar/common" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.sec.gov/edgar/thirteenffiler">
+  <schemaVersion>X0202</schemaVersion>
+  <headerData>
+    <submissionType>13F-HR</submissionType>
+    <filerInfo>
+      <liveTestFlag>LIVE</liveTestFlag>
+      <flags/>
+      <filer>
+        <credentials>
+          <cik>0001067983</cik>
+          <ccc>XXXXXXXX</ccc>
+        </credentials>
+      </filer>
+      <periodOfReport>06-30-2026</periodOfReport>
+    </filerInfo>
+  </headerData>
+  <formData>
+    <coverPage>
+      <reportCalendarOrQuarter>06-30-2026</reportCalendarOrQuarter>
+      <isAmendment>false</isAmendment>
+      <filingManager>
+        <name>Berkshire Hathaway Inc</name>
+        <address>
+          <ns1:street1>3555 Farnam Street</ns1:street1>
+          <ns1:city>Omaha</ns1:city>
+          <ns1:stateOrCountry>NE</ns1:stateOrCountry>
+          <ns1:zipCode>68131</ns1:zipCode>
+        </address>
+      </filingManager>
+      <reportType>13F HOLDINGS REPORT</reportType>
+      <form13FFileNumber>028-04545</form13FFileNumber>
+      <provideInfoForInstruction5>N</provideInfoForInstruction5>
+    </coverPage>
+    <signatureBlock>
+      <name>Marc D. Hamburg</name>
+      <title>Senior Vice President</title>
+      <phone>402-346-1400</phone>
+      <signature>Marc D. Hamburg</signature>
+      <city>Omaha</city>
+      <stateOrCountry>NE</stateOrCountry>
+      <signatureDate>08-14-2026</signatureDate>
+    </signatureBlock>
+    <summaryPage>
+      <otherIncludedManagersCount>14</otherIncludedManagersCount>
+      <tableEntryTotal>89</tableEntryTotal>
+      <tableValueTotal>299253556246</tableValueTotal>
+      <isConfidentialOmitted>false</isConfidentialOmitted>
+      <otherManagers2Info>
+        <otherManager2>
+          <sequenceNumber>1</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-2226</form13FFileNumber>
+            <name>Berkshire Hathaway Homestate Insurance Co.</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>2</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-5678</form13FFileNumber>
+            <name>Berkshire Hathaway Life Insurance Co of Nebraska</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>3</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-14389</form13FFileNumber>
+            <name>BH Finance LLC</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>4</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-554</form13FFileNumber>
+            <name>Buffett Warren E</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>5</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-1517</form13FFileNumber>
+            <name>Columbia Insurance Co</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>6</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-06102</form13FFileNumber>
+            <name>Cypress Insurance Co</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>7</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-04922</form13FFileNumber>
+            <name>General Re Corp</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>8</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-852</form13FFileNumber>
+            <name>GEICO Corp</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>9</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-12941</form13FFileNumber>
+            <name>Medical Protective Corp</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>10</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-1066</form13FFileNumber>
+            <name>National Fire &amp; Marine Insurance Co</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>11</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-718</form13FFileNumber>
+            <name>National Indemnity Co</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>12</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-5006</form13FFileNumber>
+            <name>National Liability &amp; Fire Insurance Co</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>13</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-11222</form13FFileNumber>
+            <name>Nebraska Furniture Mart</name>
+          </otherManager>
+        </otherManager2>
+        <otherManager2>
+          <sequenceNumber>14</sequenceNumber>
+          <otherManager>
+            <form13FFileNumber>28-12947</form13FFileNumber>
+            <name>U.S. Investment Corp</name>
+          </otherManager>
+        </otherManager2>
+      </otherManagers2Info>
+    </summaryPage>
+  </formData>
+</edgarSubmission>

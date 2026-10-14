@@ -1,0 +1,65 @@
+{
+  "cash": 500.0,
+  "positions": [
+    {
+      "ticker": "AAPL",
+      "shares": 3.6628,
+      "lots": [
+        {
+          "id": "AAPL-1",
+          "date": "2026-10-13",
+          "shares": 3.6628,
+          "cost": 1250.0
+        }
+      ]
+    },
+    {
+      "ticker": "KO",
+      "shares": 10,
+      "lots": [
+        {
+          "id": "KO-1",
+          "date": "2025-03-03",
+          "shares": 10,
+          "cost": 1050.0
+        }
+      ]
+    },
+    {
+      "ticker": "BAC",
+      "shares": 12,
+      "lots": [
+        {
+          "id": "BAC-1",
+          "date": "2026-02-02",
+          "shares": 10,
+          "cost": 650.0
+        },
+        {
+          "id": "BAC-2",
+          "date": "2026-10-01",
+          "shares": 2,
+          "cost": 100.0
+        }
+      ]
+    },
+    {
+      "ticker": "AXP",
+      "shares": 4,
+      "lots": [
+        {
+          "id": "AXP-1",
+          "date": "2024-06-03",
+          "shares": 3,
+          "cost": 690.0
+        },
+        {
+          "id": "AXP-2",
+          "date": "2025-12-01",
+          "shares": 1,
+          "cost": 340.0
+        }
+      ]
+    }
+  ]
+}

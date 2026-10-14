@@ -1,0 +1,4 @@
+ticker,name,revenue_growth_yoy,operating_margin,net_margin,eps_ttm,sector
+AAPL,Apple Inc.,16.4%,32.6%,27.2%,$8.71,Technology
+AXP,American Express,8.6%,,27.7%,$16.47,Financials
+KO,Coca-Cola,12.1%,35.0%,31.5%,$3.18,Consumer Staples

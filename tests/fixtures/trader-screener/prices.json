@@ -1,0 +1,5 @@
+{
+  "as_of": "2026-10-13",
+  "source": "Yahoo Finance chart API (query1.finance.yahoo.com/v8/finance/chart), regularMarketPrice at the 2026-10-13 close",
+  "prices": {"AAPL": 341.27, "AXP": 309.84, "GOOGL": 353.78, "KO": 90.11, "BAC": 53.96}
+}

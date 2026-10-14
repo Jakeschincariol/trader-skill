@@ -1,0 +1,29 @@
+{
+  "as_of": "2026-10-13T20:00:01Z",
+  "source": "yahoo",
+  "note": "Regular-session closes on 2026-10-13 from query1.finance.yahoo.com/v8/finance/chart (fixture)",
+  "prices": {
+    "AAPL": 341.27,
+    "AXP": 309.84,
+    "GOOGL": 353.78,
+    "KO": 90.11,
+    "BAC": 53.96
+  },
+  "detail": {
+    "AAPL": {
+      "prev_close": 340.97
+    },
+    "AXP": {
+      "prev_close": 311.53
+    },
+    "GOOGL": {
+      "prev_close": 352.72
+    },
+    "KO": {
+      "prev_close": 89.79
+    },
+    "BAC": {
+      "prev_close": 54.58
+    }
+  }
+}

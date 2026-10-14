@@ -1,0 +1,312 @@
+{
+"1": {
+"cik_str": 320193,
+"ticker": "AAPL",
+"title": "Apple Inc."
+},
+"2": {
+"cik_str": 1652044,
+"ticker": "GOOGL",
+"title": "Alphabet Inc."
+},
+"9": {
+"cik_str": 1067983,
+"ticker": "BRK-B",
+"title": "BERKSHIRE HATHAWAY INC"
+},
+"24": {
+"cik_str": 93410,
+"ticker": "CVX",
+"title": "CHEVRON CORP"
+},
+"28": {
+"cik_str": 21344,
+"ticker": "KO",
+"title": "COCA COLA CO"
+},
+"29": {
+"cik_str": 70858,
+"ticker": "BAC",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"70": {
+"cik_str": 4962,
+"ticker": "AXP",
+"title": "AMERICAN EXPRESS CO"
+},
+"120": {
+"cik_str": 896159,
+"ticker": "CB",
+"title": "Chubb Ltd"
+},
+"131": {
+"cik_str": 927628,
+"ticker": "COF",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"215": {
+"cik_str": 1059556,
+"ticker": "MCO",
+"title": "MOODYS CORP /DE/"
+},
+"281": {
+"cik_str": 797468,
+"ticker": "OXY",
+"title": "OCCIDENTAL PETROLEUM CORP /DE/"
+},
+"305": {
+"cik_str": 73309,
+"ticker": "NUE",
+"title": "NUCOR CORP"
+},
+"314": {
+"cik_str": 27904,
+"ticker": "DAL",
+"title": "DELTA AIR LINES, INC."
+},
+"358": {
+"cik_str": 1650107,
+"ticker": "CCEP",
+"title": "COCA-COLA EUROPACIFIC PARTNERS plc"
+},
+"414": {
+"cik_str": 882184,
+"ticker": "DHI",
+"title": "HORTON D R INC /DE/"
+},
+"421": {
+"cik_str": 56873,
+"ticker": "KR",
+"title": "KROGER CO"
+},
+"508": {
+"cik_str": 1014473,
+"ticker": "VRSN",
+"title": "VERISIGN INC/CA"
+},
+"513": {
+"cik_str": 1637459,
+"ticker": "KHC",
+"title": "Kraft Heinz Co"
+},
+"602": {
+"cik_str": 16918,
+"ticker": "STZ",
+"title": "CONSTELLATION BRANDS, INC."
+},
+"655": {
+"cik_str": 920760,
+"ticker": "LEN",
+"title": "LENNAR CORP /NEW/"
+},
+"710": {
+"cik_str": 906163,
+"ticker": "NVR",
+"title": "NVR INC"
+},
+"815": {
+"cik_str": 317540,
+"ticker": "COKE",
+"title": "Coca-Cola Consolidated, Inc."
+},
+"888": {
+"cik_str": 40729,
+"ticker": "ALLY",
+"title": "Ally Financial Inc."
+},
+"893": {
+"cik_str": 927066,
+"ticker": "DVA",
+"title": "DAVITA INC."
+},
+"922": {
+"cik_str": 71691,
+"ticker": "NYT",
+"title": "NEW YORK TIMES CO"
+},
+"1029": {
+"cik_str": 96223,
+"ticker": "JEF",
+"title": "Jefferies Financial Group Inc."
+},
+"1038": {
+"cik_str": 908937,
+"ticker": "SIRI",
+"title": "SIRIUS XM HOLDINGS INC."
+},
+"1041": {
+"cik_str": 2078416,
+"ticker": "LLYVA",
+"title": "Liberty Live Holdings, Inc."
+},
+"1274": {
+"cik_str": 794367,
+"ticker": "M",
+"title": "Macy's, Inc."
+},
+"1487": {
+"cik_str": 60519,
+"ticker": "LPX",
+"title": "LOUISIANA-PACIFIC CORP"
+},
+"1828": {
+"cik_str": 1576018,
+"ticker": "SPNT",
+"title": "SiriusPoint Ltd"
+},
+"7296": {
+"cik_str": 910631,
+"ticker": "KOF",
+"title": "COCA COLA FEMSA SAB DE CV"
+},
+"7481": {
+"cik_str": 1652044,
+"ticker": "GOOG",
+"title": "Alphabet Inc."
+},
+"7483": {
+"cik_str": 1067983,
+"ticker": "BRK-A",
+"title": "BERKSHIRE HATHAWAY INC"
+},
+"7490": {
+"cik_str": 70858,
+"ticker": "BML-PG",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"7495": {
+"cik_str": 70858,
+"ticker": "BML-PL",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"7496": {
+"cik_str": 70858,
+"ticker": "BAC-PB",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"7499": {
+"cik_str": 70858,
+"ticker": "BAC-PK",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"7593": {
+"cik_str": 920760,
+"ticker": "LEN-B",
+"title": "LENNAR CORP /NEW/"
+},
+"7625": {
+"cik_str": 910631,
+"ticker": "COCSF",
+"title": "COCA COLA FEMSA SAB DE CV"
+},
+"8344": {
+"cik_str": 927628,
+"ticker": "COF-PI",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"8345": {
+"cik_str": 927628,
+"ticker": "COF-PJ",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"8346": {
+"cik_str": 927628,
+"ticker": "COF-PK",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"8347": {
+"cik_str": 927628,
+"ticker": "COF-PL",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"8348": {
+"cik_str": 927628,
+"ticker": "COF-PN",
+"title": "CAPITAL ONE FINANCIAL CORP"
+},
+"8533": {
+"cik_str": 2078416,
+"ticker": "LLYVB",
+"title": "Liberty Live Holdings, Inc."
+},
+"8534": {
+"cik_str": 2078416,
+"ticker": "LLYVK",
+"title": "Liberty Live Holdings, Inc."
+},
+"9247": {
+"cik_str": 797468,
+"ticker": "OXY-WT",
+"title": "OCCIDENTAL PETROLEUM CORP /DE/"
+},
+"9656": {
+"cik_str": 1652044,
+"ticker": "GOOGN",
+"title": "Alphabet Inc."
+},
+"9657": {
+"cik_str": 1652044,
+"ticker": "GOOGM",
+"title": "Alphabet Inc."
+},
+"10004": {
+"cik_str": 70858,
+"ticker": "BAC-PL",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10005": {
+"cik_str": 70858,
+"ticker": "MER-PK",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10006": {
+"cik_str": 70858,
+"ticker": "BACRP",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10031": {
+"cik_str": 70858,
+"ticker": "BAC-PE",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10032": {
+"cik_str": 70858,
+"ticker": "BML-PH",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10033": {
+"cik_str": 70858,
+"ticker": "BML-PJ",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10034": {
+"cik_str": 70858,
+"ticker": "BAC-PM",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10035": {
+"cik_str": 70858,
+"ticker": "BAC-PN",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10036": {
+"cik_str": 70858,
+"ticker": "BAC-PO",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10037": {
+"cik_str": 70858,
+"ticker": "BAC-PP",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10038": {
+"cik_str": 70858,
+"ticker": "BAC-PQ",
+"title": "BANK OF AMERICA CORP /DE/"
+},
+"10039": {
+"cik_str": 70858,
+"ticker": "BAC-PS",
+"title": "BANK OF AMERICA CORP /DE/"
+}
+}
