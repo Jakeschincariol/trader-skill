@@ -46,7 +46,7 @@ def text(res, i, key="reasons"):
 
 class Copies(unittest.TestCase):
     def test_shared_helpers_are_identical_in_every_skill(self):
-        for name in ("trader-budget", "trader-rebalance"):
+        for name in ("trader-budget", "trader-rebalance", "trader-tax-au"):
             self.assertTrue(filecmp.cmp(os.path.join(ROOT, "trader-risk", "asx.py"),
                                         os.path.join(ROOT, name, "asx.py"), shallow=False), name)
         self.assertTrue(filecmp.cmp(os.path.join(ROOT, "trader-risk", "cmc_import.py"),

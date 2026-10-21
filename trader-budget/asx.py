@@ -154,7 +154,7 @@ def fin_year(d):
     return "FY%d-%s" % (start, str(start + 1)[2:])
 
 
-def sell_preview(lots, shares, price, sold, fee=0.0, wait_days=120):
+def sell_preview(lots, shares, price, sold, fee=0.0, wait_days=120, keep_order=False):
     """Which lots to sell to keep the taxable gain lowest, and the estimate.
 
     lots: [{"id", "date", "shares", "cost"}], cost = total cost base of the lot
@@ -179,7 +179,8 @@ def sell_preview(lots, shares, price, sold, fee=0.0, wait_days=120):
         rank = g if g < 0 else g * (0.5 if ok else 1.0)
         rows.append({"id": l.get("id") or "lot-%d" % i, "date": str(l["date"])[:10], "shares": n,
                      "cost_per_share": cps, "discount": ok, "rank": rank})
-    rows.sort(key=lambda r: r["rank"])
+    if not keep_order:          # keep_order: sell the lots in the order given (FIFO, specific lots)
+        rows.sort(key=lambda r: r["rank"])
     left, out = shares, []
     for r in rows:
         if left <= EPS:
