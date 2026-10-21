@@ -10,6 +10,8 @@ description: >-
   user says "I have $5,000", "size my trades", "how much of each should I
   buy", "manage my budget", "split my money", "keep 10% in cash", "no stock
   over 25%", "set my rules", or after /trader-copycat writes targets.
+  Has an ASX mode for CMC Invest in AUD: whole shares, the $500 marketable
+  parcel and CMC brokerage built into the sizing ("size my ASX buys").
 argument-hint: "[budget in dollars]"
 ---
 
@@ -101,6 +103,61 @@ decimal (30.7 / 23.9 / ...) can move a slice by a dollar.
 - Every number comes from the config, the targets or the prices. Nothing is guessed.
 - No projections: never say what the positions will be worth or earn.
 - Whole shares need real prices from `trader/prices.json`; never invent a price.
+
+## ASX mode (CMC Invest, Australia)
+
+Set `"market": "asx"` in `trader/config.json` when the user trades ASX shares
+or ETFs (for example through CMC Invest) in Australian dollars. If there is no
+config yet, write this one and go through each value with the user in plain
+words (budget, buffer, cap, minimum and maximum order, brokerage):
+
+```json
+{"market": "asx", "broker": "cmc", "budget": 5000, "cash_buffer_pct": 10,
+ "max_position_pct": 25, "max_order": 5000, "min_order": 500,
+ "max_orders_per_day": 10, "fractional": false, "blocked": [],
+ "asx_allow_codes": [],
+ "brokerage": {"free_first_buy_upto": 1000, "min": 11, "pct": 0.11},
+ "max_fee_pct": 2, "max_risk_per_trade_pct": null, "require_stop": false,
+ "rebalance_band_pct": 5, "order_type": "market", "time_in_force": "day",
+ "allow_options": false, "allow_margin": false, "allow_short": false}
+```
+
+What changes, and where each rule comes from (checked 2026-10-21; tell the
+user to confirm anything that matters, rules change):
+
+| rule | what the skill does | source |
+| --- | --- | --- |
+| whole shares | qty only, whole numbers; no dollar (notional) orders | CMC buys ASX shares in units |
+| ASX codes | `BHP.AX`, `ASX:BHP` become `BHP`; 3-character codes pass; 4-6 characters (BGBL, ETPMPM) only once listed in `asx_allow_codes`, because 4-6 characters can also be options, warrants, rights or partly paid shares | asx.com.au, understanding ASX ticker codes |
+| marketable parcel | a new holding (or a top-up of one under $500) must reach $500 | CommSec and Selfwealth help pages |
+| price steps | limit and stop prices on 0.1c (under 10c), 0.5c (10c to $2), 1c ($2 and up) | asx.com.au, ASX equities trading |
+| brokerage | CMC standard: first buy of each stock per day up to $1,000 free; otherwise $11 or a percentage, whichever is higher. CMC's own page says 0.11 %, Finder and Snowball say 0.10 %: ask the user to confirm and set `brokerage.pct` | cmcmarkets.com, finder.com.au, snowball-invest.com.au |
+| settlement | sales settle T+2, so buys funded by a sale in the same batch get a note | ASX T+2 settlement calendar 2026 |
+| CGT discount | an Australian-resident individual halves the gain on a parcel held at least 12 months, counting neither the buy day nor the sale day; the sale date is the trade date | ato.gov.au, CGT discount |
+| wash sales | no fixed window: selling at a loss and buying back soon after can have the loss cancelled (Part IVA) | ATO ruling TR 2008/1 |
+| validity | `day`, `gtc`, or `gtd` with an `expire_date` | CMC order expiry guide |
+
+Holdings that are not in AUD (crypto, overseas shares) count in the account
+value but are never traded. The orders are tickets the user types into CMC
+themselves; nothing in this pack can reach a CMC account, and trader-broker
+is not used.
+
+Prices: `trader/prices.json` must hold a real AUD price for every code. The
+CMC holdings export gives the last price of what the user holds (see
+`cmc_import.py` in trader-risk and trader-rebalance); codes they do not hold
+yet are added by hand from CMC or the ASX site. Say how old the prices are.
+Never guess one.
+
+In this skill, ASX mode also: sizes in whole shares (so it needs prices),
+raises `min_order` to $500, takes CMC brokerage out of the investable money
+(invested plus brokerage never touches the cash buffer), and notes when an
+order sits just above the free $1,000 tier (for example "10 shares for
+A$1,045 costs A$11; 9 shares would be free"). Start from
+`config.asx.example.json` in this folder.
+
+```bash
+python3 "${CLAUDE_SKILL_DIR}/size.py" --config trader/config.json --prices trader/prices.json --write
+```
 
 ## What it never does
 

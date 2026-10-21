@@ -1,0 +1,5 @@
+﻿"Account Number","Account Name","Code","Last","Currency","FX Rate","Holdings","Collateral","Recent buys","Recent sells","Open sells","Cond. sells","Available to sell","Value AUD"
+"100001","EXAMPLE INVESTOR","A200","147.42","AUD","","10","","","","","","10","1474.20000000"
+"100001","EXAMPLE INVESTOR","BGBL","85.85","AUD","","20","","","","","","20","1717.00000000"
+"100001","EXAMPLE INVESTOR","BTC","58000","USD","0.70",".01","","","","","",".01","840.000000"
+"100001","EXAMPLE INVESTOR","ETPMPM","361.14","AUD","","2","","","","","","2","722.28000000"

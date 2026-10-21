@@ -1,0 +1,23 @@
+{
+  "market": "asx",
+  "broker": "cmc",
+  "budget": 5000,
+  "cash_buffer_pct": 10,
+  "max_position_pct": 25,
+  "max_order": 5000,
+  "min_order": 500,
+  "max_orders_per_day": 10,
+  "fractional": false,
+  "blocked": [],
+  "asx_allow_codes": [],
+  "brokerage": {"free_first_buy_upto": 1000, "min": 11, "pct": 0.11},
+  "max_fee_pct": 2,
+  "max_risk_per_trade_pct": null,
+  "require_stop": false,
+  "rebalance_band_pct": 5,
+  "order_type": "market",
+  "time_in_force": "day",
+  "allow_options": false,
+  "allow_margin": false,
+  "allow_short": false
+}
