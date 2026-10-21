@@ -66,6 +66,20 @@ environment variable.
 | `/trader-alerts` | Price Alerts | Rings when a price target, a stop or the opening bell hits, with the real NYSE calendar. |
 | `/trader-rebalance` | Rebalancer | Brings the portfolio back to its target weights when it drifts past your band. |
 
+### Australian additions (ASX through CMC Invest, AUD)
+
+`/trader-budget`, `/trader-risk` and `/trader-rebalance` have an ASX mode
+(`"market": "asx"` in `trader/config.json`): whole shares, ASX codes and price
+steps, the $500 marketable parcel, CMC brokerage, T+2 settlement, Australian
+CGT estimates and wash-sale warnings, and a CMC holdings CSV importer. Three
+more skills:
+
+| command | job | what it does |
+| --- | --- | --- |
+| `/trader-tax-au` | Australian Tax Optimizer | Parcels and cost base (with AMIT adjustments), the 50 % CGT discount date for each parcel, which parcels keep a sale's tax lowest, the year's net capital gain the ATO way, tax-loss candidates before 30 June. |
+| `/trader-news-au` | Australian News Monitor | Sorts ASX announcements from alert emails in your Gmail (halts, results, guidance, raisings, director trades, substantial holders) and shows what is new. Never scrapes the ASX site. |
+| `/trader-analyst-au` | Australian Earnings Analyst | Works from the company's own Appendix 4D/4E and reports: growth against last year, statutory vs underlying profit, cash conversion, franking, P/E and grossed-up yield, forensic checks. |
+
 ## How to use it
 
 Everything lands in a `trader/` folder in your project, and each skill reads

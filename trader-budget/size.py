@@ -32,6 +32,14 @@ How the money is split:
 
 Money that cannot be invested (every stock at its cap, or leftovers from
 whole shares) is reported as "left idle", never hidden.
+
+With "market": "asx" in the config (ASX shares through CMC Invest, in AUD):
+whole shares only (prices needed), codes normalised (BHP.AX -> BHP) and
+checked, every slice at least the ASX $500 marketable parcel, CMC brokerage
+estimated per order and paid out of the investable money (so invested plus
+brokerage never eats the cash buffer), and a note when an order sits just
+over CMC's free first-buy tier. Orders are written as share counts for you to
+type into CMC yourself.
 """
 
 import argparse
@@ -40,6 +48,9 @@ import json
 import math
 import os
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import asx as A  # noqa: E402  (ships next to this file)
 
 DEFAULTS = {
     "budget": None,
@@ -133,6 +144,7 @@ def load_prices(path):
     for t, p in prices.items():
         try:
             out[str(t).upper()] = float(p)
+            out[A.code(t)] = float(p)
         except (TypeError, ValueError):
             continue
     return out
@@ -260,9 +272,11 @@ def size(rows, cfg, budget=None, prices=None, whole=None, cents=False, top=None)
     budget = float(budget if budget is not None else (cfg.get("budget") or 0))
     if budget <= 0:
         raise SizeError("no budget: pass --budget or set \"budget\" in trader/config.json")
+    asx = A.is_asx(cfg)
     buf_pct = float(cfg.get("cash_buffer_pct", 10))
     cap_pct = float(cfg.get("max_position_pct", 25))
-    min_order = float(cfg.get("min_order_usd", 5) or 0)
+    min_order = float(A.limit(cfg, "min_order", 5) or 0)
+    notes = []
     if not 0 <= buf_pct < 100:
         raise SizeError("cash_buffer_pct must be between 0 and 100")
     if not 0 < cap_pct <= 100:
@@ -270,9 +284,32 @@ def size(rows, cfg, budget=None, prices=None, whole=None, cents=False, top=None)
     if whole is None:
         whole = not cfg.get("fractional", True)
     prices = prices or {}
+    pre_dropped = []
+    if asx:
+        whole = True
+        if min_order < A.MARKETABLE_PARCEL:
+            min_order = A.MARKETABLE_PARCEL
+            notes.append("minimum order raised to $500: a new ASX holding must be worth at least $500 "
+                         "(the marketable parcel)")
+        prices = dict(prices)
+        for k, v in list(prices.items()):
+            prices.setdefault(A.code(k), v)
+        ok_rows, seen_codes = [], {}
+        for r in rows:
+            r = dict(r, ticker=A.code(r["ticker"]))
+            why = A.check_code(r["ticker"], cfg.get("asx_allow_codes"))
+            if why:
+                pre_dropped.append({"ticker": r["ticker"], "reason": why})
+                continue
+            ok_rows.append(r)
+        rows = ok_rows
+        if not rows:
+            raise SizeError("no tradeable ASX codes left: %s"
+                            % "; ".join(d["reason"] for d in pre_dropped))
 
-    keep, dropped = normalise(rows, cfg.get("blocked"), top)
-    if not keep:
+    keep0, dropped0 = normalise(rows, cfg.get("blocked"), top)
+    dropped0 = pre_dropped + dropped0
+    if not keep0:
         raise SizeError("nothing to size: no weights left after the blocked list")
 
     cash_buffer = round(budget * buf_pct / 100.0, 2)
@@ -281,38 +318,74 @@ def size(rows, cfg, budget=None, prices=None, whole=None, cents=False, top=None)
     unit = 0.01 if (cents or whole) else 1.0
 
     if whole:
-        missing = [r["ticker"] for r in keep if not prices.get(r["ticker"])]
+        missing = [r["ticker"] for r in keep0 if not prices.get(r["ticker"])]
         if missing:
+            if asx:
+                raise SizeError("ASX orders are whole shares, so every code needs a price: %s. Put the "
+                                "latest prices in trader/prices.json ({\"prices\": {\"VAS\": 104.50}}); "
+                                "cmc_import.py (trader-risk / trader-rebalance) writes your holdings' "
+                                "last prices. Never guess a price." % ", ".join(missing))
             raise SizeError("whole shares need a price for: %s (add them to trader/prices.json, "
                             "e.g. with trader-alerts: alerts.py quote %s --write)"
                             % (", ".join(missing), " ".join(missing)))
 
-    while True:
-        live = [dict(r) for r in keep]
-        tot = sum(r["source_weight"] for r in live)
-        for r in live:
-            r["weight"] = 100.0 * r["source_weight"] / tot
-        exact, capped = allocate(live, investable, cap)
-        order = [r["ticker"] for r in sorted(live, key=lambda r: -exact[r["ticker"]])]
-        dollars = round_to_unit(exact, capped, order, cap, unit)
-        shares = None
-        if whole:
-            shares = whole_shares(dollars, prices, order, cap, sum(dollars.values()))
-            dollars = {t: round(shares[t] * prices[t], 2) for t in order}
-        small = [r for r in live if dollars[r["ticker"]] < min_order - EPS]
-        if not small:
-            break
-        worst = min(small, key=lambda r: (r["source_weight"], r["ticker"]))
-        if whole and shares is not None and shares[worst["ticker"]] == 0 and prices.get(worst["ticker"], 0) > 0:
-            reason = ("one share costs $%s, more than its slice; it cannot be bought in whole shares"
-                      % _num(prices[worst["ticker"]]))
-        else:
-            reason = "its slice ($%s) is under your $%s minimum order" % (
-                _num(dollars[worst["ticker"]]), _num(min_order))
-        dropped.append({"ticker": worst["ticker"], "reason": reason})
-        keep = [r for r in keep if r["ticker"] != worst["ticker"]]
-        if not keep:
-            raise SizeError("every slice is under your minimum order; raise the budget or hold fewer stocks")
+    def run(money_to_invest):
+        keep, dropped = [dict(r) for r in keep0], list(dropped0)
+        while True:
+            live = [dict(r) for r in keep]
+            tot = sum(r["source_weight"] for r in live)
+            for r in live:
+                r["weight"] = 100.0 * r["source_weight"] / tot
+            exact, capped = allocate(live, money_to_invest, cap)
+            order = [r["ticker"] for r in sorted(live, key=lambda r: -exact[r["ticker"]])]
+            dollars = round_to_unit(exact, capped, order, cap, unit)
+            shares = None
+            if whole:
+                shares = whole_shares(dollars, prices, order, cap, sum(dollars.values()))
+                dollars = {t: round(shares[t] * prices[t], 2) for t in order}
+            small = [r for r in live if dollars[r["ticker"]] < min_order - EPS]
+            if not small:
+                return live, capped, dollars, shares, dropped
+            worst = min(small, key=lambda r: (r["source_weight"], r["ticker"]))
+            tw = worst["ticker"]
+            if whole and shares is not None and shares[tw] == 0 and prices.get(tw, 0) > dollars[tw] \
+                    and prices[tw] > min_order:
+                reason = ("one share costs $%s, more than its slice; it cannot be bought in whole shares"
+                          % _num(prices[tw]))
+            else:
+                reason = "its slice ($%s) is under your $%s minimum order" % (_num(dollars[tw]), _num(min_order))
+            dropped.append({"ticker": worst["ticker"], "reason": reason})
+            keep = [r for r in keep if r["ticker"] != worst["ticker"]]
+            if not keep:
+                raise SizeError("every slice is under your minimum order; raise the budget or hold fewer stocks")
+
+    fees = {}
+    if asx:
+        fee_guess = 0.0
+        for _ in range(8):
+            live, capped, dollars, shares, dropped = run(round(investable - fee_guess, 2))
+            fees = {t: A.brokerage(dollars[t], "buy", cfg) for t in dollars}
+            total_fee = round(sum(fees.values()), 2)
+            if sum(dollars.values()) + total_fee <= investable + EPS:
+                break
+            fee_guess = max(total_fee, fee_guess + 0.01)
+        # last resort: give back one share at a time from the biggest position
+        while sum(dollars.values()) + sum(fees.values()) > investable + EPS:
+            t = max(dollars, key=lambda k: dollars[k])
+            if shares[t] <= 0:
+                break
+            shares[t] -= 1
+            dollars[t] = round(shares[t] * prices[t], 2)
+            fees[t] = A.brokerage(dollars[t], "buy", cfg)
+        upto = A.free_tier(cfg)
+        for t in dollars:
+            if fees.get(t) and upto and upto < dollars[t] <= upto + 10 * fees[t]:
+                n = int(math.floor(upto / prices[t] + EPS))
+                if n * prices[t] >= min_order - EPS and n > 0:
+                    notes.append("%s: %d shares (%s) would be free to buy on CMC instead of about %s brokerage "
+                                 "for %s" % (t, n, money(n * prices[t]), money(fees[t]), money(dollars[t])))
+    else:
+        live, capped, dollars, shares, dropped = run(investable)
 
     positions = []
     for r in sorted(live, key=lambda r: -r["weight"]):
@@ -323,15 +396,24 @@ def size(rows, cfg, budget=None, prices=None, whole=None, cents=False, top=None)
         if prices.get(t):
             p["price"] = prices[t]
             p["shares"] = shares[t] if whole else round(dollars[t] / prices[t], 4)
+        if asx:
+            p["brokerage"] = fees.get(t, 0.0)
         positions.append(p)
     invested = round(sum(p["dollars"] for p in positions), 2)
-    return {
+    out = {
         "budget": budget, "cash_buffer_pct": buf_pct, "cash_buffer": cash_buffer,
         "investable": investable, "max_position_pct": cap_pct, "cap": cap,
         "min_order_usd": min_order, "whole_shares": bool(whole),
         "positions": positions, "invested": invested,
         "idle": round(investable - invested, 2), "dropped": dropped,
     }
+    if asx:
+        total_fee = round(sum(p["brokerage"] for p in positions), 2)
+        out.update({"market": "asx", "currency": "AUD", "min_order": out.pop("min_order_usd"),
+                    "brokerage": total_fee, "idle": round(investable - invested - total_fee, 2),
+                    "notes": notes, "order_type": str(cfg.get("order_type") or "market").lower(),
+                    "time_in_force": str(cfg.get("time_in_force") or "day").lower()})
+    return out
 
 
 # ---------------------------------------------------------------- orders
@@ -355,6 +437,15 @@ def orders_from(result, source=""):
             why = "%s, copying %s" % (why, source)
         if p["capped"]:
             why += "; capped at %s%% of the %s budget" % (_num(result["max_position_pct"]), money(result["budget"]))
+        if result.get("market") == "asx":
+            o = {"symbol": p["ticker"], "side": "buy", "qty": str(int(p["shares"])),
+                 "type": result.get("order_type", "market"), "time_in_force": result.get("time_in_force", "day")}
+            if o["type"] in ("limit", "stop_limit"):
+                o["limit_price"] = "%g" % A.round_tick(p["price"], down=False)
+            o.update({"exchange": "ASX", "currency": "AUD", "est_brokerage": p.get("brokerage", 0.0),
+                      "why": why.replace("$", "A$")})
+            out.append(o)
+            continue
         o = {"symbol": p["ticker"], "side": "buy"}
         if result["whole_shares"]:
             o["qty"] = str(int(p["shares"]))
@@ -369,16 +460,23 @@ def write_orders(path, orders, result, cfg, source=""):
     d = os.path.dirname(path)
     if d:
         os.makedirs(d, exist_ok=True)
+    asx = result.get("market") == "asx"
     doc = {
         "created_by": "trader-budget",
         "created_at": datetime.datetime.now().replace(microsecond=0).isoformat(),
         "status": "proposed",
         "paper": bool(cfg.get("paper", True)),
-        "note": ("Proposals only. Nothing is placed until trader-risk passes each order "
-                 "and you say yes to it in the chat."),
+        "note": (("Proposals only, for ASX via CMC Invest. Run trader-risk on them; you decide each one "
+                  "and type it into CMC yourself.") if asx else
+                 ("Proposals only. Nothing is placed until trader-risk passes each order "
+                  "and you say yes to it in the chat.")),
         "source": source,
         "orders": orders,
     }
+    if asx:
+        doc.pop("paper", None)
+        doc["market"] = "asx"
+        doc["currency"] = "AUD"
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(doc, fh, indent=2)
         fh.write("\n")
@@ -393,8 +491,57 @@ def money(x):
     return "$" + "{:,.2f}".format(x)
 
 
+def report_asx(r, orders, source=""):
+    def m(x):
+        return "A" + money(x)
+    lines = []
+    if source:
+        lines.append("Copying: %s" % source)
+    lines.append("Budget %s, cash buffer %s%% = %s, investing up to %s, cap %s%% = %s per stock (ASX, CMC, AUD)"
+                 % (m(r["budget"]), _num(r["cash_buffer_pct"]), m(r["cash_buffer"]), m(r["investable"]),
+                    _num(r["max_position_pct"]), m(r["cap"])))
+    lines.append("")
+    lines.append("%-7s %-22s %8s %10s %7s %11s %10s  note" % ("code", "name", "weight", "price", "shares",
+                                                            "cost", "brokerage"))
+    for p in r["positions"]:
+        row = "%-7s %-22s %7.2f%% %10s %7s %11s %10s" % (
+            p["ticker"], (p["name"] or "")[:22], p["weight"], m(p["price"]), p["shares"], m(p["dollars"]),
+            m(p["brokerage"]) if p["brokerage"] else "free")
+        if p["capped"]:
+            row += "  capped at %s%%" % _num(r["max_position_pct"])
+        lines.append(row)
+    lines.append("%-7s %-22s %8s %10s %7s %11s %10s" % ("", "invested", "", "", "", m(r["invested"]),
+                                                       m(r["brokerage"])))
+    lines.append("%-7s %-22s %8s %10s %7s %11s" % ("", "cash buffer", "", "", "", m(r["cash_buffer"])))
+    lines.append("%-7s %-22s %8s %10s %7s %11s" % ("", "left in cash", "", "", "", m(r["idle"])))
+    if r["idle"] >= 1:
+        lines.append("")
+        lines.append("Left in cash %s on top of the buffer: whole shares do not divide evenly, a slice was "
+                     "dropped, or every stock is at its cap." % m(r["idle"]))
+    for n in r.get("notes", []):
+        lines.append("Note: " + n.replace("$", "A$").replace("AA$", "A$"))
+    for d in r["dropped"]:
+        lines.append("Dropped %s: %s" % (d["ticker"], d["reason"].replace("$", "A$")))
+    lines.append("")
+    lines.append("Proposed CMC orders (nothing has been placed; you type these into CMC yourself):")
+    for o in orders:
+        price = (" limit %s" % o["limit_price"]) if o.get("limit_price") else ""
+        lines.append("  %s %s shares of %s, %s%s, %s  (brokerage about %s)"
+                     % (o["side"], o["qty"], o["symbol"], "at market" if o["type"] == "market" else o["type"],
+                        price, {"day": "day only", "gtc": "good till cancelled"}.get(o["time_in_force"],
+                                                                                  o["time_in_force"]),
+                        m(o["est_brokerage"]) if o["est_brokerage"] else "A$0"))
+    lines.append("")
+    lines.append("Prices are the last ones in trader/prices.json: check them in CMC before you trade, a market "
+                 "order fills at whatever the market price is then.")
+    lines.append("Next: trader-risk checks every order. Education and tooling, not financial advice.")
+    return "\n".join(lines)
+
+
 def report(result, orders, source=""):
     r = result
+    if r.get("market") == "asx":
+        return report_asx(r, orders, source)
     lines = []
     if source:
         lines.append("Copying: %s" % source)

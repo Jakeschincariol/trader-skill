@@ -1,0 +1,5 @@
+{"code":"TST","name":"Test Co (made up)","currency":"AUD","units":"m","periods":[
+ {"period":"FY2025","type":"FY","end":"2025-06-30","revenue":1000,"gross_profit":400,"ebitda":250,"ebit":200,"npat":140,"npat_underlying":150,"eps_cents":28,"dps_cents":20,"franking_pct":100,"operating_cash_flow":160,"capex":50,"cash":100,"debt":300,"receivables":120,"inventories":80,"intangibles":200,"equity":900,"shares_m":500,"url":"https://example.com/fy25"},
+ {"period":"HY2026","type":"HY","end":"2025-12-31","revenue":560,"npat":70,"npat_underlying":80,"eps_cents":14,"dps_cents":10,"operating_cash_flow":50,"url":"https://example.com/hy26"},
+ {"period":"HY2025","type":"HY","end":"2024-12-31","revenue":480,"npat":66,"eps_cents":13,"dps_cents":9,"url":"https://example.com/hy25"},
+ {"period":"FY2026","type":"FY","end":"2026-06-30","revenue":1150,"gross_profit":450,"ebitda":270,"ebit":210,"npat":130,"npat_underlying":160,"eps_cents":25,"dps_cents":22,"franking_pct":100,"operating_cash_flow":90,"capex":60,"cash":80,"debt":380,"receivables":170,"inventories":100,"intangibles":260,"equity":950,"shares_m":540,"url":"https://example.com/fy26"}]}

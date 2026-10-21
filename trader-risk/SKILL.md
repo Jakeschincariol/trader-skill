@@ -9,7 +9,11 @@ description: >-
   reason for each order and records the verdicts so trader-broker only shows
   an order that passed. Use when the user says "check my orders", "is this
   safe", "risk check", "does this break my rules", "can I place this", or
-  before /trader-broker, always.
+  before /trader-broker, always. Has an ASX mode for CMC Invest in AUD: ASX
+  codes, whole shares, price steps, the $500 parcel, CMC brokerage, T+2,
+  Australian CGT and wash-sale warnings, per-trade risk to a stop, and an
+  importer for the CMC holdings CSV ("check my ASX orders", "import my CMC
+  holdings").
 argument-hint: "[path to orders.json]"
 ---
 
@@ -90,6 +94,80 @@ AAPL lands exactly on the 25% cap ($1,250 of $5,000), which is allowed. A
 sixth order, another $100 of AAPL, is blocked three ways: it would dip into
 the $500 cash buffer, put AAPL over its 25% cap, and repeat AAPL in the same
 batch.
+
+## ASX mode (CMC Invest, Australia)
+
+Set `"market": "asx"` in `trader/config.json` when the user trades ASX shares
+or ETFs (for example through CMC Invest) in Australian dollars. If there is no
+config yet, write this one and go through each value with the user in plain
+words (budget, buffer, cap, minimum and maximum order, brokerage):
+
+```json
+{"market": "asx", "broker": "cmc", "budget": 5000, "cash_buffer_pct": 10,
+ "max_position_pct": 25, "max_order": 5000, "min_order": 500,
+ "max_orders_per_day": 10, "fractional": false, "blocked": [],
+ "asx_allow_codes": [],
+ "brokerage": {"free_first_buy_upto": 1000, "min": 11, "pct": 0.11},
+ "max_fee_pct": 2, "max_risk_per_trade_pct": null, "require_stop": false,
+ "rebalance_band_pct": 5, "order_type": "market", "time_in_force": "day",
+ "allow_options": false, "allow_margin": false, "allow_short": false}
+```
+
+What changes, and where each rule comes from (checked 2026-10-21; tell the
+user to confirm anything that matters, rules change):
+
+| rule | what the skill does | source |
+| --- | --- | --- |
+| whole shares | qty only, whole numbers; no dollar (notional) orders | CMC buys ASX shares in units |
+| ASX codes | `BHP.AX`, `ASX:BHP` become `BHP`; 3-character codes pass; 4-6 characters (BGBL, ETPMPM) only once listed in `asx_allow_codes`, because 4-6 characters can also be options, warrants, rights or partly paid shares | asx.com.au, understanding ASX ticker codes |
+| marketable parcel | a new holding (or a top-up of one under $500) must reach $500 | CommSec and Selfwealth help pages |
+| price steps | limit and stop prices on 0.1c (under 10c), 0.5c (10c to $2), 1c ($2 and up) | asx.com.au, ASX equities trading |
+| brokerage | CMC standard: first buy of each stock per day up to $1,000 free; otherwise $11 or a percentage, whichever is higher. CMC's own page says 0.11 %, Finder and Snowball say 0.10 %: ask the user to confirm and set `brokerage.pct` | cmcmarkets.com, finder.com.au, snowball-invest.com.au |
+| settlement | sales settle T+2, so buys funded by a sale in the same batch get a note | ASX T+2 settlement calendar 2026 |
+| CGT discount | an Australian-resident individual halves the gain on a parcel held at least 12 months, counting neither the buy day nor the sale day; the sale date is the trade date | ato.gov.au, CGT discount |
+| wash sales | no fixed window: selling at a loss and buying back soon after can have the loss cancelled (Part IVA) | ATO ruling TR 2008/1 |
+| validity | `day`, `gtc`, or `gtd` with an `expire_date` | CMC order expiry guide |
+
+Holdings that are not in AUD (crypto, overseas shares) count in the account
+value but are never traded. The orders are tickets the user types into CMC
+themselves; nothing in this pack can reach a CMC account, and trader-broker
+is not used.
+
+Prices: `trader/prices.json` must hold a real AUD price for every code. The
+CMC holdings export gives the last price of what the user holds (see
+`cmc_import.py` in trader-risk and trader-rebalance); codes they do not hold
+yet are added by hand from CMC or the ASX site. Say how old the prices are.
+Never guess one.
+
+In this skill, ASX mode also checks: whole-share qty, the ASX code, price
+steps on `limit_price`, `stop_price`, `stop_loss` and `take_profit`, the $500
+parcel, brokerage inside the cash check (and a warning when the fee is over
+`max_fee_pct` of the order), `day` / `gtc` / `gtd` validity. Warnings (not
+blocks): an estimate of the capital gain on each sale from the lots in
+`trader/portfolio.json`, with which parcels get the 50 % discount and any
+lot that qualifies within 120 days; a buy within 30 days of a recorded loss
+sale of the same code (`trader/state/tax.json`); a buy that leans on sale
+money that only settles T+2; a sale that leaves less than $500. Small sales
+are not blocked by `min_order` (it is a buy rule on the ASX).
+
+Trade risk (any market): put `"stop_loss"` (and optionally `"take_profit"`)
+on a buy to see the loss if the stop is hit, brokerage both ways included, as
+a percent of the account, and the reward-to-risk ratio. With
+`"max_risk_per_trade_pct": 3` a buy risking more than 3 % of the account is
+blocked; with `"require_stop": true` a buy with no stop is blocked.
+
+Import the user's CMC holdings first (the export has no cash and no cost
+base, so ask for the cash available to trade, and never invent lots):
+
+```bash
+python3 "${CLAUDE_SKILL_DIR}/cmc_import.py" Holdings.csv --cash 1200 --dry-run
+python3 "${CLAUDE_SKILL_DIR}/cmc_import.py" Holdings.csv --cash 1200 --only BHP,CSL   # one sleeve only
+python3 "${CLAUDE_SKILL_DIR}/check.py"
+```
+
+If the user keeps a long-term core and a trading sleeve apart, import only
+the sleeve with `--only` (or `--exclude` the core) so the cap and the buffer
+are worked out on the right money.
 
 ## What it never does
 

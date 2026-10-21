@@ -1,0 +1,10 @@
+{
+  "market": "asx",
+  "budget": 5000,
+  "cash_buffer_pct": 10,
+  "max_position_pct": 40,
+  "max_order": 5000,
+  "min_order": 500,
+  "max_orders_per_day": 10,
+  "asx_allow_codes": ["BGBL", "ETPMPM"]
+}
