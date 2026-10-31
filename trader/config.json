@@ -1,10 +1,10 @@
 {
-  "budget": 100.0,
+  "budget": 10000.0,
   "cash_buffer_pct": 10,
-  "max_position_pct": 40,
-  "max_order_usd": 50,
-  "min_order_usd": 5,
-  "max_orders_per_day": 10,
+  "max_position_pct": 20,
+  "max_order_usd": 2500,
+  "min_order_usd": 25,
+  "max_orders_per_day": 20,
   "fractional": true,
   "broker": "alpaca",
   "paper": true,
@@ -19,7 +19,7 @@
     "stop_loss_pct": -2.5,
     "portfolio_take_profit_pct": 5.0,
     "max_drawdown_pct": 4.0,
-    "min_position_pnl_usd": 0.15,
+    "min_position_pnl_usd": 5.0,
     "exit_rebuy_cooldown_cycles": 2
   }
 }

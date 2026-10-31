@@ -841,7 +841,19 @@ def apply_winner_targets(*, write: bool = True) -> dict:
     pct = [round(100.0 * float(w) / wsum, 2) for w in weights]
     # fix rounding drift on last
     pct[-1] = round(100.0 - sum(pct[:-1]), 2)
-    names = {"AAPL": "Apple", "MSFT": "Microsoft", "GOOGL": "Alphabet", "AMZN": "Amazon", "SPY": "S&P 500 ETF"}
+    names = {
+        "AAPL": "Apple",
+        "MSFT": "Microsoft",
+        "GOOGL": "Alphabet",
+        "AMZN": "Amazon",
+        "META": "Meta",
+        "NVDA": "NVIDIA",
+        "BRK-B": "Berkshire Hathaway B",
+        "JPM": "JPMorgan",
+        "V": "Visa",
+        "XOM": "Exxon Mobil",
+        "SPY": "S&P 500 ETF",
+    }
     targets = {
         "source": f"nitub research winner {winner.get('strategy_id')} ({family})",
         "as_of": winner.get("as_of"),

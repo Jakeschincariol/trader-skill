@@ -1,36 +1,64 @@
 {
-  "as_of": "2026-10-31T19:02:51Z",
+  "as_of": "2026-10-31T20:04:28Z",
   "run_id": "grid_20261031T190251Z",
   "verdict": "beats_buyhold_oos",
-  "strategy_id": "copycat_static",
+  "strategy_id": "copycat_static_diversified",
   "family": "copycat_hold",
   "params": {
     "tickers": [
       "AAPL",
       "MSFT",
-      "GOOGL"
+      "GOOGL",
+      "AMZN",
+      "META",
+      "NVDA",
+      "BRK-B",
+      "JPM",
+      "V",
+      "XOM"
     ],
     "weights": [
-      0.4,
-      0.3,
-      0.3
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1,
+      0.1
     ],
     "trend_period": 0
   },
   "beats_buyhold_oos": true,
   "test_metrics": {
-    "id": "copycat_static",
+    "id": "copycat_static_diversified",
     "family": "copycat_hold",
     "params": {
       "tickers": [
         "AAPL",
         "MSFT",
-        "GOOGL"
+        "GOOGL",
+        "AMZN",
+        "META",
+        "NVDA",
+        "BRK-B",
+        "JPM",
+        "V",
+        "XOM"
       ],
       "weights": [
-        0.4,
-        0.3,
-        0.3
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
       ],
       "trend_period": 0
     },
@@ -46,18 +74,32 @@
     "exposure_pct": 99.86
   },
   "train_metrics": {
-    "id": "copycat_static",
+    "id": "copycat_static_diversified",
     "family": "copycat_hold",
     "params": {
       "tickers": [
         "AAPL",
         "MSFT",
-        "GOOGL"
+        "GOOGL",
+        "AMZN",
+        "META",
+        "NVDA",
+        "BRK-B",
+        "JPM",
+        "V",
+        "XOM"
       ],
       "weights": [
-        0.4,
-        0.3,
-        0.3
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1
       ],
       "trend_period": 0
     },
@@ -113,6 +155,12 @@
     "MSFT",
     "GOOGL",
     "AMZN",
+    "META",
+    "NVDA",
+    "BRK-B",
+    "JPM",
+    "V",
+    "XOM",
     "SPY"
   ],
   "results_path": "/Users/bugatti/Desktop/Projects/NITUB/nitub/state/backtests/grid_20261031T190251Z.json",
@@ -154,5 +202,6 @@
       }
     ],
     "note": "Параметры sleeve зафиксированы на train 2021–2023 primary grid; refine AAPL/MSFT 50/50 выиграл train, но проиграл equal-BH на OOS — отброшен."
-  }
+  },
+  "note_paper": "Expanded diversified paper sleeve for $10k session (more than 3 names)."
 }

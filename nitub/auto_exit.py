@@ -14,7 +14,7 @@ DEFAULT_AUTO_EXIT: dict[str, Any] = {
     "stop_loss_pct": -2.5,  # −2.5% по позиции
     "portfolio_take_profit_pct": 5.0,  # +5% по портфелю → закрыть всё
     "max_drawdown_pct": 4.0,  # просадка от peak equity → закрыть всё
-    "min_position_pnl_usd": 0.15,  # шум: не TP на копейках
+    "min_position_pnl_usd": 5.0,  # шум: не TP на копейках (~$10k paper)
     "exit_rebuy_cooldown_cycles": 2,  # не сразу выкупать тот же тикер
 }
 

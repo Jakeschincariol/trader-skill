@@ -19,7 +19,7 @@ STOP_FLAG = "runner.stop"
 DEFAULT_INTERVAL_S = 45
 REBALANCE_EVERY = 8  # cycles between light rebalance attempts
 SKILLS_EVERY = 4  # cycles between full skills refresh (heavy SEC/news/pelosi interval inside)
-GOAL_RU = "Попытаться вырастить бумажный счёт ~$100 (симуляция, без гарантий прибыли)"
+GOAL_RU = "Попытаться вырастить бумажный счёт ~$10000 (симуляция, без гарантий прибыли)"
 
 _stop = False
 
@@ -505,7 +505,7 @@ def reopen_after_exits(
     pf: dict,
     prices: dict[str, float],
     *,
-    budget: float = 100.0,
+    budget: float = 10000.0,
     closed: list[dict] | None = None,
 ) -> dict:
     """После выхода — research sleeve / buy underweight (без сброса realized)."""
@@ -540,7 +540,7 @@ def reopen_after_exits(
         blocked = set()
         store.append_event(
             "reopen_search",
-            "Cooldown на весь sleeve — открываем research-цели снова (бюджет $100)",
+            "Cooldown на весь sleeve — открываем research-цели снова (бюджет $10000)",
             skill="runner",
         )
 
@@ -578,7 +578,7 @@ def run_risk_cycle(
     pf: dict,
     prices: dict[str, float] | None = None,
     *,
-    budget: float = 100.0,
+    budget: float = 10000.0,
     cfg: dict | None = None,
 ) -> dict:
     """MTM уже сделан → auto-exit → reopen. Для loop и smoke."""
@@ -625,7 +625,7 @@ def run_risk_cycle(
     return pf
 
 
-def ensure_seed_portfolio(*, budget: float = 100.0, session: str = "dashboard") -> dict:
+def ensure_seed_portfolio(*, budget: float = 10000.0, session: str = "dashboard") -> dict:
     """If no positions, run one research paper cycle with full skills pipeline."""
     pf = store.load_portfolio()
     if pf and (pf.get("positions") or []):
@@ -687,7 +687,7 @@ def refresh_skills_pass(*, cycle: int = 1) -> list[dict]:
 def run_loop(
     *,
     interval_s: float = DEFAULT_INTERVAL_S,
-    budget: float = 100.0,
+    budget: float = 10000.0,
     session: str = "dashboard",
 ) -> int:
     """Blocking paper worker. Updates runner.json; only paper."""
@@ -716,7 +716,7 @@ def run_loop(
     store.append_event(
         "runner_start",
         (
-            "Старт бумажного воркера (цель: вырастить ~$100 в симуляции). "
+            "Старт бумажного воркера (цель: вырастить ~$10000 в симуляции). "
             f"Авто-выход: TP +{ax_cfg.get('take_profit_pct')}% / "
             f"SL {ax_cfg.get('stop_loss_pct')}% / DD {ax_cfg.get('max_drawdown_pct')}%"
         ),
@@ -847,7 +847,7 @@ def main(argv: list[str] | None = None) -> int:
 
     p = argparse.ArgumentParser(description="NITUB paper worker (dashboard Start)")
     p.add_argument("--interval", type=float, default=DEFAULT_INTERVAL_S)
-    p.add_argument("--budget", type=float, default=100.0)
+    p.add_argument("--budget", type=float, default=10000.0)
     p.add_argument("--session", default="dashboard")
     args = p.parse_args(argv)
     os.environ.setdefault("NITUB_MODE", "paper")

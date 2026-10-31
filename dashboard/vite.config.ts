@@ -15,7 +15,7 @@ const RUNNER_STOP = path.join(STATE_DIR, 'runner.stop')
 const PYTHON = path.join(ROOT, 'nitub/.venv/bin/python')
 const POLL_HINT_MS = 4000
 const GOAL_RU =
-  'Попытаться вырастить бумажный счёт ~$100 (симуляция, без гарантий прибыли)'
+  'Попытаться вырастить бумажный счёт ~$10000 (симуляция, без гарантий прибыли)'
 
 let runnerChild: ChildProcess | null = null
 
@@ -155,7 +155,7 @@ function startPaperWorker(): RunnerState {
 
   const child = spawn(
     PYTHON,
-    ['-m', 'nitub.runner', '--interval', '45', '--budget', '100', '--session', 'dashboard'],
+    ['-m', 'nitub.runner', '--interval', '45', '--budget', '10000', '--session', 'dashboard'],
     {
       cwd: ROOT,
       env: {
