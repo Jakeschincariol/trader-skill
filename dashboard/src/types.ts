@@ -61,6 +61,18 @@ export type NewsItem = {
 export type SkillRow = {
   name: string
   result: string
+  status?: string
+  group?: string
+}
+
+export type SkillsCatalog = {
+  core?: string[]
+  vendor?: string[]
+  all?: string[]
+  completed?: string[]
+  last_run?: SkillRow[]
+  heavy?: string[]
+  heavy_every?: number
 }
 
 export type PlatformEvent = {
@@ -119,9 +131,34 @@ export type SessionBundle = {
   news: unknown
   analysis: AnalysisJson | unknown
   skills: unknown
+  skills_catalog?: SkillsCatalog | null
   events?: PlatformEvent[]
   backtest?: BacktestResult | null
   backtests?: BacktestResult[]
   meta?: Record<string, unknown> | null
   extras?: Record<string, unknown>
+}
+
+export type AutoExitConfig = {
+  enabled?: boolean
+  take_profit_pct?: number
+  stop_loss_pct?: number
+  portfolio_take_profit_pct?: number
+  max_drawdown_pct?: number
+  min_position_pnl_usd?: number
+  exit_rebuy_cooldown_cycles?: number
+}
+
+export type RunnerState = {
+  running: boolean
+  started_at?: string | null
+  pid?: number | null
+  goal?: string
+  last_action?: string | null
+  message?: string
+  stopped_at?: string | null
+  updated_at?: string
+  interval_s?: number
+  auto_exit?: AutoExitConfig
+  auto_exit_enabled?: boolean
 }

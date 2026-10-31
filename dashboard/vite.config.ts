@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react'
+import { spawn, type ChildProcess } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import type { IncomingMessage, ServerResponse } from 'node:http'
@@ -6,9 +7,17 @@ import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
 
 /** Active platform state (nitub run paper → сюда). Fallback: last paper session. */
+const ROOT = path.resolve(import.meta.dirname, '..')
 const STATE_DIR = path.resolve(import.meta.dirname, '../nitub/state')
 const FALLBACK_DIR = path.resolve(import.meta.dirname, '../paper-trading/session-1')
+const RUNNER_JSON = path.join(STATE_DIR, 'runner.json')
+const RUNNER_STOP = path.join(STATE_DIR, 'runner.stop')
+const PYTHON = path.join(ROOT, 'nitub/.venv/bin/python')
 const POLL_HINT_MS = 4000
+const GOAL_RU =
+  'Попытаться вырастить бумажный счёт ~$100 (симуляция, без гарантий прибыли)'
+
+let runnerChild: ChildProcess | null = null
 
 function resolveSessionDir(): string {
   if (fs.existsSync(path.join(STATE_DIR, 'portfolio.json'))) return STATE_DIR
@@ -22,6 +31,262 @@ function sendJson(res: ServerResponse, status: number, body: unknown) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
   res.setHeader('Cache-Control', 'no-store')
   res.end(payload)
+}
+
+function readBody(req: IncomingMessage): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = []
+    req.on('data', (c) => chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c)))
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+    req.on('error', reject)
+  })
+}
+
+function utcNow(): string {
+  return new Date().toISOString().replace(/\.\d{3}Z$/, 'Z')
+}
+
+type AutoExitCfg = {
+  enabled?: boolean
+  take_profit_pct?: number
+  stop_loss_pct?: number
+  portfolio_take_profit_pct?: number
+  max_drawdown_pct?: number
+}
+
+type RunnerState = {
+  running: boolean
+  started_at: string | null
+  pid: number | null
+  goal: string
+  last_action: string | null
+  message: string
+  stopped_at?: string | null
+  updated_at?: string
+  interval_s?: number
+  auto_exit?: AutoExitCfg
+  auto_exit_enabled?: boolean
+}
+
+function defaultRunner(): RunnerState {
+  return {
+    running: false,
+    started_at: null,
+    pid: null,
+    goal: GOAL_RU,
+    last_action: null,
+    message: 'Остановлен',
+    stopped_at: null,
+  }
+}
+
+function readRunner(): RunnerState {
+  try {
+    if (!fs.existsSync(RUNNER_JSON)) return defaultRunner()
+    const raw = JSON.parse(fs.readFileSync(RUNNER_JSON, 'utf8')) as Partial<RunnerState>
+    return { ...defaultRunner(), ...raw }
+  } catch {
+    return defaultRunner()
+  }
+}
+
+function writeRunner(patch: Partial<RunnerState>): RunnerState {
+  fs.mkdirSync(STATE_DIR, { recursive: true })
+  const next = { ...readRunner(), ...patch, updated_at: utcNow() }
+  const tmp = `${RUNNER_JSON}.tmp`
+  fs.writeFileSync(tmp, `${JSON.stringify(next, null, 2)}\n`, 'utf8')
+  fs.renameSync(tmp, RUNNER_JSON)
+  return next
+}
+
+function pidAlive(pid: number | null | undefined): boolean {
+  if (!pid || pid <= 0) return false
+  try {
+    process.kill(pid, 0)
+    return true
+  } catch {
+    return false
+  }
+}
+
+function refreshRunnerStatus(): RunnerState {
+  const cur = readRunner()
+  const alive = pidAlive(cur.pid)
+  if (cur.running && !alive) {
+    return writeRunner({
+      running: false,
+      pid: null,
+      last_action: 'stale',
+      message: 'Остановлен (процесс не найден)',
+      stopped_at: cur.stopped_at ?? utcNow(),
+    })
+  }
+  if (!cur.running && alive) {
+    return writeRunner({
+      running: true,
+      message: cur.message?.startsWith('Работает') ? cur.message : 'Работает…',
+    })
+  }
+  return cur
+}
+
+function startPaperWorker(): RunnerState {
+  const cur = refreshRunnerStatus()
+  if (cur.running && pidAlive(cur.pid)) {
+    return writeRunner({
+      last_action: 'already_running',
+      message: 'Уже работает',
+    })
+  }
+
+  if (!fs.existsSync(PYTHON)) {
+    return writeRunner({
+      running: false,
+      last_action: 'error',
+      message: `Нет интерпретатора: ${path.relative(ROOT, PYTHON)}`,
+    })
+  }
+
+  try {
+    if (fs.existsSync(RUNNER_STOP)) fs.unlinkSync(RUNNER_STOP)
+  } catch {
+    /* ignore */
+  }
+
+  const child = spawn(
+    PYTHON,
+    ['-m', 'nitub.runner', '--interval', '45', '--budget', '100', '--session', 'dashboard'],
+    {
+      cwd: ROOT,
+      env: {
+        ...process.env,
+        PYTHONPATH: ROOT,
+        NITUB_MODE: 'paper',
+      },
+      detached: true,
+      stdio: 'ignore',
+    },
+  )
+  child.unref()
+  runnerChild = child
+  const pid = child.pid ?? null
+
+  child.on('exit', () => {
+    if (runnerChild === child) runnerChild = null
+    const latest = readRunner()
+    if (latest.pid === pid) {
+      writeRunner({
+        running: false,
+        pid: null,
+        last_action: 'exited',
+        message: 'Остановлен',
+        stopped_at: utcNow(),
+      })
+    }
+  })
+
+  return writeRunner({
+    running: true,
+    started_at: utcNow(),
+    pid,
+    goal: GOAL_RU,
+    last_action: 'start',
+    message: 'Работает… бумажный воркер запущен',
+    stopped_at: null,
+  })
+}
+
+function stopPaperWorker(): RunnerState {
+  const cur = refreshRunnerStatus()
+  fs.mkdirSync(STATE_DIR, { recursive: true })
+  try {
+    fs.writeFileSync(RUNNER_STOP, '1\n', 'utf8')
+  } catch {
+    /* ignore */
+  }
+
+  const pid = cur.pid
+  if (pid && pidAlive(pid)) {
+    try {
+      process.kill(pid, 'SIGTERM')
+    } catch {
+      /* ignore */
+    }
+    // Force after brief wait if still alive
+    setTimeout(() => {
+      if (pidAlive(pid)) {
+        try {
+          process.kill(pid, 'SIGKILL')
+        } catch {
+          /* ignore */
+        }
+      }
+    }, 2500)
+  }
+
+  if (runnerChild?.pid && runnerChild.pid === pid) {
+    try {
+      runnerChild.kill('SIGTERM')
+    } catch {
+      /* ignore */
+    }
+    runnerChild = null
+  }
+
+  return writeRunner({
+    running: false,
+    pid: null,
+    last_action: 'stop',
+    message: 'Остановлен (позиции не закрывались)',
+    stopped_at: utcNow(),
+  })
+}
+
+function controlApiPlugin(): Plugin {
+  return {
+    name: 'nitub-control-api',
+    configureServer(server) {
+      server.middlewares.use(async (req, res, next) => {
+        const rawUrl = req.url ?? '/'
+        if (!rawUrl.startsWith('/api/control')) {
+          next()
+          return
+        }
+        try {
+          const url = new URL(rawUrl, 'http://localhost')
+          const pathname = url.pathname.replace(/\/+$/, '') || '/'
+          const method = (req.method || 'GET').toUpperCase()
+
+          if (pathname === '/api/control/status' && method === 'GET') {
+            sendJson(res, 200, { ok: true, runner: refreshRunnerStatus() })
+            return
+          }
+
+          if (pathname === '/api/control/start' && method === 'POST') {
+            await readBody(req)
+            const runner = startPaperWorker()
+            sendJson(res, 200, { ok: true, runner })
+            return
+          }
+
+          if (pathname === '/api/control/stop' && method === 'POST') {
+            await readBody(req)
+            const runner = stopPaperWorker()
+            sendJson(res, 200, { ok: true, runner })
+            return
+          }
+
+          sendJson(res, 404, { ok: false, error: 'not_found' })
+        } catch (err) {
+          sendJson(res, 500, {
+            ok: false,
+            error: 'server_error',
+            message: err instanceof Error ? err.message : String(err),
+          })
+        }
+      })
+    },
+  }
 }
 
 function readEventsJsonl(dir: string, limit = 100): unknown[] {
@@ -93,6 +358,7 @@ function sessionApiPlugin(): Plugin {
               'news.json',
               'analysis.json',
               'skills.json',
+              'skills_catalog.json',
               'events.jsonl',
               'backtest.json',
               'meta.json',
@@ -109,6 +375,7 @@ function sessionApiPlugin(): Plugin {
               news: null,
               analysis: null,
               skills: null,
+              skills_catalog: null,
               events: [] as unknown[],
               backtest: null,
               backtests: [] as unknown[],
@@ -153,6 +420,12 @@ function sessionApiPlugin(): Plugin {
                   bundle.skills = JSON.parse(raw)
                 } catch {
                   bundle.skills = { _parse_error: true, raw }
+                }
+              } else if (name === 'skills_catalog.json') {
+                try {
+                  bundle.skills_catalog = JSON.parse(raw)
+                } catch {
+                  bundle.skills_catalog = { _parse_error: true, raw }
                 }
               } else if (name === 'events.jsonl') {
                 bundle.events = readEventsJsonl(SESSION_DIR)
@@ -268,7 +541,7 @@ function sessionApiPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), sessionApiPlugin()],
+  plugins: [react(), sessionApiPlugin(), controlApiPlugin()],
   server: {
     host: '127.0.0.1',
     port: 5173,

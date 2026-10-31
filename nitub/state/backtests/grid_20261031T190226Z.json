@@ -1,0 +1,4096 @@
+{
+  "ok": true,
+  "run_id": "grid_20261031T190226Z",
+  "as_of": "2026-10-31T19:02:26Z",
+  "engine": "nitub.research/vectorized",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "SPY"
+  ],
+  "cash": 100000.0,
+  "cost_bps": 10.0,
+  "data_start": "2020-01-01",
+  "data_from": "2020-01-02",
+  "data_to": "2026-10-30",
+  "train_window": {
+    "name": "train",
+    "start": "2021-01-01",
+    "end": "2023-12-31"
+  },
+  "test_window": {
+    "name": "test",
+    "start": "2024-01-01",
+    "end": null
+  },
+  "n_specs": 44,
+  "train": [
+    {
+      "id": "bh_equal",
+      "family": "buy_hold_equal",
+      "params": {
+        "exclude_spy": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 48.02,
+      "max_drawdown_pct": 39.0659,
+      "sharpe": 0.6203,
+      "n_days": 753,
+      "end_equity": 148020.03,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "bh_spy",
+      "family": "buy_hold_spy",
+      "params": {},
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 34.6038,
+      "max_drawdown_pct": 24.4964,
+      "sharpe": 0.654,
+      "n_days": 753,
+      "end_equity": 134603.76,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_amg403030_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 65.9395,
+      "max_drawdown_pct": 34.5911,
+      "sharpe": 0.7832,
+      "n_days": 753,
+      "end_equity": 165939.48,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_amgeq_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 67.2213,
+      "max_drawdown_pct": 35.1176,
+      "sharpe": 0.7905,
+      "n_days": 753,
+      "end_equity": 167221.25,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_amg502020_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 64.4882,
+      "max_drawdown_pct": 33.4408,
+      "sharpe": 0.7754,
+      "n_days": 753,
+      "end_equity": 164488.25,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_megaeq_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 48.02,
+      "max_drawdown_pct": 39.0659,
+      "sharpe": 0.6203,
+      "n_days": 753,
+      "end_equity": 148020.03,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_ama_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 41.6879,
+      "max_drawdown_pct": 38.3788,
+      "sharpe": 0.5643,
+      "n_days": 753,
+      "end_equity": 141687.94,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_mga_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 45.0509,
+      "max_drawdown_pct": 43.7177,
+      "sharpe": 0.5778,
+      "n_days": 753,
+      "end_equity": 145050.89,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_am_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 66.3479,
+      "max_drawdown_pct": 31.9859,
+      "sharpe": 0.7897,
+      "n_days": 753,
+      "end_equity": 166347.95,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "cc_amg403030_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 16.4792,
+      "max_drawdown_pct": 31.6054,
+      "sharpe": 0.3837,
+      "n_days": 753,
+      "end_equity": 116479.24,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_amgeq_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 14.7587,
+      "max_drawdown_pct": 32.3034,
+      "sharpe": 0.3531,
+      "n_days": 753,
+      "end_equity": 114758.74,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_amg502020_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 19.5126,
+      "max_drawdown_pct": 30.1739,
+      "sharpe": 0.4367,
+      "n_days": 753,
+      "end_equity": 119512.57,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_megaeq_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 9.9217,
+      "max_drawdown_pct": 34.3429,
+      "sharpe": 0.2669,
+      "n_days": 753,
+      "end_equity": 109921.75,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_ama_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 12.5239,
+      "max_drawdown_pct": 32.6394,
+      "sharpe": 0.3106,
+      "n_days": 753,
+      "end_equity": 112523.93,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_mga_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 2.8168,
+      "max_drawdown_pct": 39.1614,
+      "sharpe": 0.1439,
+      "n_days": 753,
+      "end_equity": 102816.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_am_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 21.1332,
+      "max_drawdown_pct": 28.6652,
+      "sharpe": 0.4609,
+      "n_days": 753,
+      "end_equity": 121133.2,
+      "start_equity": 100000.0,
+      "exposure_pct": 59.76
+    },
+    {
+      "id": "cc_amg403030_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 28.3719,
+      "max_drawdown_pct": 26.3003,
+      "sharpe": 0.6096,
+      "n_days": 753,
+      "end_equity": 128371.86,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_amgeq_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 27.3795,
+      "max_drawdown_pct": 26.5328,
+      "sharpe": 0.5893,
+      "n_days": 753,
+      "end_equity": 127379.53,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_amg502020_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 30.2913,
+      "max_drawdown_pct": 25.7054,
+      "sharpe": 0.6471,
+      "n_days": 753,
+      "end_equity": 130291.28,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_megaeq_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 20.4519,
+      "max_drawdown_pct": 28.5959,
+      "sharpe": 0.4633,
+      "n_days": 753,
+      "end_equity": 120451.91,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_ama_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 21.2042,
+      "max_drawdown_pct": 28.0674,
+      "sharpe": 0.4765,
+      "n_days": 753,
+      "end_equity": 121204.2,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_mga_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 14.9155,
+      "max_drawdown_pct": 31.8927,
+      "sharpe": 0.3527,
+      "n_days": 753,
+      "end_equity": 114915.52,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_am_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 31.9649,
+      "max_drawdown_pct": 24.7219,
+      "sharpe": 0.671,
+      "n_days": 753,
+      "end_equity": 131964.91,
+      "start_equity": 100000.0,
+      "exposure_pct": 55.51
+    },
+    {
+      "id": "cc_amg403030_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 32.3609,
+      "max_drawdown_pct": 22.5986,
+      "sharpe": 0.6891,
+      "n_days": 753,
+      "end_equity": 132360.91,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_amgeq_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 32.2646,
+      "max_drawdown_pct": 22.5819,
+      "sharpe": 0.6802,
+      "n_days": 753,
+      "end_equity": 132264.64,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_amg502020_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 32.3041,
+      "max_drawdown_pct": 22.6706,
+      "sharpe": 0.6989,
+      "n_days": 753,
+      "end_equity": 132304.06,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_megaeq_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 22.2327,
+      "max_drawdown_pct": 26.5638,
+      "sharpe": 0.5024,
+      "n_days": 753,
+      "end_equity": 122232.66,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_ama_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 18.7282,
+      "max_drawdown_pct": 27.9714,
+      "sharpe": 0.444,
+      "n_days": 753,
+      "end_equity": 118728.2,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_mga_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 18.4854,
+      "max_drawdown_pct": 29.7315,
+      "sharpe": 0.4144,
+      "n_days": 753,
+      "end_equity": 118485.4,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_am_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 31.4926,
+      "max_drawdown_pct": 22.8661,
+      "sharpe": 0.6815,
+      "n_days": 753,
+      "end_equity": 131492.56,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "cc_amg403030_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 19.342,
+      "max_drawdown_pct": 22.3578,
+      "sharpe": 0.4969,
+      "n_days": 753,
+      "end_equity": 119342.04,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_amgeq_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 17.3157,
+      "max_drawdown_pct": 23.0971,
+      "sharpe": 0.4499,
+      "n_days": 753,
+      "end_equity": 117315.71,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_amg502020_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 23.0579,
+      "max_drawdown_pct": 21.428,
+      "sharpe": 0.5831,
+      "n_days": 753,
+      "end_equity": 123057.86,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_megaeq_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 10.7783,
+      "max_drawdown_pct": 25.0513,
+      "sharpe": 0.3063,
+      "n_days": 753,
+      "end_equity": 110778.25,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_ama_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 13.9038,
+      "max_drawdown_pct": 23.9546,
+      "sharpe": 0.3716,
+      "n_days": 753,
+      "end_equity": 113903.77,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_mga_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 2.4015,
+      "max_drawdown_pct": 31.6613,
+      "sharpe": 0.1304,
+      "n_days": 753,
+      "end_equity": 102401.52,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_am_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 25.4788,
+      "max_drawdown_pct": 22.19,
+      "sharpe": 0.6273,
+      "n_days": 753,
+      "end_equity": 125478.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "cc_amg403030_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -3.4545,
+      "max_drawdown_pct": 25.399,
+      "sharpe": -0.024,
+      "n_days": 753,
+      "end_equity": 96545.54,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_amgeq_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -4.3325,
+      "max_drawdown_pct": 26.6588,
+      "sharpe": -0.0443,
+      "n_days": 753,
+      "end_equity": 95667.53,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_amg502020_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -1.9489,
+      "max_drawdown_pct": 23.234,
+      "sharpe": 0.0121,
+      "n_days": 753,
+      "end_equity": 98051.1,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_megaeq_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -5.1456,
+      "max_drawdown_pct": 28.889,
+      "sharpe": -0.0556,
+      "n_days": 753,
+      "end_equity": 94854.39,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_ama_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -3.3531,
+      "max_drawdown_pct": 26.7474,
+      "sharpe": -0.0123,
+      "n_days": 753,
+      "end_equity": 96646.92,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_mga_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -8.5165,
+      "max_drawdown_pct": 33.5554,
+      "sharpe": -0.1127,
+      "n_days": 753,
+      "end_equity": 91483.49,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    },
+    {
+      "id": "cc_am_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 250
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -1.3115,
+      "max_drawdown_pct": 22.2865,
+      "sharpe": 0.0297,
+      "n_days": 753,
+      "end_equity": 98688.51,
+      "start_equity": 100000.0,
+      "exposure_pct": 36.79
+    }
+  ],
+  "test": [
+    {
+      "id": "bh_equal",
+      "family": "buy_hold_equal",
+      "params": {
+        "exclude_spy": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 81.8458,
+      "max_drawdown_pct": 26.1597,
+      "sharpe": 1.0712,
+      "n_days": 711,
+      "end_equity": 181845.8,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "bh_spy",
+      "family": "buy_hold_spy",
+      "params": {},
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 64.9559,
+      "max_drawdown_pct": 18.7552,
+      "sharpe": 1.227,
+      "n_days": 711,
+      "end_equity": 164955.89,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_amg403030_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 86.7755,
+      "max_drawdown_pct": 26.8144,
+      "sharpe": 1.1516,
+      "n_days": 711,
+      "end_equity": 186775.46,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_amgeq_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 85.7482,
+      "max_drawdown_pct": 26.2715,
+      "sharpe": 1.1397,
+      "n_days": 711,
+      "end_equity": 185748.23,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_amg502020_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 84.4838,
+      "max_drawdown_pct": 27.4602,
+      "sharpe": 1.128,
+      "n_days": 711,
+      "end_equity": 184483.78,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_megaeq_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 81.8458,
+      "max_drawdown_pct": 26.1597,
+      "sharpe": 1.0712,
+      "n_days": 711,
+      "end_equity": 181845.8,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_ama_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 70.7758,
+      "max_drawdown_pct": 26.471,
+      "sharpe": 0.9612,
+      "n_days": 711,
+      "end_equity": 170775.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_mga_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 74.7488,
+      "max_drawdown_pct": 24.7933,
+      "sharpe": 0.9318,
+      "n_days": 711,
+      "end_equity": 174748.84,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_am_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 69.8178,
+      "max_drawdown_pct": 26.7507,
+      "sharpe": 0.9656,
+      "n_days": 711,
+      "end_equity": 169817.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "cc_amg403030_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 53.5527,
+      "max_drawdown_pct": 14.0724,
+      "sharpe": 1.0602,
+      "n_days": 711,
+      "end_equity": 153552.7,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_amgeq_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 47.8179,
+      "max_drawdown_pct": 14.6247,
+      "sharpe": 0.9649,
+      "n_days": 711,
+      "end_equity": 147817.92,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_amg502020_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 59.0573,
+      "max_drawdown_pct": 14.2943,
+      "sharpe": 1.1461,
+      "n_days": 711,
+      "end_equity": 159057.33,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_megaeq_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 30.2642,
+      "max_drawdown_pct": 18.1437,
+      "sharpe": 0.6634,
+      "n_days": 711,
+      "end_equity": 130264.19,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_ama_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 24.533,
+      "max_drawdown_pct": 16.9483,
+      "sharpe": 0.5607,
+      "n_days": 711,
+      "end_equity": 124533.05,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_mga_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 9.0433,
+      "max_drawdown_pct": 26.405,
+      "sharpe": 0.2597,
+      "n_days": 711,
+      "end_equity": 109043.33,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_am_t50",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 45.6387,
+      "max_drawdown_pct": 17.8289,
+      "sharpe": 0.9072,
+      "n_days": 711,
+      "end_equity": 145638.71,
+      "start_equity": 100000.0,
+      "exposure_pct": 72.71
+    },
+    {
+      "id": "cc_amg403030_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 61.8141,
+      "max_drawdown_pct": 14.4814,
+      "sharpe": 1.1527,
+      "n_days": 711,
+      "end_equity": 161814.1,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_amgeq_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 57.5863,
+      "max_drawdown_pct": 15.2787,
+      "sharpe": 1.0808,
+      "n_days": 711,
+      "end_equity": 157586.29,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_amg502020_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 65.3576,
+      "max_drawdown_pct": 14.2943,
+      "sharpe": 1.2072,
+      "n_days": 711,
+      "end_equity": 165357.56,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_megaeq_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 45.2925,
+      "max_drawdown_pct": 15.518,
+      "sharpe": 0.8692,
+      "n_days": 711,
+      "end_equity": 145292.52,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_ama_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 40.018,
+      "max_drawdown_pct": 16.434,
+      "sharpe": 0.786,
+      "n_days": 711,
+      "end_equity": 140017.98,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_mga_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 28.0065,
+      "max_drawdown_pct": 18.211,
+      "sharpe": 0.5417,
+      "n_days": 711,
+      "end_equity": 128006.54,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_am_t100",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 53.6906,
+      "max_drawdown_pct": 16.9208,
+      "sharpe": 0.9828,
+      "n_days": 711,
+      "end_equity": 153690.61,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.11
+    },
+    {
+      "id": "cc_amg403030_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 68.0547,
+      "max_drawdown_pct": 14.0724,
+      "sharpe": 1.3095,
+      "n_days": 711,
+      "end_equity": 168054.72,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_amgeq_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 65.8102,
+      "max_drawdown_pct": 14.3411,
+      "sharpe": 1.2581,
+      "n_days": 711,
+      "end_equity": 165810.16,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_amg502020_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 67.6853,
+      "max_drawdown_pct": 14.2943,
+      "sharpe": 1.3163,
+      "n_days": 711,
+      "end_equity": 167685.26,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_megaeq_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 58.2968,
+      "max_drawdown_pct": 14.7623,
+      "sharpe": 1.0985,
+      "n_days": 711,
+      "end_equity": 158296.75,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_ama_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 48.5861,
+      "max_drawdown_pct": 16.434,
+      "sharpe": 0.9495,
+      "n_days": 711,
+      "end_equity": 148586.12,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_mga_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 47.3791,
+      "max_drawdown_pct": 15.8873,
+      "sharpe": 0.8211,
+      "n_days": 711,
+      "end_equity": 147379.12,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_am_t150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 53.1335,
+      "max_drawdown_pct": 16.9208,
+      "sharpe": 1.0242,
+      "n_days": 711,
+      "end_equity": 153133.48,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "cc_amg403030_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 47.1648,
+      "max_drawdown_pct": 14.8912,
+      "sharpe": 1.0046,
+      "n_days": 711,
+      "end_equity": 147164.81,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_amgeq_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 45.8988,
+      "max_drawdown_pct": 14.7106,
+      "sharpe": 0.9684,
+      "n_days": 711,
+      "end_equity": 145898.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_amg502020_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 45.6565,
+      "max_drawdown_pct": 15.4641,
+      "sharpe": 0.9902,
+      "n_days": 711,
+      "end_equity": 145656.51,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_megaeq_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 37.2961,
+      "max_drawdown_pct": 16.0216,
+      "sharpe": 0.7929,
+      "n_days": 711,
+      "end_equity": 137296.1,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_ama_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 26.839,
+      "max_drawdown_pct": 17.6766,
+      "sharpe": 0.6119,
+      "n_days": 711,
+      "end_equity": 126838.98,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_mga_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 29.3291,
+      "max_drawdown_pct": 17.1545,
+      "sharpe": 0.5817,
+      "n_days": 711,
+      "end_equity": 129329.06,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_am_t200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 32.5407,
+      "max_drawdown_pct": 19.0518,
+      "sharpe": 0.7122,
+      "n_days": 711,
+      "end_equity": 132540.67,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "cc_amg403030_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 22.429,
+      "max_drawdown_pct": 22.6435,
+      "sharpe": 0.549,
+      "n_days": 711,
+      "end_equity": 122428.97,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_amgeq_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 21.3881,
+      "max_drawdown_pct": 22.4162,
+      "sharpe": 0.5254,
+      "n_days": 711,
+      "end_equity": 121388.13,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_amg502020_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.5,
+          0.3,
+          0.2
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 22.0118,
+      "max_drawdown_pct": 22.5098,
+      "sharpe": 0.5416,
+      "n_days": 711,
+      "end_equity": 122011.84,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_megaeq_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 13.8887,
+      "max_drawdown_pct": 23.6513,
+      "sharpe": 0.366,
+      "n_days": 711,
+      "end_equity": 113888.65,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_ama_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 7.5783,
+      "max_drawdown_pct": 22.68,
+      "sharpe": 0.2401,
+      "n_days": 711,
+      "end_equity": 107578.29,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_mga_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "MSFT",
+          "GOOGL",
+          "AMZN"
+        ],
+        "weights": [
+          0.34,
+          0.33,
+          0.33
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 7.3364,
+      "max_drawdown_pct": 25.1351,
+      "sharpe": 0.2277,
+      "n_days": 711,
+      "end_equity": 107336.39,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    },
+    {
+      "id": "cc_am_t250",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 250
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 14.2348,
+      "max_drawdown_pct": 21.4144,
+      "sharpe": 0.373,
+      "n_days": 711,
+      "end_equity": 114234.76,
+      "start_equity": 100000.0,
+      "exposure_pct": 61.04
+    }
+  ],
+  "selection": {
+    "verdict": "train_pick_misses_oos__explorer_beats",
+    "winner": {
+      "id": "cc_am_t0",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT"
+        ],
+        "weights": [
+          0.5,
+          0.5
+        ],
+        "trend_period": 0
+      },
+      "train": {
+        "id": "cc_am_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 0
+        },
+        "window": "train",
+        "from": "2021-01-04",
+        "to": "2023-12-29",
+        "total_return_pct": 66.3479,
+        "max_drawdown_pct": 31.9859,
+        "sharpe": 0.7897,
+        "n_days": 753,
+        "end_equity": 166347.95,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.87
+      },
+      "test": {
+        "id": "cc_am_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 0
+        },
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 69.8178,
+        "max_drawdown_pct": 26.7507,
+        "sharpe": 0.9656,
+        "n_days": 711,
+        "end_equity": 169817.82,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.86
+      },
+      "train_score": 1.7119,
+      "train_rank": 0,
+      "beats_buyhold_oos": false,
+      "beats_ret_oos": false,
+      "beats_sharpe_or_dd_oos": true,
+      "vs_spy_ret_oos": 4.8619,
+      "vs_equal_ret_oos": -12.028,
+      "vs_spy_sharpe_oos": -0.2614,
+      "explorer_oos_beater": {
+        "id": "cc_amgeq_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "trend_period": 0
+        },
+        "train_rank": 1,
+        "test": {
+          "id": "cc_amgeq_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 85.7482,
+          "max_drawdown_pct": 26.2715,
+          "sharpe": 1.1397,
+          "n_days": 711,
+          "end_equity": 185748.23,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "beats_buyhold_oos": true,
+        "vs_spy_ret_oos": 20.7923,
+        "vs_equal_ret_oos": 3.9024,
+        "vs_spy_sharpe_oos": -0.0873
+      }
+    },
+    "ranked": [
+      {
+        "id": "cc_am_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_am_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 66.3479,
+          "max_drawdown_pct": 31.9859,
+          "sharpe": 0.7897,
+          "n_days": 753,
+          "end_equity": 166347.95,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_am_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 69.8178,
+          "max_drawdown_pct": 26.7507,
+          "sharpe": 0.9656,
+          "n_days": 711,
+          "end_equity": 169817.82,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 1.7119,
+        "train_rank": 0,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 4.8619,
+        "vs_equal_ret_oos": -12.028,
+        "vs_spy_sharpe_oos": -0.2614
+      },
+      {
+        "id": "cc_amgeq_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_amgeq_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 67.2213,
+          "max_drawdown_pct": 35.1176,
+          "sharpe": 0.7905,
+          "n_days": 753,
+          "end_equity": 167221.25,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_amgeq_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 85.7482,
+          "max_drawdown_pct": 26.2715,
+          "sharpe": 1.1397,
+          "n_days": 711,
+          "end_equity": 185748.23,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 1.6522,
+        "train_rank": 1,
+        "beats_buyhold_oos": true,
+        "beats_ret_oos": true,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 20.7923,
+        "vs_equal_ret_oos": 3.9024,
+        "vs_spy_sharpe_oos": -0.0873
+      },
+      {
+        "id": "cc_amg403030_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_amg403030_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 65.9395,
+          "max_drawdown_pct": 34.5911,
+          "sharpe": 0.7832,
+          "n_days": 753,
+          "end_equity": 165939.48,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_amg403030_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 86.7755,
+          "max_drawdown_pct": 26.8144,
+          "sharpe": 1.1516,
+          "n_days": 711,
+          "end_equity": 186775.46,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 1.6288,
+        "train_rank": 2,
+        "beats_buyhold_oos": true,
+        "beats_ret_oos": true,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 21.8196,
+        "vs_equal_ret_oos": 4.9297,
+        "vs_spy_sharpe_oos": -0.0754
+      },
+      {
+        "id": "cc_amg502020_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_amg502020_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 64.4882,
+          "max_drawdown_pct": 33.4408,
+          "sharpe": 0.7754,
+          "n_days": 753,
+          "end_equity": 164488.25,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_amg502020_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 84.4838,
+          "max_drawdown_pct": 27.4602,
+          "sharpe": 1.128,
+          "n_days": 711,
+          "end_equity": 184483.78,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 1.6168,
+        "train_rank": 3,
+        "beats_buyhold_oos": true,
+        "beats_ret_oos": true,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 19.5279,
+        "vs_equal_ret_oos": 2.638,
+        "vs_spy_sharpe_oos": -0.099
+      },
+      {
+        "id": "cc_amg502020_t150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "cc_amg502020_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 32.3041,
+          "max_drawdown_pct": 22.6706,
+          "sharpe": 0.6989,
+          "n_days": 753,
+          "end_equity": 132304.06,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "cc_amg502020_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 67.6853,
+          "max_drawdown_pct": 14.2943,
+          "sharpe": 1.3163,
+          "n_days": 711,
+          "end_equity": 167685.26,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 1.1277,
+        "train_rank": 4,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 2.7294,
+        "vs_equal_ret_oos": -14.1605,
+        "vs_spy_sharpe_oos": 0.0893
+      },
+      {
+        "id": "cc_amg403030_t150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "cc_amg403030_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 32.3609,
+          "max_drawdown_pct": 22.5986,
+          "sharpe": 0.6891,
+          "n_days": 753,
+          "end_equity": 132360.91,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "cc_amg403030_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 68.0547,
+          "max_drawdown_pct": 14.0724,
+          "sharpe": 1.3095,
+          "n_days": 711,
+          "end_equity": 168054.72,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 1.1159,
+        "train_rank": 5,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 3.0988,
+        "vs_equal_ret_oos": -13.7911,
+        "vs_spy_sharpe_oos": 0.0825
+      },
+      {
+        "id": "cc_amgeq_t150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "cc_amgeq_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 32.2646,
+          "max_drawdown_pct": 22.5819,
+          "sharpe": 0.6802,
+          "n_days": 753,
+          "end_equity": 132264.64,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "cc_amgeq_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 65.8102,
+          "max_drawdown_pct": 14.3411,
+          "sharpe": 1.2581,
+          "n_days": 711,
+          "end_equity": 165810.16,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 1.101,
+        "train_rank": 6,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 0.8543,
+        "vs_equal_ret_oos": -16.0356,
+        "vs_spy_sharpe_oos": 0.0311
+      },
+      {
+        "id": "cc_am_t150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "cc_am_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 31.4926,
+          "max_drawdown_pct": 22.8661,
+          "sharpe": 0.6815,
+          "n_days": 753,
+          "end_equity": 131492.56,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "cc_am_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 53.1335,
+          "max_drawdown_pct": 16.9208,
+          "sharpe": 1.0242,
+          "n_days": 711,
+          "end_equity": 153133.48,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 1.0804,
+        "train_rank": 7,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -11.8224,
+        "vs_equal_ret_oos": -28.7123,
+        "vs_spy_sharpe_oos": -0.2028
+      },
+      {
+        "id": "cc_am_t100",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 100
+        },
+        "train": {
+          "id": "cc_am_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 100
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 31.9649,
+          "max_drawdown_pct": 24.7219,
+          "sharpe": 0.671,
+          "n_days": 753,
+          "end_equity": 131964.91,
+          "start_equity": 100000.0,
+          "exposure_pct": 55.51
+        },
+        "test": {
+          "id": "cc_am_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 100
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 53.6906,
+          "max_drawdown_pct": 16.9208,
+          "sharpe": 0.9828,
+          "n_days": 711,
+          "end_equity": 153690.61,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.11
+        },
+        "train_score": 1.0278,
+        "train_rank": 8,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -11.2653,
+        "vs_equal_ret_oos": -28.1552,
+        "vs_spy_sharpe_oos": -0.2442
+      },
+      {
+        "id": "cc_amg502020_t100",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "trend_period": 100
+        },
+        "train": {
+          "id": "cc_amg502020_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 100
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 30.2913,
+          "max_drawdown_pct": 25.7054,
+          "sharpe": 0.6471,
+          "n_days": 753,
+          "end_equity": 130291.28,
+          "start_equity": 100000.0,
+          "exposure_pct": 55.51
+        },
+        "test": {
+          "id": "cc_amg502020_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 100
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 65.3576,
+          "max_drawdown_pct": 14.2943,
+          "sharpe": 1.2072,
+          "n_days": 711,
+          "end_equity": 165357.56,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.11
+        },
+        "train_score": 0.9338,
+        "train_rank": 9,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 0.4017,
+        "vs_equal_ret_oos": -16.4882,
+        "vs_spy_sharpe_oos": -0.0198
+      },
+      {
+        "id": "cc_megaeq_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL",
+            "AMZN"
+          ],
+          "weights": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_megaeq_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 48.02,
+          "max_drawdown_pct": 39.0659,
+          "sharpe": 0.6203,
+          "n_days": 753,
+          "end_equity": 148020.03,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_megaeq_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 81.8458,
+          "max_drawdown_pct": 26.1597,
+          "sharpe": 1.0712,
+          "n_days": 711,
+          "end_equity": 181845.8,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 0.9142,
+        "train_rank": 10,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 16.8899,
+        "vs_equal_ret_oos": 0.0,
+        "vs_spy_sharpe_oos": -0.1558
+      },
+      {
+        "id": "cc_am_t200",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT"
+          ],
+          "weights": [
+            0.5,
+            0.5
+          ],
+          "trend_period": 200
+        },
+        "train": {
+          "id": "cc_am_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 25.4788,
+          "max_drawdown_pct": 22.19,
+          "sharpe": 0.6273,
+          "n_days": 753,
+          "end_equity": 125478.82,
+          "start_equity": 100000.0,
+          "exposure_pct": 44.22
+        },
+        "test": {
+          "id": "cc_am_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT"
+            ],
+            "weights": [
+              0.5,
+              0.5
+            ],
+            "trend_period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 32.5407,
+          "max_drawdown_pct": 19.0518,
+          "sharpe": 0.7122,
+          "n_days": 711,
+          "end_equity": 132540.67,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.28
+        },
+        "train_score": 0.8958,
+        "train_rank": 11,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -32.4152,
+        "vs_equal_ret_oos": -49.3051,
+        "vs_spy_sharpe_oos": -0.5148
+      },
+      {
+        "id": "cc_amg403030_t100",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 100
+        },
+        "train": {
+          "id": "cc_amg403030_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 100
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 28.3719,
+          "max_drawdown_pct": 26.3003,
+          "sharpe": 0.6096,
+          "n_days": 753,
+          "end_equity": 128371.86,
+          "start_equity": 100000.0,
+          "exposure_pct": 55.51
+        },
+        "test": {
+          "id": "cc_amg403030_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 100
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 61.8141,
+          "max_drawdown_pct": 14.4814,
+          "sharpe": 1.1527,
+          "n_days": 711,
+          "end_equity": 161814.1,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.11
+        },
+        "train_score": 0.8243,
+        "train_rank": 12,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -3.1418,
+        "vs_equal_ret_oos": -20.0317,
+        "vs_spy_sharpe_oos": -0.0743
+      },
+      {
+        "id": "cc_amg502020_t200",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.5,
+            0.3,
+            0.2
+          ],
+          "trend_period": 200
+        },
+        "train": {
+          "id": "cc_amg502020_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 23.0579,
+          "max_drawdown_pct": 21.428,
+          "sharpe": 0.5831,
+          "n_days": 753,
+          "end_equity": 123057.86,
+          "start_equity": 100000.0,
+          "exposure_pct": 44.22
+        },
+        "test": {
+          "id": "cc_amg502020_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.5,
+              0.3,
+              0.2
+            ],
+            "trend_period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 45.6565,
+          "max_drawdown_pct": 15.4641,
+          "sharpe": 0.9902,
+          "n_days": 711,
+          "end_equity": 145656.51,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.28
+        },
+        "train_score": 0.8001,
+        "train_rank": 13,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -19.2994,
+        "vs_equal_ret_oos": -36.1893,
+        "vs_spy_sharpe_oos": -0.2368
+      },
+      {
+        "id": "cc_amgeq_t100",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "trend_period": 100
+        },
+        "train": {
+          "id": "cc_amgeq_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 100
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 27.3795,
+          "max_drawdown_pct": 26.5328,
+          "sharpe": 0.5893,
+          "n_days": 753,
+          "end_equity": 127379.53,
+          "start_equity": 100000.0,
+          "exposure_pct": 55.51
+        },
+        "test": {
+          "id": "cc_amgeq_t100",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 100
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 57.5863,
+          "max_drawdown_pct": 15.2787,
+          "sharpe": 1.0808,
+          "n_days": 711,
+          "end_equity": 157586.29,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.11
+        },
+        "train_score": 0.7682,
+        "train_rank": 14,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -7.3696,
+        "vs_equal_ret_oos": -24.2595,
+        "vs_spy_sharpe_oos": -0.1462
+      },
+      {
+        "id": "cc_ama_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "AMZN"
+          ],
+          "weights": [
+            0.34,
+            0.33,
+            0.33
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_ama_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "AMZN"
+            ],
+            "weights": [
+              0.34,
+              0.33,
+              0.33
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 41.6879,
+          "max_drawdown_pct": 38.3788,
+          "sharpe": 0.5643,
+          "n_days": 753,
+          "end_equity": 141687.94,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_ama_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "AMZN"
+            ],
+            "weights": [
+              0.34,
+              0.33,
+              0.33
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 70.7758,
+          "max_drawdown_pct": 26.471,
+          "sharpe": 0.9612,
+          "n_days": 711,
+          "end_equity": 170775.82,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 0.7207,
+        "train_rank": 15,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 5.8199,
+        "vs_equal_ret_oos": -11.07,
+        "vs_spy_sharpe_oos": -0.2658
+      },
+      {
+        "id": "cc_mga_t0",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "MSFT",
+            "GOOGL",
+            "AMZN"
+          ],
+          "weights": [
+            0.34,
+            0.33,
+            0.33
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "cc_mga_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.34,
+              0.33,
+              0.33
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 45.0509,
+          "max_drawdown_pct": 43.7177,
+          "sharpe": 0.5778,
+          "n_days": 753,
+          "end_equity": 145050.89,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "cc_mga_t0",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.34,
+              0.33,
+              0.33
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 74.7488,
+          "max_drawdown_pct": 24.7933,
+          "sharpe": 0.9318,
+          "n_days": 711,
+          "end_equity": 174748.84,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 0.6748,
+        "train_rank": 16,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": 9.7929,
+        "vs_equal_ret_oos": -7.097,
+        "vs_spy_sharpe_oos": -0.2952
+      },
+      {
+        "id": "cc_amg403030_t200",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 200
+        },
+        "train": {
+          "id": "cc_amg403030_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 19.342,
+          "max_drawdown_pct": 22.3578,
+          "sharpe": 0.4969,
+          "n_days": 753,
+          "end_equity": 119342.04,
+          "start_equity": 100000.0,
+          "exposure_pct": 44.22
+        },
+        "test": {
+          "id": "cc_amg403030_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 47.1648,
+          "max_drawdown_pct": 14.8912,
+          "sharpe": 1.0046,
+          "n_days": 711,
+          "end_equity": 147164.81,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.28
+        },
+        "train_score": 0.5732,
+        "train_rank": 17,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -17.7911,
+        "vs_equal_ret_oos": -34.681,
+        "vs_spy_sharpe_oos": -0.2224
+      },
+      {
+        "id": "cc_megaeq_t150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL",
+            "AMZN"
+          ],
+          "weights": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "cc_megaeq_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 22.2327,
+          "max_drawdown_pct": 26.5638,
+          "sharpe": 0.5024,
+          "n_days": 753,
+          "end_equity": 122232.66,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "cc_megaeq_t150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL",
+              "AMZN"
+            ],
+            "weights": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 58.2968,
+          "max_drawdown_pct": 14.7623,
+          "sharpe": 1.0985,
+          "n_days": 711,
+          "end_equity": 158296.75,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 0.5342,
+        "train_rank": 18,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -6.6591,
+        "vs_equal_ret_oos": -23.549,
+        "vs_spy_sharpe_oos": -0.1285
+      },
+      {
+        "id": "cc_amgeq_t200",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.3333333333333333,
+            0.3333333333333333,
+            0.3333333333333333
+          ],
+          "trend_period": 200
+        },
+        "train": {
+          "id": "cc_amgeq_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 17.3157,
+          "max_drawdown_pct": 23.0971,
+          "sharpe": 0.4499,
+          "n_days": 753,
+          "end_equity": 117315.71,
+          "start_equity": 100000.0,
+          "exposure_pct": 44.22
+        },
+        "test": {
+          "id": "cc_amgeq_t200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.3333333333333333,
+              0.3333333333333333,
+              0.3333333333333333
+            ],
+            "trend_period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 45.8988,
+          "max_drawdown_pct": 14.7106,
+          "sharpe": 0.9684,
+          "n_days": 711,
+          "end_equity": 145898.82,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.28
+        },
+        "train_score": 0.4437,
+        "train_rank": 19,
+        "beats_buyhold_oos": false,
+        "beats_ret_oos": false,
+        "beats_sharpe_or_dd_oos": true,
+        "vs_spy_ret_oos": -19.0571,
+        "vs_equal_ret_oos": -35.947,
+        "vs_spy_sharpe_oos": -0.2586
+      }
+    ],
+    "benchmarks_oos": {
+      "bh_spy": {
+        "id": "bh_spy",
+        "family": "buy_hold_spy",
+        "params": {},
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 64.9559,
+        "max_drawdown_pct": 18.7552,
+        "sharpe": 1.227,
+        "n_days": 711,
+        "end_equity": 164955.89,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.86
+      },
+      "bh_equal": {
+        "id": "bh_equal",
+        "family": "buy_hold_equal",
+        "params": {
+          "exclude_spy": true
+        },
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 81.8458,
+        "max_drawdown_pct": 26.1597,
+        "sharpe": 1.0712,
+        "n_days": 711,
+        "end_equity": 181845.8,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.86
+      }
+    },
+    "selection_rule": "max train_score (sharpe*1.5 + ret/50 - dd/40); OOS is holdout"
+  },
+  "note": "Параметры выбирались на train; OOS = test. Комиссия ~10 bps на оборот. Не финсовет."
+}

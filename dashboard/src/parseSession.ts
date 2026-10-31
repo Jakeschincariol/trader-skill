@@ -263,8 +263,8 @@ export function extractAnalysis(
 
   // Short default risks from session shape when none written yet.
   if (risks.length === 0 && (portfolio || analysisJson)) {
-    risks.push('Paper-симуляция: fills идеальные, без проскальзывания.')
-    risks.push('Котировки могут быть delayed — не для live-торговли.')
+    risks.push('Бумажная симуляция: исполнения идеальные, без проскальзывания.')
+    risks.push('Котировки могут быть с задержкой — не для живой торговли.')
   }
 
   return {
@@ -302,6 +302,40 @@ export function sideLabel(side: string): string {
   if (s === 'buy') return 'покупка'
   if (s === 'sell') return 'продажа'
   return side
+}
+
+export function modeLabel(mode?: string | null): string {
+  if (!mode) return ''
+  const m = mode.toLowerCase()
+  if (m === 'paper') return 'симуляция'
+  if (m === 'live') return 'живой (запрещён)'
+  return mode
+}
+
+export const DISCLAIMER_RU =
+  'Только обучение и tooling. Бумажная симуляция. Не финансовый совет.'
+
+export function eventKindLabel(kind?: string | null): string {
+  if (!kind) return 'событие'
+  const map: Record<string, string> = {
+    session_start: 'старт сессии',
+    session_end: 'конец сессии',
+    portfolio_reset: 'сброс портфеля',
+    skill_start: 'skill старт',
+    skill_end: 'skill конец',
+    fill: 'сделка',
+    fill_skip: 'пропуск сделки',
+    mark_to_market: 'переоценка',
+    rebalance: 'ребаланс',
+    auto_exit: 'авто-выход',
+    reopen_search: 'поиск входа',
+    reopen: 'новый вход',
+    runner_start: 'воркер старт',
+    runner_stop: 'воркер стоп',
+    runner_error: 'ошибка воркера',
+    event: 'событие',
+  }
+  return map[kind] ?? kind
 }
 
 export function fileList(files?: Record<string, { mtime: string; size: number }>) {

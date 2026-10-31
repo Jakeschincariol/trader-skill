@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import type { SessionBundle } from './types'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import type { RunnerState, SessionBundle } from './types'
 
 const EMPTY: SessionBundle = {
   ok: false,
@@ -9,19 +9,38 @@ const EMPTY: SessionBundle = {
   news: null,
   analysis: null,
   skills: null,
+  skills_catalog: null,
   events: [],
   backtest: null,
   backtests: [],
   meta: null,
 }
 
+const EMPTY_RUNNER: RunnerState = {
+  running: false,
+  message: 'Остановлен',
+}
+
 export function useSession(pollMs = 4000) {
   const [data, setData] = useState<SessionBundle>(EMPTY)
+  const [runner, setRunner] = useState<RunnerState>(EMPTY_RUNNER)
   const [status, setStatus] = useState<'loading' | 'live' | 'error'>('loading')
   const [error, setError] = useState<string | null>(null)
   const [updatedAt, setUpdatedAt] = useState<string | null>(null)
   const [flashKey, setFlashKey] = useState(0)
+  const [controlBusy, setControlBusy] = useState(false)
   const prevPnl = useRef<number | null>(null)
+
+  const loadRunner = useCallback(async () => {
+    try {
+      const res = await fetch('/api/control/status', { cache: 'no-store' })
+      if (!res.ok) return
+      const json = (await res.json()) as { runner?: RunnerState }
+      if (json.runner) setRunner(json.runner)
+    } catch {
+      /* ignore — session poll still primary */
+    }
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -29,9 +48,12 @@ export function useSession(pollMs = 4000) {
 
     async function load() {
       try {
-        const res = await fetch('/api/session/bundle', { cache: 'no-store' })
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        const json = (await res.json()) as SessionBundle
+        const [bundleRes] = await Promise.all([
+          fetch('/api/session/bundle', { cache: 'no-store' }),
+          loadRunner(),
+        ])
+        if (!bundleRes.ok) throw new Error(`HTTP ${bundleRes.status}`)
+        const json = (await bundleRes.json()) as SessionBundle
         if (cancelled) return
 
         const pnl = json.portfolio?.total_pnl_vs_start ?? null
@@ -58,7 +80,37 @@ export function useSession(pollMs = 4000) {
       cancelled = true
       if (timer) window.clearTimeout(timer)
     }
-  }, [pollMs])
+  }, [pollMs, loadRunner])
+
+  const startRunner = useCallback(async () => {
+    setControlBusy(true)
+    try {
+      const res = await fetch('/api/control/start', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      })
+      const json = (await res.json()) as { runner?: RunnerState; message?: string }
+      if (json.runner) setRunner(json.runner)
+    } finally {
+      setControlBusy(false)
+    }
+  }, [])
+
+  const stopRunner = useCallback(async () => {
+    setControlBusy(true)
+    try {
+      const res = await fetch('/api/control/stop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: '{}',
+      })
+      const json = (await res.json()) as { runner?: RunnerState }
+      if (json.runner) setRunner(json.runner)
+    } finally {
+      setControlBusy(false)
+    }
+  }, [])
 
   const hasAny =
     !!data.portfolio ||
@@ -66,5 +118,16 @@ export function useSession(pollMs = 4000) {
     !!data.report ||
     (data.files && Object.keys(data.files).length > 0)
 
-  return { data, status, error, updatedAt, flashKey, hasAny }
+  return {
+    data,
+    runner,
+    status,
+    error,
+    updatedAt,
+    flashKey,
+    hasAny,
+    controlBusy,
+    startRunner,
+    stopRunner,
+  }
 }

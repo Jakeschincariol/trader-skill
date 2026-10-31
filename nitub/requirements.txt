@@ -1,0 +1,5 @@
+# Lightweight deps for paper + backtest smoke (installed into nitub/.venv)
+backtrader>=1.9.78
+yfinance>=0.2.40
+pandas>=2.0
+numpy>=1.26
