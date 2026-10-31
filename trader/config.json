@@ -1,0 +1,25 @@
+{
+  "budget": 10000.0,
+  "cash_buffer_pct": 10,
+  "max_position_pct": 20,
+  "max_order_usd": 2500,
+  "min_order_usd": 25,
+  "max_orders_per_day": 20,
+  "fractional": true,
+  "broker": "alpaca",
+  "paper": true,
+  "blocked": [],
+  "allow_options": false,
+  "allow_margin": false,
+  "allow_short": false,
+  "sec_user_agent": "Mikhail Kuryanov mihahaker@icloud.com",
+  "auto_exit": {
+    "enabled": true,
+    "take_profit_pct": 4.0,
+    "stop_loss_pct": -2.5,
+    "portfolio_take_profit_pct": 5.0,
+    "max_drawdown_pct": 4.0,
+    "min_position_pnl_usd": 5.0,
+    "exit_rebuy_cooldown_cycles": 2
+  }
+}

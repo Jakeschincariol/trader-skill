@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@600;700;800&display=swap');
+
+:root {
+  --ink: #102a33;
+  --ink-soft: #3a5560;
+  --muted: #6a818b;
+  --line: rgba(16, 42, 51, 0.12);
+  --accent: #0b7a75;
+  --accent-deep: #065a56;
+  --gain: #1a6b45;
+  --loss: #a33a28;
+  --bg-a: #c9dde4;
+  --bg-b: #e8f2f5;
+  --bg-c: #d5e4d8;
+  --font-brand: 'Syne', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(1100px 560px at 8% -12%, rgba(11, 122, 117, 0.2), transparent 55%),
+    radial-gradient(820px 480px at 96% 4%, rgba(213, 228, 216, 0.95), transparent 52%),
+    linear-gradient(165deg, var(--bg-a) 0%, var(--bg-b) 48%, var(--bg-c) 100%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.32;
+  background-image:
+    linear-gradient(rgba(16, 42, 51, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 42, 51, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 88%);
+}
+
+a {
+  color: var(--accent-deep);
+}
+
+button {
+  font: inherit;
+}
+
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}

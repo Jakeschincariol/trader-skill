@@ -1,0 +1,21 @@
+{
+  "running": false,
+  "started_at": null,
+  "pid": null,
+  "goal": "Попытаться вырастить бумажный счёт ~$100 (симуляция, без гарантий прибыли)",
+  "last_action": "stopped",
+  "message": "Остановлен (позиции не закрывались)",
+  "stopped_at": null,
+  "updated_at": "2026-10-31T20:00:00Z",
+  "interval_s": 45.0,
+  "auto_exit_enabled": true,
+  "auto_exit": {
+    "enabled": true,
+    "take_profit_pct": 4.0,
+    "stop_loss_pct": -2.5,
+    "portfolio_take_profit_pct": 5.0,
+    "max_drawdown_pct": 4.0,
+    "min_position_pnl_usd": 0.15,
+    "exit_rebuy_cooldown_cycles": 2
+  }
+}

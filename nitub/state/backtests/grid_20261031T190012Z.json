@@ -1,0 +1,1771 @@
+{
+  "ok": true,
+  "run_id": "grid_20261031T190012Z",
+  "as_of": "2026-10-31T19:00:12Z",
+  "engine": "nitub.research/vectorized",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "SPY"
+  ],
+  "cash": 100000.0,
+  "cost_bps": 10.0,
+  "data_start": "2020-01-01",
+  "data_from": "2020-01-02",
+  "data_to": "2026-10-30",
+  "train_window": {
+    "name": "train",
+    "start": "2021-01-01",
+    "end": "2023-12-31"
+  },
+  "test_window": {
+    "name": "test",
+    "start": "2024-01-01",
+    "end": null
+  },
+  "n_specs": 22,
+  "train": [
+    {
+      "id": "bh_equal",
+      "family": "buy_hold_equal",
+      "params": {},
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 45.9754,
+      "max_drawdown_pct": 35.2634,
+      "sharpe": 0.635,
+      "n_days": 753,
+      "end_equity": 145975.41,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "bh_spy",
+      "family": "buy_hold_spy",
+      "params": {},
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 34.6038,
+      "max_drawdown_pct": 24.4964,
+      "sharpe": 0.654,
+      "n_days": 753,
+      "end_equity": 134603.81,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "copycat_static",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 0
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 65.9395,
+      "max_drawdown_pct": 34.5911,
+      "sharpe": 0.7832,
+      "n_days": 753,
+      "end_equity": 165939.46,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.87
+    },
+    {
+      "id": "copycat_trend200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 19.342,
+      "max_drawdown_pct": 22.3578,
+      "sharpe": 0.4969,
+      "n_days": 753,
+      "end_equity": 119342.0,
+      "start_equity": 100000.0,
+      "exposure_pct": 44.22
+    },
+    {
+      "id": "copycat_berk_trend150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.42,
+          0.33,
+          0.25
+        ],
+        "trend_period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 32.2791,
+      "max_drawdown_pct": 22.6372,
+      "sharpe": 0.6923,
+      "n_days": 753,
+      "end_equity": 132279.11,
+      "start_equity": 100000.0,
+      "exposure_pct": 52.19
+    },
+    {
+      "id": "sma_5_20",
+      "family": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 15.5441,
+      "max_drawdown_pct": 32.8989,
+      "sharpe": 0.3481,
+      "n_days": 753,
+      "end_equity": 115544.12,
+      "start_equity": 100000.0,
+      "exposure_pct": 74.24
+    },
+    {
+      "id": "sma_10_30",
+      "family": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 30
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -7.25,
+      "max_drawdown_pct": 39.7045,
+      "sharpe": -0.0193,
+      "n_days": 753,
+      "end_equity": 92749.98,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.43
+    },
+    {
+      "id": "sma_20_50",
+      "family": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 8.5185,
+      "max_drawdown_pct": 32.5391,
+      "sharpe": 0.2378,
+      "n_days": 753,
+      "end_equity": 108518.45,
+      "start_equity": 100000.0,
+      "exposure_pct": 73.31
+    },
+    {
+      "id": "sma_50_200",
+      "family": "sma_cross",
+      "params": {
+        "fast": 50,
+        "slow": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 6.3922,
+      "max_drawdown_pct": 29.1583,
+      "sharpe": 0.2065,
+      "n_days": 753,
+      "end_equity": 106392.23,
+      "start_equity": 100000.0,
+      "exposure_pct": 53.12
+    },
+    {
+      "id": "trend_50",
+      "family": "trend_sma",
+      "params": {
+        "period": 50
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 3.3195,
+      "max_drawdown_pct": 37.1635,
+      "sharpe": 0.1519,
+      "n_days": 753,
+      "end_equity": 103319.5,
+      "start_equity": 100000.0,
+      "exposure_pct": 74.63
+    },
+    {
+      "id": "trend_100",
+      "family": "trend_sma",
+      "params": {
+        "period": 100
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 7.7186,
+      "max_drawdown_pct": 37.0029,
+      "sharpe": 0.2294,
+      "n_days": 753,
+      "end_equity": 107718.59,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.72
+    },
+    {
+      "id": "trend_150",
+      "family": "trend_sma",
+      "params": {
+        "period": 150
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -14.1618,
+      "max_drawdown_pct": 46.4818,
+      "sharpe": -0.2047,
+      "n_days": 753,
+      "end_equity": 85838.19,
+      "start_equity": 100000.0,
+      "exposure_pct": 62.95
+    },
+    {
+      "id": "trend_200",
+      "family": "trend_sma",
+      "params": {
+        "period": 200
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -8.6208,
+      "max_drawdown_pct": 40.9193,
+      "sharpe": -0.1046,
+      "n_days": 753,
+      "end_equity": 91379.25,
+      "start_equity": 100000.0,
+      "exposure_pct": 53.25
+    },
+    {
+      "id": "mom_lb21_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 21,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -24.372,
+      "max_drawdown_pct": 39.8673,
+      "sharpe": -0.3099,
+      "n_days": 753,
+      "end_equity": 75627.98,
+      "start_equity": 100000.0,
+      "exposure_pct": 76.76
+    },
+    {
+      "id": "mom_lb42_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 42,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -21.0622,
+      "max_drawdown_pct": 41.5417,
+      "sharpe": -0.2613,
+      "n_days": 753,
+      "end_equity": 78937.83,
+      "start_equity": 100000.0,
+      "exposure_pct": 77.69
+    },
+    {
+      "id": "mom_lb60_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 60,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -1.2391,
+      "max_drawdown_pct": 45.794,
+      "sharpe": 0.09,
+      "n_days": 753,
+      "end_equity": 98760.94,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.17
+    },
+    {
+      "id": "mom_lb60_k3",
+      "family": "momentum",
+      "params": {
+        "lookback": 60,
+        "top_k": 3,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": 3.7175,
+      "max_drawdown_pct": 43.1733,
+      "sharpe": 0.1625,
+      "n_days": 753,
+      "end_equity": 103717.45,
+      "start_equity": 100000.0,
+      "exposure_pct": 75.17
+    },
+    {
+      "id": "mom_lb126_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 126,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -7.764,
+      "max_drawdown_pct": 45.3561,
+      "sharpe": -0.0383,
+      "n_days": 753,
+      "end_equity": 92235.97,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.14
+    },
+    {
+      "id": "mom_lb126_k1",
+      "family": "momentum",
+      "params": {
+        "lookback": 126,
+        "top_k": 1,
+        "abs_filter": true
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -15.8459,
+      "max_drawdown_pct": 44.3684,
+      "sharpe": -0.1521,
+      "n_days": 753,
+      "end_equity": 84154.11,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.14
+    },
+    {
+      "id": "dualmom_63",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 63
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -23.3175,
+      "max_drawdown_pct": 49.9279,
+      "sharpe": -0.2414,
+      "n_days": 753,
+      "end_equity": 76682.5,
+      "start_equity": 100000.0,
+      "exposure_pct": 73.84
+    },
+    {
+      "id": "dualmom_126",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 126
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -15.8459,
+      "max_drawdown_pct": 44.3684,
+      "sharpe": -0.1521,
+      "n_days": 753,
+      "end_equity": 84154.11,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.14
+    },
+    {
+      "id": "dualmom_252",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 252
+      },
+      "window": "train",
+      "from": "2021-01-04",
+      "to": "2023-12-29",
+      "total_return_pct": -28.1214,
+      "max_drawdown_pct": 42.2889,
+      "sharpe": -0.4207,
+      "n_days": 753,
+      "end_equity": 71878.59,
+      "start_equity": 100000.0,
+      "exposure_pct": 50.6
+    }
+  ],
+  "test": [
+    {
+      "id": "bh_equal",
+      "family": "buy_hold_equal",
+      "params": {},
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 79.0592,
+      "max_drawdown_pct": 24.4701,
+      "sharpe": 1.1231,
+      "n_days": 711,
+      "end_equity": 179059.22,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "bh_spy",
+      "family": "buy_hold_spy",
+      "params": {},
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 64.9559,
+      "max_drawdown_pct": 18.7552,
+      "sharpe": 1.227,
+      "n_days": 711,
+      "end_equity": 164955.88,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "copycat_static",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 0
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 86.7755,
+      "max_drawdown_pct": 26.8144,
+      "sharpe": 1.1516,
+      "n_days": 711,
+      "end_equity": 186775.48,
+      "start_equity": 100000.0,
+      "exposure_pct": 99.86
+    },
+    {
+      "id": "copycat_trend200",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.4,
+          0.3,
+          0.3
+        ],
+        "trend_period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 47.1648,
+      "max_drawdown_pct": 14.8912,
+      "sharpe": 1.0046,
+      "n_days": 711,
+      "end_equity": 147164.82,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.28
+    },
+    {
+      "id": "copycat_berk_trend150",
+      "family": "copycat_hold",
+      "params": {
+        "tickers": [
+          "AAPL",
+          "MSFT",
+          "GOOGL"
+        ],
+        "weights": [
+          0.42,
+          0.33,
+          0.25
+        ],
+        "trend_period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 65.9118,
+      "max_drawdown_pct": 14.485,
+      "sharpe": 1.2889,
+      "n_days": 711,
+      "end_equity": 165911.84,
+      "start_equity": 100000.0,
+      "exposure_pct": 69.76
+    },
+    {
+      "id": "sma_5_20",
+      "family": "sma_cross",
+      "params": {
+        "fast": 5,
+        "slow": 20
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 18.5399,
+      "max_drawdown_pct": 29.7881,
+      "sharpe": 0.4091,
+      "n_days": 711,
+      "end_equity": 118539.93,
+      "start_equity": 100000.0,
+      "exposure_pct": 85.94
+    },
+    {
+      "id": "sma_10_30",
+      "family": "sma_cross",
+      "params": {
+        "fast": 10,
+        "slow": 30
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 39.8812,
+      "max_drawdown_pct": 18.1453,
+      "sharpe": 0.742,
+      "n_days": 711,
+      "end_equity": 139881.18,
+      "start_equity": 100000.0,
+      "exposure_pct": 84.95
+    },
+    {
+      "id": "sma_20_50",
+      "family": "sma_cross",
+      "params": {
+        "fast": 20,
+        "slow": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 20.735,
+      "max_drawdown_pct": 22.9017,
+      "sharpe": 0.4869,
+      "n_days": 711,
+      "end_equity": 120735.01,
+      "start_equity": 100000.0,
+      "exposure_pct": 84.95
+    },
+    {
+      "id": "sma_50_200",
+      "family": "sma_cross",
+      "params": {
+        "fast": 50,
+        "slow": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 17.037,
+      "max_drawdown_pct": 25.8139,
+      "sharpe": 0.4054,
+      "n_days": 711,
+      "end_equity": 117036.98,
+      "start_equity": 100000.0,
+      "exposure_pct": 67.23
+    },
+    {
+      "id": "trend_50",
+      "family": "trend_sma",
+      "params": {
+        "period": 50
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 49.1208,
+      "max_drawdown_pct": 16.8314,
+      "sharpe": 0.8715,
+      "n_days": 711,
+      "end_equity": 149120.8,
+      "start_equity": 100000.0,
+      "exposure_pct": 82.0
+    },
+    {
+      "id": "trend_100",
+      "family": "trend_sma",
+      "params": {
+        "period": 100
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 21.4783,
+      "max_drawdown_pct": 17.4437,
+      "sharpe": 0.5273,
+      "n_days": 711,
+      "end_equity": 121478.28,
+      "start_equity": 100000.0,
+      "exposure_pct": 77.78
+    },
+    {
+      "id": "trend_150",
+      "family": "trend_sma",
+      "params": {
+        "period": 150
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 32.8069,
+      "max_drawdown_pct": 18.3769,
+      "sharpe": 0.7319,
+      "n_days": 711,
+      "end_equity": 132806.88,
+      "start_equity": 100000.0,
+      "exposure_pct": 73.28
+    },
+    {
+      "id": "trend_200",
+      "family": "trend_sma",
+      "params": {
+        "period": 200
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 32.7407,
+      "max_drawdown_pct": 21.3977,
+      "sharpe": 0.7453,
+      "n_days": 711,
+      "end_equity": 132740.74,
+      "start_equity": 100000.0,
+      "exposure_pct": 67.37
+    },
+    {
+      "id": "mom_lb21_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 21,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 43.471,
+      "max_drawdown_pct": 24.8682,
+      "sharpe": 0.7076,
+      "n_days": 711,
+      "end_equity": 143471.0,
+      "start_equity": 100000.0,
+      "exposure_pct": 87.62
+    },
+    {
+      "id": "mom_lb42_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 42,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 110.4386,
+      "max_drawdown_pct": 16.8096,
+      "sharpe": 1.396,
+      "n_days": 711,
+      "end_equity": 210438.61,
+      "start_equity": 100000.0,
+      "exposure_pct": 83.68
+    },
+    {
+      "id": "mom_lb60_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 60,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 60.424,
+      "max_drawdown_pct": 19.553,
+      "sharpe": 0.9768,
+      "n_days": 711,
+      "end_equity": 160424.0,
+      "start_equity": 100000.0,
+      "exposure_pct": 82.28
+    },
+    {
+      "id": "mom_lb60_k3",
+      "family": "momentum",
+      "params": {
+        "lookback": 60,
+        "top_k": 3,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 51.7142,
+      "max_drawdown_pct": 14.9899,
+      "sharpe": 0.9655,
+      "n_days": 711,
+      "end_equity": 151714.18,
+      "start_equity": 100000.0,
+      "exposure_pct": 82.28
+    },
+    {
+      "id": "mom_lb126_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 126,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 6.0047,
+      "max_drawdown_pct": 34.7823,
+      "sharpe": 0.204,
+      "n_days": 711,
+      "end_equity": 106004.68,
+      "start_equity": 100000.0,
+      "exposure_pct": 79.75
+    },
+    {
+      "id": "mom_lb126_k1",
+      "family": "momentum",
+      "params": {
+        "lookback": 126,
+        "top_k": 1,
+        "abs_filter": true
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 20.0448,
+      "max_drawdown_pct": 33.8252,
+      "sharpe": 0.3893,
+      "n_days": 711,
+      "end_equity": 120044.78,
+      "start_equity": 100000.0,
+      "exposure_pct": 79.75
+    },
+    {
+      "id": "dualmom_63",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 63
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 84.14,
+      "max_drawdown_pct": 31.3172,
+      "sharpe": 1.0452,
+      "n_days": 711,
+      "end_equity": 184139.97,
+      "start_equity": 100000.0,
+      "exposure_pct": 82.98
+    },
+    {
+      "id": "dualmom_126",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 126
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 20.0448,
+      "max_drawdown_pct": 33.8252,
+      "sharpe": 0.3893,
+      "n_days": 711,
+      "end_equity": 120044.78,
+      "start_equity": 100000.0,
+      "exposure_pct": 79.75
+    },
+    {
+      "id": "dualmom_252",
+      "family": "dual_momentum",
+      "params": {
+        "lookback": 252
+      },
+      "window": "test",
+      "from": "2024-01-02",
+      "to": "2026-10-30",
+      "total_return_pct": 25.2135,
+      "max_drawdown_pct": 34.0937,
+      "sharpe": 0.4357,
+      "n_days": 711,
+      "end_equity": 125213.45,
+      "start_equity": 100000.0,
+      "exposure_pct": 64.42
+    }
+  ],
+  "selection": {
+    "verdict": "beats_buyhold_oos",
+    "winner": {
+      "id": "mom_lb42_k2",
+      "family": "momentum",
+      "params": {
+        "lookback": 42,
+        "top_k": 2,
+        "abs_filter": true
+      },
+      "train": {
+        "id": "mom_lb42_k2",
+        "family": "momentum",
+        "params": {
+          "lookback": 42,
+          "top_k": 2,
+          "abs_filter": true
+        },
+        "window": "train",
+        "from": "2021-01-04",
+        "to": "2023-12-29",
+        "total_return_pct": -21.0622,
+        "max_drawdown_pct": 41.5417,
+        "sharpe": -0.2613,
+        "n_days": 753,
+        "end_equity": 78937.83,
+        "start_equity": 100000.0,
+        "exposure_pct": 77.69
+      },
+      "test": {
+        "id": "mom_lb42_k2",
+        "family": "momentum",
+        "params": {
+          "lookback": 42,
+          "top_k": 2,
+          "abs_filter": true
+        },
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 110.4386,
+        "max_drawdown_pct": 16.8096,
+        "sharpe": 1.396,
+        "n_days": 711,
+        "end_equity": 210438.61,
+        "start_equity": 100000.0,
+        "exposure_pct": 83.68
+      },
+      "train_score": -1.8517,
+      "beats_buyhold_oos": true,
+      "vs_spy_ret_oos": 45.4827,
+      "vs_equal_ret_oos": 31.3794,
+      "vs_spy_sharpe_oos": 0.169
+    },
+    "ranked": [
+      {
+        "id": "copycat_static",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 0
+        },
+        "train": {
+          "id": "copycat_static",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 0
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 65.9395,
+          "max_drawdown_pct": 34.5911,
+          "sharpe": 0.7832,
+          "n_days": 753,
+          "end_equity": 165939.46,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.87
+        },
+        "test": {
+          "id": "copycat_static",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 0
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 86.7755,
+          "max_drawdown_pct": 26.8144,
+          "sharpe": 1.1516,
+          "n_days": 711,
+          "end_equity": 186775.48,
+          "start_equity": 100000.0,
+          "exposure_pct": 99.86
+        },
+        "train_score": 1.6288,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": 21.8196,
+        "vs_equal_ret_oos": 7.7163,
+        "vs_spy_sharpe_oos": -0.0754
+      },
+      {
+        "id": "copycat_berk_trend150",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.42,
+            0.33,
+            0.25
+          ],
+          "trend_period": 150
+        },
+        "train": {
+          "id": "copycat_berk_trend150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.42,
+              0.33,
+              0.25
+            ],
+            "trend_period": 150
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 32.2791,
+          "max_drawdown_pct": 22.6372,
+          "sharpe": 0.6923,
+          "n_days": 753,
+          "end_equity": 132279.11,
+          "start_equity": 100000.0,
+          "exposure_pct": 52.19
+        },
+        "test": {
+          "id": "copycat_berk_trend150",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.42,
+              0.33,
+              0.25
+            ],
+            "trend_period": 150
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 65.9118,
+          "max_drawdown_pct": 14.485,
+          "sharpe": 1.2889,
+          "n_days": 711,
+          "end_equity": 165911.84,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.76
+        },
+        "train_score": 1.1181,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": 0.9559,
+        "vs_equal_ret_oos": -13.1474,
+        "vs_spy_sharpe_oos": 0.0619
+      },
+      {
+        "id": "copycat_trend200",
+        "family": "copycat_hold",
+        "params": {
+          "tickers": [
+            "AAPL",
+            "MSFT",
+            "GOOGL"
+          ],
+          "weights": [
+            0.4,
+            0.3,
+            0.3
+          ],
+          "trend_period": 200
+        },
+        "train": {
+          "id": "copycat_trend200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 19.342,
+          "max_drawdown_pct": 22.3578,
+          "sharpe": 0.4969,
+          "n_days": 753,
+          "end_equity": 119342.0,
+          "start_equity": 100000.0,
+          "exposure_pct": 44.22
+        },
+        "test": {
+          "id": "copycat_trend200",
+          "family": "copycat_hold",
+          "params": {
+            "tickers": [
+              "AAPL",
+              "MSFT",
+              "GOOGL"
+            ],
+            "weights": [
+              0.4,
+              0.3,
+              0.3
+            ],
+            "trend_period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 47.1648,
+          "max_drawdown_pct": 14.8912,
+          "sharpe": 1.0046,
+          "n_days": 711,
+          "end_equity": 147164.82,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.28
+        },
+        "train_score": 0.5732,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -17.7911,
+        "vs_equal_ret_oos": -31.8944,
+        "vs_spy_sharpe_oos": -0.2224
+      },
+      {
+        "id": "sma_5_20",
+        "family": "sma_cross",
+        "params": {
+          "fast": 5,
+          "slow": 20
+        },
+        "train": {
+          "id": "sma_5_20",
+          "family": "sma_cross",
+          "params": {
+            "fast": 5,
+            "slow": 20
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 15.5441,
+          "max_drawdown_pct": 32.8989,
+          "sharpe": 0.3481,
+          "n_days": 753,
+          "end_equity": 115544.12,
+          "start_equity": 100000.0,
+          "exposure_pct": 74.24
+        },
+        "test": {
+          "id": "sma_5_20",
+          "family": "sma_cross",
+          "params": {
+            "fast": 5,
+            "slow": 20
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 18.5399,
+          "max_drawdown_pct": 29.7881,
+          "sharpe": 0.4091,
+          "n_days": 711,
+          "end_equity": 118539.93,
+          "start_equity": 100000.0,
+          "exposure_pct": 85.94
+        },
+        "train_score": 0.0106,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -46.416,
+        "vs_equal_ret_oos": -60.5193,
+        "vs_spy_sharpe_oos": -0.8179
+      },
+      {
+        "id": "sma_20_50",
+        "family": "sma_cross",
+        "params": {
+          "fast": 20,
+          "slow": 50
+        },
+        "train": {
+          "id": "sma_20_50",
+          "family": "sma_cross",
+          "params": {
+            "fast": 20,
+            "slow": 50
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 8.5185,
+          "max_drawdown_pct": 32.5391,
+          "sharpe": 0.2378,
+          "n_days": 753,
+          "end_equity": 108518.45,
+          "start_equity": 100000.0,
+          "exposure_pct": 73.31
+        },
+        "test": {
+          "id": "sma_20_50",
+          "family": "sma_cross",
+          "params": {
+            "fast": 20,
+            "slow": 50
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 20.735,
+          "max_drawdown_pct": 22.9017,
+          "sharpe": 0.4869,
+          "n_days": 711,
+          "end_equity": 120735.01,
+          "start_equity": 100000.0,
+          "exposure_pct": 84.95
+        },
+        "train_score": -0.2864,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -44.2209,
+        "vs_equal_ret_oos": -58.3242,
+        "vs_spy_sharpe_oos": -0.7401
+      },
+      {
+        "id": "sma_50_200",
+        "family": "sma_cross",
+        "params": {
+          "fast": 50,
+          "slow": 200
+        },
+        "train": {
+          "id": "sma_50_200",
+          "family": "sma_cross",
+          "params": {
+            "fast": 50,
+            "slow": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 6.3922,
+          "max_drawdown_pct": 29.1583,
+          "sharpe": 0.2065,
+          "n_days": 753,
+          "end_equity": 106392.23,
+          "start_equity": 100000.0,
+          "exposure_pct": 53.12
+        },
+        "test": {
+          "id": "sma_50_200",
+          "family": "sma_cross",
+          "params": {
+            "fast": 50,
+            "slow": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 17.037,
+          "max_drawdown_pct": 25.8139,
+          "sharpe": 0.4054,
+          "n_days": 711,
+          "end_equity": 117036.98,
+          "start_equity": 100000.0,
+          "exposure_pct": 67.23
+        },
+        "train_score": -0.2914,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -47.9189,
+        "vs_equal_ret_oos": -62.0222,
+        "vs_spy_sharpe_oos": -0.8216
+      },
+      {
+        "id": "trend_100",
+        "family": "trend_sma",
+        "params": {
+          "period": 100
+        },
+        "train": {
+          "id": "trend_100",
+          "family": "trend_sma",
+          "params": {
+            "period": 100
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 7.7186,
+          "max_drawdown_pct": 37.0029,
+          "sharpe": 0.2294,
+          "n_days": 753,
+          "end_equity": 107718.59,
+          "start_equity": 100000.0,
+          "exposure_pct": 69.72
+        },
+        "test": {
+          "id": "trend_100",
+          "family": "trend_sma",
+          "params": {
+            "period": 100
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 21.4783,
+          "max_drawdown_pct": 17.4437,
+          "sharpe": 0.5273,
+          "n_days": 711,
+          "end_equity": 121478.28,
+          "start_equity": 100000.0,
+          "exposure_pct": 77.78
+        },
+        "train_score": -0.4266,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -43.4776,
+        "vs_equal_ret_oos": -57.5809,
+        "vs_spy_sharpe_oos": -0.6997
+      },
+      {
+        "id": "trend_50",
+        "family": "trend_sma",
+        "params": {
+          "period": 50
+        },
+        "train": {
+          "id": "trend_50",
+          "family": "trend_sma",
+          "params": {
+            "period": 50
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 3.3195,
+          "max_drawdown_pct": 37.1635,
+          "sharpe": 0.1519,
+          "n_days": 753,
+          "end_equity": 103319.5,
+          "start_equity": 100000.0,
+          "exposure_pct": 74.63
+        },
+        "test": {
+          "id": "trend_50",
+          "family": "trend_sma",
+          "params": {
+            "period": 50
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 49.1208,
+          "max_drawdown_pct": 16.8314,
+          "sharpe": 0.8715,
+          "n_days": 711,
+          "end_equity": 149120.8,
+          "start_equity": 100000.0,
+          "exposure_pct": 82.0
+        },
+        "train_score": -0.6348,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -15.8351,
+        "vs_equal_ret_oos": -29.9384,
+        "vs_spy_sharpe_oos": -0.3555
+      },
+      {
+        "id": "mom_lb60_k3",
+        "family": "momentum",
+        "params": {
+          "lookback": 60,
+          "top_k": 3,
+          "abs_filter": true
+        },
+        "train": {
+          "id": "mom_lb60_k3",
+          "family": "momentum",
+          "params": {
+            "lookback": 60,
+            "top_k": 3,
+            "abs_filter": true
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": 3.7175,
+          "max_drawdown_pct": 43.1733,
+          "sharpe": 0.1625,
+          "n_days": 753,
+          "end_equity": 103717.45,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.17
+        },
+        "test": {
+          "id": "mom_lb60_k3",
+          "family": "momentum",
+          "params": {
+            "lookback": 60,
+            "top_k": 3,
+            "abs_filter": true
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 51.7142,
+          "max_drawdown_pct": 14.9899,
+          "sharpe": 0.9655,
+          "n_days": 711,
+          "end_equity": 151714.18,
+          "start_equity": 100000.0,
+          "exposure_pct": 82.28
+        },
+        "train_score": -0.7612,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -13.2417,
+        "vs_equal_ret_oos": -27.345,
+        "vs_spy_sharpe_oos": -0.2615
+      },
+      {
+        "id": "mom_lb60_k2",
+        "family": "momentum",
+        "params": {
+          "lookback": 60,
+          "top_k": 2,
+          "abs_filter": true
+        },
+        "train": {
+          "id": "mom_lb60_k2",
+          "family": "momentum",
+          "params": {
+            "lookback": 60,
+            "top_k": 2,
+            "abs_filter": true
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -1.2391,
+          "max_drawdown_pct": 45.794,
+          "sharpe": 0.09,
+          "n_days": 753,
+          "end_equity": 98760.94,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.17
+        },
+        "test": {
+          "id": "mom_lb60_k2",
+          "family": "momentum",
+          "params": {
+            "lookback": 60,
+            "top_k": 2,
+            "abs_filter": true
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 60.424,
+          "max_drawdown_pct": 19.553,
+          "sharpe": 0.9768,
+          "n_days": 711,
+          "end_equity": 160424.0,
+          "start_equity": 100000.0,
+          "exposure_pct": 82.28
+        },
+        "train_score": -1.0346,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -4.5319,
+        "vs_equal_ret_oos": -18.6352,
+        "vs_spy_sharpe_oos": -0.2502
+      },
+      {
+        "id": "sma_10_30",
+        "family": "sma_cross",
+        "params": {
+          "fast": 10,
+          "slow": 30
+        },
+        "train": {
+          "id": "sma_10_30",
+          "family": "sma_cross",
+          "params": {
+            "fast": 10,
+            "slow": 30
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -7.25,
+          "max_drawdown_pct": 39.7045,
+          "sharpe": -0.0193,
+          "n_days": 753,
+          "end_equity": 92749.98,
+          "start_equity": 100000.0,
+          "exposure_pct": 75.43
+        },
+        "test": {
+          "id": "sma_10_30",
+          "family": "sma_cross",
+          "params": {
+            "fast": 10,
+            "slow": 30
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 39.8812,
+          "max_drawdown_pct": 18.1453,
+          "sharpe": 0.742,
+          "n_days": 711,
+          "end_equity": 139881.18,
+          "start_equity": 100000.0,
+          "exposure_pct": 84.95
+        },
+        "train_score": -1.1666,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -25.0747,
+        "vs_equal_ret_oos": -39.178,
+        "vs_spy_sharpe_oos": -0.485
+      },
+      {
+        "id": "mom_lb126_k2",
+        "family": "momentum",
+        "params": {
+          "lookback": 126,
+          "top_k": 2,
+          "abs_filter": true
+        },
+        "train": {
+          "id": "mom_lb126_k2",
+          "family": "momentum",
+          "params": {
+            "lookback": 126,
+            "top_k": 2,
+            "abs_filter": true
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -7.764,
+          "max_drawdown_pct": 45.3561,
+          "sharpe": -0.0383,
+          "n_days": 753,
+          "end_equity": 92235.97,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.14
+        },
+        "test": {
+          "id": "mom_lb126_k2",
+          "family": "momentum",
+          "params": {
+            "lookback": 126,
+            "top_k": 2,
+            "abs_filter": true
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 6.0047,
+          "max_drawdown_pct": 34.7823,
+          "sharpe": 0.204,
+          "n_days": 711,
+          "end_equity": 106004.68,
+          "start_equity": 100000.0,
+          "exposure_pct": 79.75
+        },
+        "train_score": -1.3466,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -58.9512,
+        "vs_equal_ret_oos": -73.0545,
+        "vs_spy_sharpe_oos": -1.023
+      },
+      {
+        "id": "trend_200",
+        "family": "trend_sma",
+        "params": {
+          "period": 200
+        },
+        "train": {
+          "id": "trend_200",
+          "family": "trend_sma",
+          "params": {
+            "period": 200
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -8.6208,
+          "max_drawdown_pct": 40.9193,
+          "sharpe": -0.1046,
+          "n_days": 753,
+          "end_equity": 91379.25,
+          "start_equity": 100000.0,
+          "exposure_pct": 53.25
+        },
+        "test": {
+          "id": "trend_200",
+          "family": "trend_sma",
+          "params": {
+            "period": 200
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 32.7407,
+          "max_drawdown_pct": 21.3977,
+          "sharpe": 0.7453,
+          "n_days": 711,
+          "end_equity": 132740.74,
+          "start_equity": 100000.0,
+          "exposure_pct": 67.37
+        },
+        "train_score": -1.3523,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -32.2152,
+        "vs_equal_ret_oos": -46.3185,
+        "vs_spy_sharpe_oos": -0.4817
+      },
+      {
+        "id": "mom_lb126_k1",
+        "family": "momentum",
+        "params": {
+          "lookback": 126,
+          "top_k": 1,
+          "abs_filter": true
+        },
+        "train": {
+          "id": "mom_lb126_k1",
+          "family": "momentum",
+          "params": {
+            "lookback": 126,
+            "top_k": 1,
+            "abs_filter": true
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -15.8459,
+          "max_drawdown_pct": 44.3684,
+          "sharpe": -0.1521,
+          "n_days": 753,
+          "end_equity": 84154.11,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.14
+        },
+        "test": {
+          "id": "mom_lb126_k1",
+          "family": "momentum",
+          "params": {
+            "lookback": 126,
+            "top_k": 1,
+            "abs_filter": true
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 20.0448,
+          "max_drawdown_pct": 33.8252,
+          "sharpe": 0.3893,
+          "n_days": 711,
+          "end_equity": 120044.78,
+          "start_equity": 100000.0,
+          "exposure_pct": 79.75
+        },
+        "train_score": -1.6543,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -44.9111,
+        "vs_equal_ret_oos": -59.0144,
+        "vs_spy_sharpe_oos": -0.8377
+      },
+      {
+        "id": "dualmom_126",
+        "family": "dual_momentum",
+        "params": {
+          "lookback": 126
+        },
+        "train": {
+          "id": "dualmom_126",
+          "family": "dual_momentum",
+          "params": {
+            "lookback": 126
+          },
+          "window": "train",
+          "from": "2021-01-04",
+          "to": "2023-12-29",
+          "total_return_pct": -15.8459,
+          "max_drawdown_pct": 44.3684,
+          "sharpe": -0.1521,
+          "n_days": 753,
+          "end_equity": 84154.11,
+          "start_equity": 100000.0,
+          "exposure_pct": 64.14
+        },
+        "test": {
+          "id": "dualmom_126",
+          "family": "dual_momentum",
+          "params": {
+            "lookback": 126
+          },
+          "window": "test",
+          "from": "2024-01-02",
+          "to": "2026-10-30",
+          "total_return_pct": 20.0448,
+          "max_drawdown_pct": 33.8252,
+          "sharpe": 0.3893,
+          "n_days": 711,
+          "end_equity": 120044.78,
+          "start_equity": 100000.0,
+          "exposure_pct": 79.75
+        },
+        "train_score": -1.6543,
+        "beats_buyhold_oos": false,
+        "vs_spy_ret_oos": -44.9111,
+        "vs_equal_ret_oos": -59.0144,
+        "vs_spy_sharpe_oos": -0.8377
+      }
+    ],
+    "benchmarks_oos": {
+      "bh_spy": {
+        "id": "bh_spy",
+        "family": "buy_hold_spy",
+        "params": {},
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 64.9559,
+        "max_drawdown_pct": 18.7552,
+        "sharpe": 1.227,
+        "n_days": 711,
+        "end_equity": 164955.88,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.86
+      },
+      "bh_equal": {
+        "id": "bh_equal",
+        "family": "buy_hold_equal",
+        "params": {},
+        "window": "test",
+        "from": "2024-01-02",
+        "to": "2026-10-30",
+        "total_return_pct": 79.0592,
+        "max_drawdown_pct": 24.4701,
+        "sharpe": 1.1231,
+        "n_days": 711,
+        "end_equity": 179059.22,
+        "start_equity": 100000.0,
+        "exposure_pct": 99.86
+      }
+    }
+  },
+  "note": "Параметры выбирались на train; OOS = test. Комиссия ~10 bps на оборот. Не финсовет."
+}

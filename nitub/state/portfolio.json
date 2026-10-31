@@ -1,0 +1,147 @@
+{
+  "session": "skills-smoke",
+  "mode": "paper",
+  "currency": "USD",
+  "started_at": "2026-10-31",
+  "as_of": "2026-10-31T19:50:37Z",
+  "price_source": "yahoo",
+  "price_note": "Delayed quotes for alerts and sizing checks. Paper fills use the same marks (ideal execution).",
+  "thesis": {
+    "name": "Research winner: copycat_static (copycat_hold)",
+    "source": "nitub research winner copycat_static (copycat_hold)",
+    "strategy_id": "copycat_static",
+    "family": "copycat_hold",
+    "params": {
+      "tickers": [
+        "AAPL",
+        "MSFT",
+        "GOOGL"
+      ],
+      "weights": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "trend_period": 0
+    },
+    "verdict": "beats_buyhold_oos",
+    "beats_buyhold_oos": true,
+    "oos": {
+      "total_return_pct": 86.7755,
+      "sharpe": 1.1516,
+      "max_drawdown_pct": 26.8144,
+      "vs_spy_ret_oos": 21.8196,
+      "vs_equal_ret_oos": 4.9297
+    },
+    "rationale_ru": "Paper-сессия skills-smoke: sleeve из nitub research (copycat_static), отбор только на train; OOS verdict=beats_buyhold_oos. Fills только paper. Полный pipeline: 11 core skills."
+  },
+  "starting_cash": 100.0,
+  "cash": 10.0,
+  "invested_cost": 90.0,
+  "positions_market_value": 90.0,
+  "equity": 100.0,
+  "unrealized_pnl": 0.0,
+  "total_pnl_vs_start": 0.0,
+  "total_pnl_pct": 0.0,
+  "realized_pnl": 0.0,
+  "cash_buffer_target": 10.0,
+  "config_snapshot": {
+    "budget": 100.0,
+    "cash_buffer_pct": 10,
+    "max_position_pct": 40,
+    "max_order_usd": 50,
+    "min_order_usd": 5,
+    "fractional": true,
+    "paper": true,
+    "allow_options": false
+  },
+  "positions": [
+    {
+      "ticker": "AAPL",
+      "shares": 0.10446,
+      "cost_basis": 36.0,
+      "avg_cost_per_share": 344.6295,
+      "mark": 344.63,
+      "market_value": 36.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "AAPL-1",
+          "date": "2026-10-31",
+          "shares": 0.10446,
+          "cost": 36.0
+        }
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 0.051733,
+      "cost_basis": 27.0,
+      "avg_cost_per_share": 521.9106,
+      "mark": 521.91,
+      "market_value": 27.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "MSFT-1",
+          "date": "2026-10-31",
+          "shares": 0.051733,
+          "cost": 27.0
+        }
+      ]
+    },
+    {
+      "ticker": "GOOGL",
+      "shares": 0.096484,
+      "cost_basis": 27.0,
+      "avg_cost_per_share": 279.8391,
+      "mark": 279.84,
+      "market_value": 27.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "GOOGL-1",
+          "date": "2026-10-31",
+          "shares": 0.096484,
+          "cost": 27.0
+        }
+      ]
+    }
+  ],
+  "fills": [
+    {
+      "id": "PAPER-SIM-AAPL-1",
+      "symbol": "AAPL",
+      "side": "buy",
+      "notional": 36.0,
+      "qty": 0.10446,
+      "price": 344.63,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T19:20:48Z"
+    },
+    {
+      "id": "PAPER-SIM-MSFT-2",
+      "symbol": "MSFT",
+      "side": "buy",
+      "notional": 27.0,
+      "qty": 0.051733,
+      "price": 521.91,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T19:20:48Z"
+    },
+    {
+      "id": "PAPER-SIM-GOOGL-3",
+      "symbol": "GOOGL",
+      "side": "buy",
+      "notional": 27.0,
+      "qty": 0.096484,
+      "price": 279.84,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T19:20:48Z"
+    }
+  ],
+  "disclaimer": "Education/tooling only. Paper simulation. Not financial advice. No live broker orders."
+}
