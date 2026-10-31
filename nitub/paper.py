@@ -262,6 +262,20 @@ def _build_report(portfolio: dict, skill_rows: list[dict], extras: dict) -> str:
             f"| {p['ticker']} | {p['shares']} | {p['cost_basis']:.2f} | "
             f"{p['mark']:.2f} | {p['market_value']:.2f} | {p['unrealized_pnl']:.2f} |"
         )
+    thesis = portfolio.get("thesis") or {}
+    signal_rows = thesis.get("signals") or []
+    if signal_rows:
+        lines += [
+            "",
+            "## Почему каждый тикер (сигналы skills)",
+            "",
+            "| тикер | источники | причины |",
+            "| --- | --- | --- |",
+        ]
+        for s in signal_rows:
+            src = ", ".join(s.get("sources") or [])
+            why = "; ".join(s.get("reasons") or [])
+            lines.append(f"| {s.get('ticker')} | {src} | {why} |")
     lines += [
         "",
         "## Что сделал каждый skill",
@@ -352,10 +366,15 @@ def run_paper(
         f"Сброс portfolio+broker → cash=${starting:.2f} для {session}",
     )
 
-    # Targets: research winner OR copycat 13F (copycat всё равно вызывается в pipeline)
+    # Targets: signal sleeve (default) OR optional research winner.
+    # Mega-cap hardcode (AAPL/MSFT/…) запрещён как единственный путь.
+    from . import signals
+
     thesis: dict[str, Any]
-    copycat_out = None
+    copycat_out = TRADER_DIR / "state" / "copycat-ref.json"
     do_refresh_copycat = refresh_copycat
+    discovery_top = max(int(top or 3), 12)
+
     if use_research_strategy:
         from . import research
 
@@ -395,47 +414,159 @@ def run_paper(
                 "group": "meta",
             }
         )
-        # Не затираем research targets: copycat пишет в side-файл, но skill числится
-        copycat_out = TRADER_DIR / "state" / "copycat-ref.json"
         do_refresh_copycat = True
+        tickers = [
+            w["ticker"]
+            for w in ((_load_json(TRADER_DIR / "targets.json", {}) or {}).get("weights") or [])
+            if w.get("ticker")
+        ]
+        pipeline_rows = orchestrator.run_full_pipeline(
+            tickers=tickers or None,
+            cik=cik,
+            top=top,
+            refresh_copycat=do_refresh_copycat,
+            copycat_out=copycat_out,
+            skip_news=skip_news,
+            force_heavy=True,
+            cycle=1,
+            run_budget_risk=True,
+            broker_mode="tickets",
+            include_vendor=True,
+        )
+        skill_rows = orchestrator.merge_skill_rows(skill_rows, pipeline_rows)
     else:
+        # --- Signal-driven path ---
+        # Wipe prior mega/research targets so discovery не подмешивает старый sleeve.
+        store.write_json(
+            TRADER_DIR / "targets.json",
+            {
+                "source": "pending signal sleeve",
+                "as_of": store.utc_now(),
+                "method": "cleared before skills discovery",
+                "weights": [],
+            },
+        )
+        # 1) Discovery: broad 13F → side-file (не пишем сразу в targets как sleeve)
+        store.append_event(
+            "signal_path",
+            f"Signal sleeve: discovery copycat top-{discovery_top} → filters → targets",
+            data={"cik": cik, "top": discovery_top},
+        )
+        if do_refresh_copycat:
+            cc = skills.copycat_top(cik=cik, top=discovery_top, out=copycat_out)
+            skill_rows.append(
+                {
+                    "name": "copycat",
+                    "result": (
+                        f"13F CIK {cik} top-{discovery_top} → {copycat_out.name}"
+                        if cc.get("ok")
+                        else f"copycat soft ({cc.get('error') or cc.get('returncode')})"
+                    ),
+                    "status": "ok" if cc.get("ok") else "soft",
+                    "group": "core",
+                }
+            )
+        else:
+            skill_rows.append(
+                {
+                    "name": "copycat",
+                    "result": f"reuse {copycat_out.name}",
+                    "status": "ok",
+                    "group": "core",
+                }
+            )
+
+        discovery = signals.discovery_universe(copycat_path=copycat_out, max_n=16)
+        if not discovery:
+            store.append_event(
+                "signal_path",
+                "Discovery пуст — нет кандидатов из skills (не подставляем mega-cap)",
+            )
+
+        # 2) Core discovery skills on candidates (без budget/risk — targets ещё нет)
+        disc_rows = orchestrator.run_core_skills(
+            tickers=discovery,
+            cik=cik,
+            top=discovery_top,
+            refresh_copycat=False,  # уже сделали выше в side-file
+            copycat_out=copycat_out,
+            skip_news=skip_news,
+            force_heavy=True,
+            cycle=1,
+            run_budget_risk=False,
+            broker_mode="tickets",
+        )
+        skill_rows = orchestrator.merge_skill_rows(skill_rows, disc_rows)
+
+        # 3) Vendor filters (earnings / drawdown / market / valuation)
+        vendor_rows = orchestrator.run_vendor_skills(discovery)
+        skill_rows = orchestrator.merge_skill_rows(skill_rows, vendor_rows)
+
+        # 4) Build sleeve ONLY from screener + skill filters
+        targets = signals.build_signal_targets(
+            write=True,
+            copycat_path=copycat_out,
+            max_positions=8,
+            min_signals=1,
+        )
+        signal_list = targets.get("signals") or []
         thesis = {
-            "name": "Berkshire Hathaway top-3 copycat (tiny sleeve)",
-            "source": "reuse or refresh 13F via trader-copycat",
+            "name": "Signal-driven sleeve (skills pipeline)",
+            "source": targets.get("source"),
+            "strategy_id": "signal_skills",
+            "family": "signal_driven",
+            "method": targets.get("method"),
+            "signals": signal_list,
+            "rejected": targets.get("rejected") or [],
+            "regime": targets.get("regime") or {},
+            "as_of_holdings": (_load_json(copycat_out, {}) or {}).get("as_of"),
+            "filed": (_load_json(copycat_out, {}) or {}).get("filed"),
             "rationale_ru": (
-                f"Paper-сессия {session}: копируем top-{top} Berkshire через 13F, "
-                "полный pipeline всех trader-* skills, fills только paper."
+                f"Paper-сессия {session}: тикеры только из pipeline "
+                f"(screener shortlist + analyst/copycat/pelosi/news + vendor "
+                f"earnings/valuation/market-environment/drawdown). "
+                f"Позиций: {len(targets.get('weights') or [])}. "
+                f"Без hardcode mega-cap как единственного пути. Fills только paper."
             ),
         }
+        skill_rows.append(
+            {
+                "name": "signals",
+                "result": (
+                    "sleeve "
+                    + (
+                        ", ".join(
+                            f"{s['ticker']}←{'+'.join(s.get('sources') or [])}"
+                            for s in signal_list
+                        )
+                        or "(пусто — нет PASS)"
+                    )
+                ),
+                "status": "ok" if signal_list else "soft",
+                "group": "meta",
+            }
+        )
 
-    tickers = [
-        w["ticker"]
-        for w in ((_load_json(TRADER_DIR / "targets.json", {}) or {}).get("weights") or [])
-        if w.get("ticker")
-    ]
-
-    # Full core + vendor skills (alerts/copycat/news/pelosi/analyst/screener/
-    # budget/risk/broker-tickets/tax/rebalance + vendor)
-    pipeline_rows = orchestrator.run_full_pipeline(
-        tickers=tickers or None,
-        cik=cik,
-        top=top,
-        refresh_copycat=do_refresh_copycat,
-        copycat_out=copycat_out,
-        skip_news=skip_news,
-        force_heavy=True,
-        cycle=1,
-        run_budget_risk=True,
-        broker_mode="tickets",
-        include_vendor=True,
-    )
-    skill_rows = orchestrator.merge_skill_rows(skill_rows, pipeline_rows)
-
-    if not use_research_strategy:
-        targets = _load_json(TRADER_DIR / "targets.json", {}) or {}
-        thesis["source"] = targets.get("source") or thesis["source"]
-        thesis["as_of_holdings"] = targets.get("as_of")
-        thesis["filed"] = targets.get("filed")
+        # 5) Size + risk + broker tickets на выбранном sleeve
+        sized = orchestrator.run_core_skills(
+            tickers=[w["ticker"] for w in (targets.get("weights") or []) if w.get("ticker")],
+            cik=cik,
+            top=discovery_top,
+            refresh_copycat=False,
+            copycat_out=copycat_out,
+            skip_news=True,  # уже гоняли
+            force_heavy=False,
+            cycle=2,
+            run_budget_risk=True,
+            broker_mode="tickets",
+        )
+        # Keep discovery results for heavy skills; only take sizing/risk/broker/tax/rebalance
+        keep = {"budget", "risk", "broker", "tax", "rebalance", "alerts", "screener"}
+        skill_rows = orchestrator.merge_skill_rows(
+            skill_rows,
+            [r for r in sized if r.get("name") in keep],
+        )
+        orchestrator.publish_catalog(skill_rows)
 
     tickers = [
         w["ticker"]
@@ -589,6 +720,7 @@ def run_paper(
     orchestrator.publish_catalog(skill_rows)
 
     shortlist = _load_json(TRADER_DIR / "shortlist.json", {}) or {}
+    targets_now = _load_json(TRADER_DIR / "targets.json", {}) or {}
     analysis = {
         "thesis": thesis,
         "orders_proposed": len(orders),
@@ -607,6 +739,31 @@ def run_paper(
             (r["result"] for r in skill_rows if r["name"] == "analyst"),
             None,
         ),
+        "signals": targets_now.get("signals")
+        or thesis.get("signals")
+        or [
+            {
+                "ticker": w.get("ticker"),
+                "sources": w.get("sources") or [],
+                "reasons": w.get("reasons") or [],
+            }
+            for w in (targets_now.get("weights") or [])
+            if w.get("ticker")
+        ],
+        "positions_why": {
+            (p.get("ticker") or p.get("symbol")): next(
+                (
+                    {
+                        "sources": w.get("sources"),
+                        "reasons": w.get("reasons"),
+                    }
+                    for w in (targets_now.get("weights") or [])
+                    if w.get("ticker") == (p.get("ticker") or p.get("symbol"))
+                ),
+                None,
+            )
+            for p in (portfolio.get("positions") or [])
+        },
     }
     report = _build_report(portfolio, skill_rows, {})
     store.publish_state(

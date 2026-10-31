@@ -235,6 +235,7 @@ export function extractAnalysis(
   risks: string[]
   fills?: number
   ordersPassed?: number
+  signals: Array<{ ticker: string; sources: string[]; reasons: string[] }>
 } {
   const skills = extractSkills(report)
   const screener = skills.find((s) => /screener/i.test(s.name))?.result
@@ -267,6 +268,19 @@ export function extractAnalysis(
     risks.push('Котировки могут быть с задержкой — не для живой торговли.')
   }
 
+  const rawSignals =
+    analysisJson?.signals ||
+    analysisJson?.thesis?.signals ||
+    (portfolio?.thesis as { signals?: AnalysisJson['signals'] } | undefined)?.signals ||
+    []
+  const signals = (Array.isArray(rawSignals) ? rawSignals : [])
+    .filter((s) => s && s.ticker)
+    .map((s) => ({
+      ticker: String(s.ticker),
+      sources: Array.isArray(s.sources) ? s.sources.map(String) : [],
+      reasons: Array.isArray(s.reasons) ? s.reasons.map(String) : [],
+    }))
+
   return {
     thesis: analysisJson?.thesis?.name ?? portfolio?.thesis?.name,
     rationale:
@@ -282,6 +296,7 @@ export function extractAnalysis(
       typeof analysisJson?.orders_passed === 'number'
         ? analysisJson.orders_passed
         : undefined,
+    signals,
   }
 }
 

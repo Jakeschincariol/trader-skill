@@ -147,7 +147,8 @@ def run_core_skills(
             )
         )
 
-    # refresh ticker list after possible targets update
+    # refresh ticker list after possible targets update (holdings + targets;
+    # discovery path may pass an explicit candidate list already in uniq)
     uniq = sorted(set(uniq) | set(target_tickers()) | set(holding_tickers()))
     if uniq:
         skills.quote_tickers(uniq, write=True)
@@ -189,9 +190,13 @@ def run_core_skills(
 
     # 5) analyst
     if _should_run_heavy("analyst", cycle=cycle, force_heavy=force_heavy):
-        a = skills.analyst_facts(uniq[:5] or ["AAPL"], soft=True)
-        msg, st = _ok_msg(a, f"metrics ← {', '.join((uniq[:5] or ['AAPL']))}")
-        rows.append(_row("analyst", msg, status=st))
+        if uniq:
+            a = skills.analyst_facts(uniq[:12], soft=True)
+            msg, st = _ok_msg(a, f"metrics ← {', '.join(uniq[:12])}")
+            rows.append(_row("analyst", msg, status=st))
+        else:
+            store.append_event("skill_skip", "analyst: нет тикеров (без mega hardcode)", skill="analyst")
+            rows.append(_row("analyst", "skipped — нет тикеров", status="soft"))
     else:
         store.append_event(
             "skill_skip",
@@ -290,7 +295,17 @@ def run_full_pipeline(
     """All core (+ vendor) skills → skill_rows for skills.json / dashboard."""
     ensure_dirs()
     (STATE_DIR / "skills").mkdir(parents=True, exist_ok=True)
-    tix = tickers or target_tickers() or holding_tickers() or ["AAPL", "MSFT", "GOOGL"]
+    # Never invent mega-cap defaults as the sole universe path.
+    tix = list(tickers or []) or target_tickers() or holding_tickers()
+    if not tix:
+        from . import signals
+
+        tix = signals.discovery_universe(max_n=12)
+    if not tix:
+        store.append_event(
+            "pipeline_empty",
+            "Нет тикеров для pipeline (targets/holdings/discovery пусты) — без mega hardcode",
+        )
     store.append_event(
         "pipeline_start",
         f"Полный pipeline skills (cycle={cycle}, heavy={'all' if force_heavy else 'interval'})",

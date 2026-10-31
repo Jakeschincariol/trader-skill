@@ -441,21 +441,33 @@ export default function App() {
                           <th className="num">Курс</th>
                           <th className="num">Рын. ст.</th>
                           <th className="num">Нереализ.</th>
+                          <th>Сигнал</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {positions.map((p) => (
-                          <tr key={p.ticker}>
-                            <td>{p.ticker}</td>
-                            <td className="num">{p.shares}</td>
-                            <td className="num">{formatMoney(p.cost_basis)}</td>
-                            <td className="num">{formatMoney(p.mark)}</td>
-                            <td className="num">{formatMoney(p.market_value)}</td>
-                            <td className={`num ${pnlClass(p.unrealized_pnl)}`}>
-                              {formatMoney(p.unrealized_pnl)}
-                            </td>
-                          </tr>
-                        ))}
+                        {positions.map((p) => {
+                          const sig = analysis.signals.find((s) => s.ticker === p.ticker)
+                          return (
+                            <tr key={p.ticker}>
+                              <td>{p.ticker}</td>
+                              <td className="num">{p.shares}</td>
+                              <td className="num">{formatMoney(p.cost_basis)}</td>
+                              <td className="num">{formatMoney(p.mark)}</td>
+                              <td className="num">{formatMoney(p.market_value)}</td>
+                              <td className={`num ${pnlClass(p.unrealized_pnl)}`}>
+                                {formatMoney(p.unrealized_pnl)}
+                              </td>
+                              <td className="muted">
+                                {sig
+                                  ? clip(
+                                      `${sig.sources.join('+')}: ${(sig.reasons[0] || '').slice(0, 80)}`,
+                                      90,
+                                    )
+                                  : '—'}
+                              </td>
+                            </tr>
+                          )
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -506,6 +518,21 @@ export default function App() {
                   <p className="brief-body">{clip(analysis.rationale, 180)}</p>
                 ) : null}
               </div>
+              {analysis.signals.length ? (
+                <div className="brief-block">
+                  <h2 className="brief-label">Почему тикеры</h2>
+                  <ul className="risk-list">
+                    {analysis.signals.map((s) => (
+                      <li key={s.ticker}>
+                        <strong>{s.ticker}</strong>
+                        {' ← '}
+                        {clip(s.sources.join(', '), 40)}
+                        {s.reasons[0] ? ` — ${clip(s.reasons[0], 90)}` : ''}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
               <div className="brief-block">
                 <h2 className="brief-label">Риски</h2>
                 <ul className="risk-list">

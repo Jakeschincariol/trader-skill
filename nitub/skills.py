@@ -452,11 +452,208 @@ def clawdfolio_risk_step(tickers: list[str], *, soft: bool = True) -> dict:
         raise
 
 
+def drawdown_circuit_step(tickers: list[str], *, soft: bool = True) -> dict:
+    """Per-ticker 6mo drawdown gate (yfinance) for signal filters."""
+    store.append_event(
+        "skill_start",
+        f"Запуск drawdown-circuit-breaker: {', '.join(tickers[:8]) or '—'}",
+        skill="drawdown-circuit-breaker",
+    )
+    try:
+        import yfinance as yf
+
+        per: list[dict] = []
+        for t in tickers[:12]:
+            try:
+                hist = yf.Ticker(t).history(period="6mo", auto_adjust=True)
+                if hist is None or getattr(hist, "empty", True):
+                    per.append({"ticker": t, "error": "no history"})
+                    continue
+                close = hist["Close"]
+                peak = float(close.cummax().iloc[-1]) if len(close) else 0.0
+                last = float(close.iloc[-1]) if len(close) else 0.0
+                dd = (last / peak - 1.0) if peak else 0.0
+                # also max underwater in window
+                underwater = (close / close.cummax() - 1.0).min()
+                per.append(
+                    {
+                        "ticker": t,
+                        "last": round(last, 4),
+                        "peak_6mo": round(peak, 4),
+                        "drawdown_from_peak": round(float(dd), 4),
+                        "max_drawdown_6mo": round(float(underwater), 4),
+                        "trip": bool(float(underwater) <= -0.28),
+                    }
+                )
+            except Exception as exc:
+                per.append({"ticker": t, "error": str(exc)})
+        trips = [r["ticker"] for r in per if r.get("trip")]
+        artifact = {
+            "skill": "drawdown-circuit-breaker",
+            "source": "vendor/skills/claude-trading-skills/skills/drawdown-circuit-breaker",
+            "note": "Локальный 6mo drawdown gate; trip если max DD ≤ -28%",
+            "tickers": tickers,
+            "per_ticker": per,
+            "trips": trips,
+            "ts": store.utc_now(),
+        }
+        path = _write_artifact("drawdown-circuit-breaker", artifact)
+        summary = f"ok · trips={len(trips)}" + (f" ({', '.join(trips)})" if trips else "")
+        store.append_event(
+            "skill_end",
+            f"drawdown-circuit-breaker: {summary}",
+            skill="drawdown-circuit-breaker",
+            data={"artifact": str(path), "trips": trips},
+        )
+        return {"ok": True, "skill": "drawdown-circuit-breaker", "summary": summary, "artifact": str(path)}
+    except Exception as exc:
+        if soft:
+            return skillmd_step(
+                "drawdown-circuit-breaker",
+                summary=f"fallback SKILL.md ({exc})",
+                artifact={"error": str(exc), "tickers": tickers},
+                status="soft",
+            )
+        raise
+
+
+def market_environment_step(*, soft: bool = True) -> dict:
+    """SPY vs SMA50/200 regime for risk-on / risk-off sleeve sizing."""
+    store.append_event("skill_start", "Запуск market-environment-analysis (SPY)", skill="market-environment-analysis")
+    try:
+        import yfinance as yf
+
+        hist = yf.Ticker("SPY").history(period="1y", auto_adjust=True)
+        if hist is None or getattr(hist, "empty", True) or len(hist) < 60:
+            raise RuntimeError("недостаточно истории SPY")
+        close = hist["Close"]
+        last = float(close.iloc[-1])
+        sma50 = float(close.tail(50).mean())
+        sma200 = float(close.tail(min(200, len(close))).mean())
+        risk_off = last < sma200 or last < sma50 * 0.98
+        summary = (
+            f"SPY {last:.2f} vs SMA50 {sma50:.2f} / SMA200 {sma200:.2f} → "
+            + ("risk_off" if risk_off else "risk_on")
+        )
+        regime = {
+            "symbol": "SPY",
+            "last": round(last, 2),
+            "sma50": round(sma50, 2),
+            "sma200": round(sma200, 2),
+            "risk_off": risk_off,
+            "summary": summary,
+        }
+        artifact = {
+            "skill": "market-environment-analysis",
+            "source": "vendor/skills/claude-trading-skills/skills/market-environment-analysis",
+            "regime": regime,
+            "ts": store.utc_now(),
+        }
+        path = _write_artifact("market-environment-analysis", artifact)
+        store.append_event(
+            "skill_end",
+            f"market-environment-analysis: {summary}",
+            skill="market-environment-analysis",
+            data={"artifact": str(path), "regime": regime},
+        )
+        return {
+            "ok": True,
+            "skill": "market-environment-analysis",
+            "summary": summary,
+            "artifact": str(path),
+            "regime": regime,
+        }
+    except Exception as exc:
+        if soft:
+            return skillmd_step(
+                "market-environment-analysis",
+                summary=f"fallback SKILL.md ({exc})",
+                artifact={"error": str(exc)},
+                status="soft",
+            )
+        raise
+
+
+def company_valuation_step(tickers: list[str], *, soft: bool = True) -> dict:
+    """Relative PE snapshot from metrics.json + prices.json (finance-skills style)."""
+    store.append_event(
+        "skill_start",
+        f"Запуск company-valuation: {', '.join(tickers[:8]) or '—'}",
+        skill="company-valuation",
+    )
+    try:
+        metrics_path = TRADER_DIR / "metrics.json"
+        prices_path = TRADER_DIR / "prices.json"
+        metrics = {}
+        if metrics_path.exists():
+            raw = json.loads(metrics_path.read_text(encoding="utf-8"))
+            metrics = {
+                str(c.get("ticker", "")).upper(): c for c in (raw.get("companies") or [])
+            }
+        prices = {}
+        if prices_path.exists():
+            prices = (json.loads(prices_path.read_text(encoding="utf-8")).get("prices") or {})
+
+        rows: list[dict] = []
+        for t in tickers[:12]:
+            m = metrics.get(t.upper()) or {}
+            px = prices.get(t) or prices.get(t.upper())
+            eps = m.get("eps_ttm")
+            pe = None
+            if px is not None and eps not in (None, 0, 0.0):
+                try:
+                    pe = float(px) / float(eps)
+                except (TypeError, ValueError, ZeroDivisionError):
+                    pe = None
+            note = "недостаточно данных"
+            if pe is not None:
+                if pe <= 20:
+                    note = f"PE {pe:.1f} — относительно дёшево"
+                elif pe <= 35:
+                    note = f"PE {pe:.1f} — в разумном диапазоне"
+                else:
+                    note = f"PE {pe:.1f} — дорого vs rules≤35"
+            rows.append(
+                {
+                    "ticker": t.upper(),
+                    "price": px,
+                    "eps_ttm": eps,
+                    "pe": round(pe, 2) if pe is not None else None,
+                    "note": note,
+                }
+            )
+        artifact = {
+            "skill": "company-valuation",
+            "source": "vendor/skills/finance-skills/.../company-valuation",
+            "note": "Relative PE из SEC metrics + Yahoo prices (без полного DCF)",
+            "rows": rows,
+            "ts": store.utc_now(),
+        }
+        path = _write_artifact("company-valuation", artifact)
+        summary = f"ok · valued {len(rows)}"
+        store.append_event(
+            "skill_end",
+            f"company-valuation: {summary}",
+            skill="company-valuation",
+            data={"artifact": str(path)},
+        )
+        return {"ok": True, "skill": "company-valuation", "summary": summary, "artifact": str(path)}
+    except Exception as exc:
+        if soft:
+            return skillmd_step(
+                "company-valuation",
+                summary=f"fallback SKILL.md ({exc})",
+                artifact={"error": str(exc), "tickers": tickers},
+                status="soft",
+            )
+        raise
+
+
 def vendor_skillmd_batch(tickers: list[str]) -> list[dict]:
     """Register remaining SKILL.md-driven vendor skills + light runnable ones."""
     rows: list[dict] = []
 
-    # runnable-ish / light
+    # runnable-ish / light — produce artifacts used by signals.py
     rows.append(
         {
             "name": "earnings-calendar",
@@ -473,17 +670,36 @@ def vendor_skillmd_batch(tickers: list[str]) -> list[dict]:
             "group": "vendor",
         }
     )
+    dd = drawdown_circuit_step(tickers, soft=True)
+    rows.append(
+        {
+            "name": "drawdown-circuit-breaker",
+            "result": dd.get("summary") or _fmt(dd),
+            "status": "ok" if dd.get("ok") else "soft",
+            "group": "vendor",
+        }
+    )
+    me = market_environment_step(soft=True)
+    rows.append(
+        {
+            "name": "market-environment-analysis",
+            "result": me.get("summary") or _fmt(me),
+            "status": "ok" if me.get("ok") else "soft",
+            "group": "vendor",
+        }
+    )
+    val = company_valuation_step(tickers, soft=True)
+    rows.append(
+        {
+            "name": "company-valuation",
+            "result": val.get("summary") or _fmt(val),
+            "status": "ok" if val.get("ok") else "soft",
+            "group": "vendor",
+        }
+    )
 
-    # pure SKILL.md steps with artifacts pointing at cloned docs
+    # remaining pure SKILL.md steps
     for name, blurb in (
-        (
-            "drawdown-circuit-breaker",
-            "circuit-breaker gate (SKILL.md + scripts; paper: зафиксирован шаг)",
-        ),
-        (
-            "market-environment-analysis",
-            "режим рынка (SKILL.md); артефакт в state/skills/",
-        ),
         (
             "exposure-coach",
             "экспозиция портфеля (SKILL.md); артефакт в state/skills/",
@@ -491,10 +707,6 @@ def vendor_skillmd_batch(tickers: list[str]) -> list[dict]:
         (
             "earnings-preview",
             "pre-earnings briefing (finance-skills); SKILL.md-driven",
-        ),
-        (
-            "company-valuation",
-            "DCF/relative valuation (finance-skills); SKILL.md-driven",
         ),
     ):
         r = skillmd_step(

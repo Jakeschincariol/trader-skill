@@ -832,8 +832,10 @@ def apply_winner_targets(*, write: bool = True) -> dict:
         tickers = [t for t in (winner.get("universe") or DEFAULT_STOCKS) if t != "SPY"]
         weights = [1.0 / len(tickers)] * len(tickers) if tickers else []
     if not tickers:
-        tickers = ["AAPL", "MSFT", "GOOGL"]
-        weights = [0.4, 0.3, 0.3]
+        raise RuntimeError(
+            "Research winner без tickers — не подставляем mega-cap hardcode. "
+            "Запустите nitub research или nitub run paper (signal sleeve)."
+        )
     if len(weights) != len(tickers):
         weights = [1.0 / len(tickers)] * len(tickers)
     # scale to percent weights summing ~100

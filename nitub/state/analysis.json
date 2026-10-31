@@ -1,37 +1,193 @@
 {
   "thesis": {
-    "name": "Research winner: copycat_static (copycat_hold)",
-    "source": "nitub research winner copycat_static (copycat_hold)",
-    "strategy_id": "copycat_static",
-    "family": "copycat_hold",
-    "params": {
-      "tickers": [
-        "AAPL",
-        "MSFT",
-        "GOOGL"
-      ],
-      "weights": [
-        0.4,
-        0.3,
-        0.3
-      ],
-      "trend_period": 0
+    "name": "Signal-driven sleeve (skills pipeline)",
+    "source": "nitub signal sleeve (screener + skills)",
+    "strategy_id": "signal_skills",
+    "family": "signal_driven",
+    "method": "skills pipeline: screener shortlist + analyst/copycat/pelosi/news/vendor filters",
+    "signals": [
+      {
+        "ticker": "GOOGL",
+        "sources": [
+          "analyst",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis",
+          "screener"
+        ],
+        "reasons": [
+          "screener PASS: revenue_growth_yoy 24.7 >= 10; operating_margin 31.8 >= 25; eps_ttm 19.16 > 0; pe 14.6 <= 35",
+          "copycat 13F top#3 weight=13.29",
+          "analyst: revYoY 24.7%, opMargin 31.8%, EPS 19.16",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "MSFT",
+        "sources": [
+          "analyst",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis",
+          "screener"
+        ],
+        "reasons": [
+          "screener PASS: revenue_growth_yoy 18.8 >= 10; operating_margin 49.8 >= 25; eps_ttm 19.15 > 0; pe 27.3 <= 35",
+          "analyst: revYoY 18.8%, opMargin 49.8%, EPS 19.15",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "AAPL",
+        "sources": [
+          "analyst",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#1 weight=23.21",
+          "analyst: EPS 8.71, revYoY 16.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "AXP",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#2 weight=18.05",
+          "analyst: EPS 17.75, revYoY 7.8%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 18.0 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "KO",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#4 weight=11.44",
+          "analyst: EPS 3.4, revYoY 7.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 27.7 — в разумном диапазоне",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "BAC",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#5 weight=9.69",
+          "analyst: EPS 4.21, revYoY 3.2%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 11.9 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "CB",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#8 weight=4.11",
+          "analyst: EPS 28.53, revYoY 0.3%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 12.8 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "CVX",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#6 weight=4.92",
+          "analyst: EPS 10.4, revYoY 51.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 22.6 — в разумном диапазоне",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      }
+    ],
+    "rejected": [
+      {
+        "ticker": "OXY",
+        "why": "нет analyst metrics",
+        "filter": "analyst"
+      },
+      {
+        "ticker": "MCO",
+        "why": "нет analyst metrics",
+        "filter": "analyst"
+      },
+      {
+        "ticker": "KHC",
+        "why": "analyst: EPS≤0/missing",
+        "filter": "analyst"
+      }
+    ],
+    "regime": {
+      "symbol": "SPY",
+      "last": 755.72,
+      "sma50": 766.77,
+      "sma200": 725.98,
+      "risk_off": false,
+      "summary": "SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
     },
-    "verdict": "beats_buyhold_oos",
-    "beats_buyhold_oos": true,
-    "oos": {
-      "total_return_pct": 86.7755,
-      "sharpe": 1.1516,
-      "max_drawdown_pct": 26.8144,
-      "vs_spy_ret_oos": 21.8196,
-      "vs_equal_ret_oos": 4.9297
-    },
-    "rationale_ru": "Paper-сессия skills-smoke: sleeve из nitub research (copycat_static), отбор только на train; OOS verdict=beats_buyhold_oos. Fills только paper. Полный pipeline: 11 core skills."
+    "as_of_holdings": "2026-06-30",
+    "filed": "2026-08-14",
+    "rationale_ru": "Paper-сессия signal-10k: тикеры только из pipeline (screener shortlist + analyst/copycat/pelosi/news + vendor earnings/valuation/market-environment/drawdown). Позиций: 8. Без hardcode mega-cap как единственного пути. Fills только paper."
   },
-  "orders_proposed": 3,
-  "orders_passed": 3,
-  "fills": 3,
-  "equity": 100.0,
+  "orders_proposed": 8,
+  "orders_passed": 8,
+  "fills": 8,
+  "equity": 10000.0,
   "pnl": 0.0,
   "skills_catalog": {
     "core": [
@@ -85,9 +241,8 @@
     "heavy_every": 3
   },
   "skills_completed": [
-    "research",
-    "alerts",
     "copycat",
+    "alerts",
     "news",
     "pelosi",
     "analyst",
@@ -101,10 +256,303 @@
     "clawdfolio",
     "drawdown-circuit-breaker",
     "market-environment-analysis",
+    "company-valuation",
     "exposure-coach",
     "earnings-preview",
-    "company-valuation"
+    "signals"
   ],
   "screener": "shortlist 2",
-  "analyst": "metrics ← AAPL, GOOGL, MSFT"
+  "analyst": "interval skip (cycle 2) — в pipeline",
+  "signals": [
+    {
+      "ticker": "GOOGL",
+      "sources": [
+        "analyst",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis",
+        "screener"
+      ],
+      "reasons": [
+        "screener PASS: revenue_growth_yoy 24.7 >= 10; operating_margin 31.8 >= 25; eps_ttm 19.16 > 0; pe 14.6 <= 35",
+        "copycat 13F top#3 weight=13.29",
+        "analyst: revYoY 24.7%, opMargin 31.8%, EPS 19.16",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "sources": [
+        "analyst",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis",
+        "screener"
+      ],
+      "reasons": [
+        "screener PASS: revenue_growth_yoy 18.8 >= 10; operating_margin 49.8 >= 25; eps_ttm 19.15 > 0; pe 27.3 <= 35",
+        "analyst: revYoY 18.8%, opMargin 49.8%, EPS 19.15",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "AAPL",
+      "sources": [
+        "analyst",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#1 weight=23.21",
+        "analyst: EPS 8.71, revYoY 16.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "AXP",
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#2 weight=18.05",
+        "analyst: EPS 17.75, revYoY 7.8%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 18.0 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "KO",
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#4 weight=11.44",
+        "analyst: EPS 3.4, revYoY 7.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 27.7 — в разумном диапазоне",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "BAC",
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#5 weight=9.69",
+        "analyst: EPS 4.21, revYoY 3.2%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 11.9 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "CB",
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#8 weight=4.11",
+        "analyst: EPS 28.53, revYoY 0.3%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 12.8 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    {
+      "ticker": "CVX",
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#6 weight=4.92",
+        "analyst: EPS 10.4, revYoY 51.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 22.6 — в разумном диапазоне",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    }
+  ],
+  "positions_why": {
+    "GOOGL": {
+      "sources": [
+        "analyst",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis",
+        "screener"
+      ],
+      "reasons": [
+        "screener PASS: revenue_growth_yoy 24.7 >= 10; operating_margin 31.8 >= 25; eps_ttm 19.16 > 0; pe 14.6 <= 35",
+        "copycat 13F top#3 weight=13.29",
+        "analyst: revYoY 24.7%, opMargin 31.8%, EPS 19.16",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "MSFT": {
+      "sources": [
+        "analyst",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis",
+        "screener"
+      ],
+      "reasons": [
+        "screener PASS: revenue_growth_yoy 18.8 >= 10; operating_margin 49.8 >= 25; eps_ttm 19.15 > 0; pe 27.3 <= 35",
+        "analyst: revYoY 18.8%, opMargin 49.8%, EPS 19.15",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "AAPL": {
+      "sources": [
+        "analyst",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#1 weight=23.21",
+        "analyst: EPS 8.71, revYoY 16.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "AXP": {
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#2 weight=18.05",
+        "analyst: EPS 17.75, revYoY 7.8%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 18.0 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "KO": {
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#4 weight=11.44",
+        "analyst: EPS 3.4, revYoY 7.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 27.7 — в разумном диапазоне",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "BAC": {
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#5 weight=9.69",
+        "analyst: EPS 4.21, revYoY 3.2%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 11.9 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "CB": {
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#8 weight=4.11",
+        "analyst: EPS 28.53, revYoY 0.3%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 12.8 — относительно дёшево",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    },
+    "CVX": {
+      "sources": [
+        "analyst",
+        "company-valuation",
+        "copycat",
+        "drawdown-circuit-breaker",
+        "earnings-calendar",
+        "market-environment-analysis"
+      ],
+      "reasons": [
+        "copycat 13F top#6 weight=4.92",
+        "analyst: EPS 10.4, revYoY 51.4%",
+        "earnings-calendar: нет ближнего отчёта (≤5д)",
+        "drawdown-circuit-breaker: ok",
+        "company-valuation: PE 22.6 — в разумном диапазоне",
+        "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+      ]
+    }
+  }
 }

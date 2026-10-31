@@ -109,6 +109,11 @@ export type AnalysisJson = {
     rationale_ru?: string
     as_of_holdings?: string
     filed?: string
+    signals?: Array<{
+      ticker?: string
+      sources?: string[]
+      reasons?: string[]
+    }>
   }
   orders_proposed?: number
   orders_passed?: number
@@ -116,6 +121,15 @@ export type AnalysisJson = {
   equity?: number
   pnl?: number
   risks?: string[]
+  signals?: Array<{
+    ticker?: string
+    sources?: string[]
+    reasons?: string[]
+  }>
+  positions_why?: Record<
+    string,
+    { sources?: string[]; reasons?: string[] } | null | undefined
+  >
   [key: string]: unknown
 }
 

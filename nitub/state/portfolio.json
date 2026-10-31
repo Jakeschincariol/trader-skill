@@ -1,147 +1,455 @@
 {
-  "session": "skills-smoke",
+  "session": "signal-10k",
   "mode": "paper",
   "currency": "USD",
   "started_at": "2026-10-31",
-  "as_of": "2026-10-31T19:50:37Z",
+  "as_of": "2026-10-31T20:18:36Z",
   "price_source": "yahoo",
   "price_note": "Delayed quotes for alerts and sizing checks. Paper fills use the same marks (ideal execution).",
   "thesis": {
-    "name": "Research winner: copycat_static (copycat_hold)",
-    "source": "nitub research winner copycat_static (copycat_hold)",
-    "strategy_id": "copycat_static",
-    "family": "copycat_hold",
-    "params": {
-      "tickers": [
-        "AAPL",
-        "MSFT",
-        "GOOGL"
-      ],
-      "weights": [
-        0.4,
-        0.3,
-        0.3
-      ],
-      "trend_period": 0
+    "name": "Signal-driven sleeve (skills pipeline)",
+    "source": "nitub signal sleeve (screener + skills)",
+    "strategy_id": "signal_skills",
+    "family": "signal_driven",
+    "method": "skills pipeline: screener shortlist + analyst/copycat/pelosi/news/vendor filters",
+    "signals": [
+      {
+        "ticker": "GOOGL",
+        "sources": [
+          "analyst",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis",
+          "screener"
+        ],
+        "reasons": [
+          "screener PASS: revenue_growth_yoy 24.7 >= 10; operating_margin 31.8 >= 25; eps_ttm 19.16 > 0; pe 14.6 <= 35",
+          "copycat 13F top#3 weight=13.29",
+          "analyst: revYoY 24.7%, opMargin 31.8%, EPS 19.16",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "MSFT",
+        "sources": [
+          "analyst",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis",
+          "screener"
+        ],
+        "reasons": [
+          "screener PASS: revenue_growth_yoy 18.8 >= 10; operating_margin 49.8 >= 25; eps_ttm 19.15 > 0; pe 27.3 <= 35",
+          "analyst: revYoY 18.8%, opMargin 49.8%, EPS 19.15",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "AAPL",
+        "sources": [
+          "analyst",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#1 weight=23.21",
+          "analyst: EPS 8.71, revYoY 16.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "AXP",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#2 weight=18.05",
+          "analyst: EPS 17.75, revYoY 7.8%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 18.0 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "KO",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#4 weight=11.44",
+          "analyst: EPS 3.4, revYoY 7.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 27.7 — в разумном диапазоне",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "BAC",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#5 weight=9.69",
+          "analyst: EPS 4.21, revYoY 3.2%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 11.9 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "CB",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#8 weight=4.11",
+          "analyst: EPS 28.53, revYoY 0.3%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 12.8 — относительно дёшево",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      },
+      {
+        "ticker": "CVX",
+        "sources": [
+          "analyst",
+          "company-valuation",
+          "copycat",
+          "drawdown-circuit-breaker",
+          "earnings-calendar",
+          "market-environment-analysis"
+        ],
+        "reasons": [
+          "copycat 13F top#6 weight=4.92",
+          "analyst: EPS 10.4, revYoY 51.4%",
+          "earnings-calendar: нет ближнего отчёта (≤5д)",
+          "drawdown-circuit-breaker: ok",
+          "company-valuation: PE 22.6 — в разумном диапазоне",
+          "market-environment: SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
+        ]
+      }
+    ],
+    "rejected": [
+      {
+        "ticker": "OXY",
+        "why": "нет analyst metrics",
+        "filter": "analyst"
+      },
+      {
+        "ticker": "MCO",
+        "why": "нет analyst metrics",
+        "filter": "analyst"
+      },
+      {
+        "ticker": "KHC",
+        "why": "analyst: EPS≤0/missing",
+        "filter": "analyst"
+      }
+    ],
+    "regime": {
+      "symbol": "SPY",
+      "last": 755.72,
+      "sma50": 766.77,
+      "sma200": 725.98,
+      "risk_off": false,
+      "summary": "SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on"
     },
-    "verdict": "beats_buyhold_oos",
-    "beats_buyhold_oos": true,
-    "oos": {
-      "total_return_pct": 86.7755,
-      "sharpe": 1.1516,
-      "max_drawdown_pct": 26.8144,
-      "vs_spy_ret_oos": 21.8196,
-      "vs_equal_ret_oos": 4.9297
-    },
-    "rationale_ru": "Paper-сессия skills-smoke: sleeve из nitub research (copycat_static), отбор только на train; OOS verdict=beats_buyhold_oos. Fills только paper. Полный pipeline: 11 core skills."
+    "as_of_holdings": "2026-06-30",
+    "filed": "2026-08-14",
+    "rationale_ru": "Paper-сессия signal-10k: тикеры только из pipeline (screener shortlist + analyst/copycat/pelosi/news + vendor earnings/valuation/market-environment/drawdown). Позиций: 8. Без hardcode mega-cap как единственного пути. Fills только paper."
   },
-  "starting_cash": 100.0,
-  "cash": 10.0,
-  "invested_cost": 90.0,
-  "positions_market_value": 90.0,
-  "equity": 100.0,
+  "starting_cash": 10000.0,
+  "cash": 1000.0,
+  "invested_cost": 9000.0,
+  "positions_market_value": 9000.0,
+  "equity": 10000.0,
   "unrealized_pnl": 0.0,
   "total_pnl_vs_start": 0.0,
   "total_pnl_pct": 0.0,
   "realized_pnl": 0.0,
-  "cash_buffer_target": 10.0,
+  "cash_buffer_target": 1000.0,
   "config_snapshot": {
-    "budget": 100.0,
+    "budget": 10000.0,
     "cash_buffer_pct": 10,
-    "max_position_pct": 40,
-    "max_order_usd": 50,
-    "min_order_usd": 5,
+    "max_position_pct": 20,
+    "max_order_usd": 2500,
+    "min_order_usd": 25,
     "fractional": true,
     "paper": true,
     "allow_options": false
   },
   "positions": [
     {
-      "ticker": "AAPL",
-      "shares": 0.10446,
-      "cost_basis": 36.0,
-      "avg_cost_per_share": 344.6295,
-      "mark": 344.63,
-      "market_value": 36.0,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0,
-      "lots": [
-        {
-          "id": "AAPL-1",
-          "date": "2026-10-31",
-          "shares": 0.10446,
-          "cost": 36.0
-        }
-      ]
-    },
-    {
-      "ticker": "MSFT",
-      "shares": 0.051733,
-      "cost_basis": 27.0,
-      "avg_cost_per_share": 521.9106,
-      "mark": 521.91,
-      "market_value": 27.0,
-      "unrealized_pnl": 0.0,
-      "unrealized_pnl_pct": 0.0,
-      "lots": [
-        {
-          "id": "MSFT-1",
-          "date": "2026-10-31",
-          "shares": 0.051733,
-          "cost": 27.0
-        }
-      ]
-    },
-    {
       "ticker": "GOOGL",
-      "shares": 0.096484,
-      "cost_basis": 27.0,
-      "avg_cost_per_share": 279.8391,
+      "shares": 4.020154,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 279.84,
       "mark": 279.84,
-      "market_value": 27.0,
+      "market_value": 1125.0,
       "unrealized_pnl": 0.0,
       "unrealized_pnl_pct": 0.0,
       "lots": [
         {
           "id": "GOOGL-1",
           "date": "2026-10-31",
-          "shares": 0.096484,
-          "cost": 27.0
+          "shares": 4.020154,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 2.155544,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 521.91,
+      "mark": 521.91,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "MSFT-1",
+          "date": "2026-10-31",
+          "shares": 2.155544,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "AAPL",
+      "shares": 3.26437,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 344.6301,
+      "mark": 344.63,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "AAPL-1",
+          "date": "2026-10-31",
+          "shares": 3.26437,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "AXP",
+      "shares": 3.52543,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 319.11,
+      "mark": 319.11,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "AXP-1",
+          "date": "2026-10-31",
+          "shares": 3.52543,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "KO",
+      "shares": 11.957908,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 94.08,
+      "mark": 94.08,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "KO-1",
+          "date": "2026-10-31",
+          "shares": 11.957908,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "BAC",
+      "shares": 22.495501,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 50.01,
+      "mark": 50.01,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "BAC-1",
+          "date": "2026-10-31",
+          "shares": 22.495501,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "CB",
+      "shares": 3.089641,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 364.12,
+      "mark": 364.12,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "CB-1",
+          "date": "2026-10-31",
+          "shares": 3.089641,
+          "cost": 1125.0
+        }
+      ]
+    },
+    {
+      "ticker": "CVX",
+      "shares": 4.776664,
+      "cost_basis": 1125.0,
+      "avg_cost_per_share": 235.52,
+      "mark": 235.52,
+      "market_value": 1125.0,
+      "unrealized_pnl": 0.0,
+      "unrealized_pnl_pct": 0.0,
+      "lots": [
+        {
+          "id": "CVX-1",
+          "date": "2026-10-31",
+          "shares": 4.776664,
+          "cost": 1125.0
         }
       ]
     }
   ],
   "fills": [
     {
-      "id": "PAPER-SIM-AAPL-1",
-      "symbol": "AAPL",
+      "id": "PAPER-SIM-GOOGL-1",
+      "symbol": "GOOGL",
       "side": "buy",
-      "notional": 36.0,
-      "qty": 0.10446,
-      "price": 344.63,
+      "notional": 1125.0,
+      "qty": 4.020154,
+      "price": 279.84,
       "status": "paper_simulated",
-      "ts": "2026-10-31T19:20:48Z"
+      "ts": "2026-10-31T20:18:02Z"
     },
     {
       "id": "PAPER-SIM-MSFT-2",
       "symbol": "MSFT",
       "side": "buy",
-      "notional": 27.0,
-      "qty": 0.051733,
+      "notional": 1125.0,
+      "qty": 2.155544,
       "price": 521.91,
       "status": "paper_simulated",
-      "ts": "2026-10-31T19:20:48Z"
+      "ts": "2026-10-31T20:18:02Z"
     },
     {
-      "id": "PAPER-SIM-GOOGL-3",
-      "symbol": "GOOGL",
+      "id": "PAPER-SIM-AAPL-3",
+      "symbol": "AAPL",
       "side": "buy",
-      "notional": 27.0,
-      "qty": 0.096484,
-      "price": 279.84,
+      "notional": 1125.0,
+      "qty": 3.26437,
+      "price": 344.63,
       "status": "paper_simulated",
-      "ts": "2026-10-31T19:20:48Z"
+      "ts": "2026-10-31T20:18:02Z"
+    },
+    {
+      "id": "PAPER-SIM-AXP-4",
+      "symbol": "AXP",
+      "side": "buy",
+      "notional": 1125.0,
+      "qty": 3.52543,
+      "price": 319.11,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T20:18:02Z"
+    },
+    {
+      "id": "PAPER-SIM-KO-5",
+      "symbol": "KO",
+      "side": "buy",
+      "notional": 1125.0,
+      "qty": 11.957908,
+      "price": 94.08,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T20:18:02Z"
+    },
+    {
+      "id": "PAPER-SIM-BAC-6",
+      "symbol": "BAC",
+      "side": "buy",
+      "notional": 1125.0,
+      "qty": 22.495501,
+      "price": 50.01,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T20:18:02Z"
+    },
+    {
+      "id": "PAPER-SIM-CB-7",
+      "symbol": "CB",
+      "side": "buy",
+      "notional": 1125.0,
+      "qty": 3.089641,
+      "price": 364.12,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T20:18:02Z"
+    },
+    {
+      "id": "PAPER-SIM-CVX-8",
+      "symbol": "CVX",
+      "side": "buy",
+      "notional": 1125.0,
+      "qty": 4.776664,
+      "price": 235.52,
+      "status": "paper_simulated",
+      "ts": "2026-10-31T20:18:02Z"
     }
   ],
-  "disclaimer": "Education/tooling only. Paper simulation. Not financial advice. No live broker orders."
+  "disclaimer": "Education/tooling only. Paper simulation. Not financial advice. No live broker orders.",
+  "peak_equity": 10000.0,
+  "drawdown_pct": 0.0,
+  "exit_cooldown": [],
+  "auto_exit_config": {
+    "enabled": true,
+    "take_profit_pct": 4,
+    "stop_loss_pct": -2.5,
+    "portfolio_take_profit_pct": 5,
+    "max_drawdown_pct": 4,
+    "min_position_pnl_usd": 0.15,
+    "exit_rebuy_cooldown_cycles": 2
+  }
 }

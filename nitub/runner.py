@@ -626,7 +626,7 @@ def run_risk_cycle(
 
 
 def ensure_seed_portfolio(*, budget: float = 10000.0, session: str = "dashboard") -> dict:
-    """If no positions, run one research paper cycle with full skills pipeline."""
+    """If no positions, run one signal-driven paper cycle (skills filters, not mega hardcode)."""
     pf = store.load_portfolio()
     if pf and (pf.get("positions") or []):
         return pf
@@ -634,7 +634,7 @@ def ensure_seed_portfolio(*, budget: float = 10000.0, session: str = "dashboard"
     write_runner(
         {
             "last_action": "seed_paper",
-            "message": "Первый цикл paper: research + все skills…",
+            "message": "Первый цикл paper: signal sleeve + все skills…",
         }
     )
     from . import paper
@@ -644,7 +644,7 @@ def ensure_seed_portfolio(*, budget: float = 10000.0, session: str = "dashboard"
         budget=budget,
         refresh_copycat=True,
         skip_news=False,
-        use_research_strategy=True,
+        use_research_strategy=False,
     )
 
 
