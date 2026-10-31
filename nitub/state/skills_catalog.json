@@ -1,0 +1,188 @@
+{
+  "core": [
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance"
+  ],
+  "vendor": [
+    "earnings-calendar",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation",
+    "clawdfolio"
+  ],
+  "all": [
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance",
+    "earnings-calendar",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation",
+    "clawdfolio"
+  ],
+  "heavy": [
+    "analyst",
+    "copycat",
+    "news",
+    "pelosi"
+  ],
+  "heavy_every": 3,
+  "last_run": [
+    {
+      "name": "copycat",
+      "result": "interval skip (cycle 2, every 3) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "alerts",
+      "result": "quotes обновлены",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "news",
+      "result": "skipped (flag)",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "pelosi",
+      "result": "interval skip (cycle 2) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "analyst",
+      "result": "interval skip (cycle 2) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "screener",
+      "result": "shortlist обновлён",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "budget",
+      "result": "8 proposed orders, budget $10000",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "risk",
+      "result": "PASS ×8",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "broker",
+      "result": "paper fills ×8 (без живого брокера)",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "tax",
+      "result": "lots after fills",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "rebalance",
+      "result": "в пределах band — ордеров нет (exit 1 = ok)",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "earnings-calendar",
+      "result": "ok · rows=12",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "clawdfolio",
+      "result": "ok · sharpe=1.6483 dd=-0.0765",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "drawdown-circuit-breaker",
+      "result": "ok · trips=0",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "market-environment-analysis",
+      "result": "SPY 755.72 vs SMA50 766.77 / SMA200 725.98 → risk_on",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "company-valuation",
+      "result": "ok · valued 12",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "exposure-coach",
+      "result": "экспозиция портфеля (SKILL.md); артефакт в state/skills/",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "earnings-preview",
+      "result": "pre-earnings briefing (finance-skills); SKILL.md-driven",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "signals",
+      "result": "sleeve GOOGL←analyst+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis+screener, MSFT←analyst+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis+screener, AAPL←analyst+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis, AXP←analyst+company-valuation+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis, KO←analyst+company-valuation+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis, BAC←analyst+company-valuation+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis, CB←analyst+company-valuation+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis, CVX←analyst+company-valuation+copycat+drawdown-circuit-breaker+earnings-calendar+market-environment-analysis",
+      "status": "ok",
+      "group": "meta"
+    }
+  ],
+  "completed": [
+    "copycat",
+    "alerts",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance",
+    "earnings-calendar",
+    "clawdfolio",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "company-valuation",
+    "exposure-coach",
+    "earnings-preview",
+    "signals"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "engine": "nitub.research/vectorized",
+  "strategy": "copycat_hold:copycat_static",
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "SPY"
+  ],
+  "from": "2024-01-02",
+  "to": "2026-10-30",
+  "start_cash": 100000.0,
+  "end_value": 186775.45,
+  "pnl": 86775.45,
+  "pnl_pct": 86.7755,
+  "sharpe": 1.1516,
+  "max_drawdown_pct": 26.8144,
+  "verdict": "beats_buyhold_oos",
+  "beats_buyhold_oos": true,
+  "vs_spy_ret_oos": 21.8196,
+  "vs_equal_ret_oos": 4.9297,
+  "run_id": "grid_20261031T190251Z",
+  "note": "OOS metrics only. Not financial advice."
+}
