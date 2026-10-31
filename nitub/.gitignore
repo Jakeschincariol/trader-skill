@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+*.tmp
+state/*.tmp
+state/events.jsonl
+state/runner.stop
+state/broker-archive-*.json
+state/skills/

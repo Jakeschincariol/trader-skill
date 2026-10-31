@@ -1,0 +1,188 @@
+{
+  "core": [
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance"
+  ],
+  "vendor": [
+    "earnings-calendar",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation",
+    "clawdfolio"
+  ],
+  "all": [
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance",
+    "earnings-calendar",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation",
+    "clawdfolio"
+  ],
+  "heavy": [
+    "analyst",
+    "copycat",
+    "news",
+    "pelosi"
+  ],
+  "heavy_every": 3,
+  "last_run": [
+    {
+      "name": "research",
+      "result": "winner copycat_static → targets (AAPL, MSFT, GOOGL)",
+      "status": "ok",
+      "group": "meta"
+    },
+    {
+      "name": "alerts",
+      "result": "quotes обновлены",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "copycat",
+      "result": "interval skip (cycle 32, every 3) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "news",
+      "result": "interval skip (cycle 32) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "pelosi",
+      "result": "interval skip (cycle 32) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "analyst",
+      "result": "interval skip (cycle 32) — в pipeline",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "screener",
+      "result": "shortlist обновлён",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "budget",
+      "result": "deferred (refresh — без переписывания sleeve)",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "risk",
+      "result": "deferred (refresh — без переписывания sleeve)",
+      "status": "soft",
+      "group": "core"
+    },
+    {
+      "name": "broker",
+      "result": "tickets show (paper only, без live)",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "tax",
+      "result": "lots / unrealized report",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "rebalance",
+      "result": "drift table (no write)",
+      "status": "ok",
+      "group": "core"
+    },
+    {
+      "name": "earnings-calendar",
+      "result": "ok · rows=3",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "clawdfolio",
+      "result": "ok · sharpe=0.8035 dd=-0.1434",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "drawdown-circuit-breaker",
+      "result": "circuit-breaker gate (SKILL.md + scripts; paper: зафиксирован шаг)",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "market-environment-analysis",
+      "result": "режим рынка (SKILL.md); артефакт в state/skills/",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "exposure-coach",
+      "result": "экспозиция портфеля (SKILL.md); артефакт в state/skills/",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "earnings-preview",
+      "result": "pre-earnings briefing (finance-skills); SKILL.md-driven",
+      "status": "ok",
+      "group": "vendor"
+    },
+    {
+      "name": "company-valuation",
+      "result": "DCF/relative valuation (finance-skills); SKILL.md-driven",
+      "status": "ok",
+      "group": "vendor"
+    }
+  ],
+  "completed": [
+    "research",
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance",
+    "earnings-calendar",
+    "clawdfolio",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation"
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "thesis": {
+    "name": "Research winner: copycat_static (copycat_hold)",
+    "source": "nitub research winner copycat_static (copycat_hold)",
+    "strategy_id": "copycat_static",
+    "family": "copycat_hold",
+    "params": {
+      "tickers": [
+        "AAPL",
+        "MSFT",
+        "GOOGL"
+      ],
+      "weights": [
+        0.4,
+        0.3,
+        0.3
+      ],
+      "trend_period": 0
+    },
+    "verdict": "beats_buyhold_oos",
+    "beats_buyhold_oos": true,
+    "oos": {
+      "total_return_pct": 86.7755,
+      "sharpe": 1.1516,
+      "max_drawdown_pct": 26.8144,
+      "vs_spy_ret_oos": 21.8196,
+      "vs_equal_ret_oos": 4.9297
+    },
+    "rationale_ru": "Paper-сессия skills-smoke: sleeve из nitub research (copycat_static), отбор только на train; OOS verdict=beats_buyhold_oos. Fills только paper. Полный pipeline: 11 core skills."
+  },
+  "orders_proposed": 3,
+  "orders_passed": 3,
+  "fills": 3,
+  "equity": 100.0,
+  "pnl": 0.0,
+  "skills_catalog": {
+    "core": [
+      "alerts",
+      "copycat",
+      "news",
+      "pelosi",
+      "analyst",
+      "screener",
+      "budget",
+      "risk",
+      "broker",
+      "tax",
+      "rebalance"
+    ],
+    "vendor": [
+      "earnings-calendar",
+      "drawdown-circuit-breaker",
+      "market-environment-analysis",
+      "exposure-coach",
+      "earnings-preview",
+      "company-valuation",
+      "clawdfolio"
+    ],
+    "all": [
+      "alerts",
+      "copycat",
+      "news",
+      "pelosi",
+      "analyst",
+      "screener",
+      "budget",
+      "risk",
+      "broker",
+      "tax",
+      "rebalance",
+      "earnings-calendar",
+      "drawdown-circuit-breaker",
+      "market-environment-analysis",
+      "exposure-coach",
+      "earnings-preview",
+      "company-valuation",
+      "clawdfolio"
+    ],
+    "heavy": [
+      "analyst",
+      "copycat",
+      "news",
+      "pelosi"
+    ],
+    "heavy_every": 3
+  },
+  "skills_completed": [
+    "research",
+    "alerts",
+    "copycat",
+    "news",
+    "pelosi",
+    "analyst",
+    "screener",
+    "budget",
+    "risk",
+    "broker",
+    "tax",
+    "rebalance",
+    "earnings-calendar",
+    "clawdfolio",
+    "drawdown-circuit-breaker",
+    "market-environment-analysis",
+    "exposure-coach",
+    "earnings-preview",
+    "company-valuation"
+  ],
+  "screener": "shortlist 2",
+  "analyst": "metrics ← AAPL, GOOGL, MSFT"
+}

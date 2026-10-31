@@ -1,3 +1,27 @@
+# NITUB
+
+Paper-first торговая платформа: единый CLI + state + дашборд поверх 11 trader-skills.  
+**Только симуляция.** Живых ордеров и брокер-ключей нет.
+
+```bash
+# из корня репо
+export PYTHONPATH="$PWD"
+export NITUB_MODE=paper
+
+nitub/.venv/bin/python -m nitub run paper --session session-2 --budget 100
+nitub/.venv/bin/python -m nitub status
+nitub/.venv/bin/python -m nitub backtest --symbols AAPL,GOOGL
+nitub/.venv/bin/python -m nitub events
+
+cd dashboard && npm run dev   # http://127.0.0.1:5173/
+```
+
+Активный state: `nitub/state/` (`portfolio.json`, `ledger.md`, `events.jsonl`).  
+Архив сессий: `paper-trading/session-N/`. Live — заглушка с отказом.  
+Док: см. Agent Store `docs/nitub-platform.md`.
+
+---
+
 # The Trader skill
 
 11 Claude skills that copy the investors you trust, watch the news and Congress, size every trade to your budget, and never place an order without your yes.
