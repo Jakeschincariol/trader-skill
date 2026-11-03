@@ -47,6 +47,12 @@ YES_WORDS = ("yes", "y")
 BATCH_WORDS = {"all", "every", "everything", "rest", "remaining", "them", "both", "batch", "each"}
 DOUBT_WORDS = {"no", "not", "dont", "don't", "wait", "cancel", "stop", "but", "maybe", "later",
                "hold", "unless", "if"}
+# Ordinary words that may follow "yes" and are not a ticker, even in capitals.
+PLAIN_WORDS = {"yes", "y", "buy", "sell", "of", "it", "this", "that", "one", "order", "place", "send",
+               "go", "do", "ok", "please", "now", "the", "a", "an", "i", "for", "and", "at", "to", "me",
+               "shares", "share", "stock", "dollars", "usd", "market", "limit", "day", "gtc", "trade"}
+# A word right after one of these names what is being traded.
+TRADE_WORDS = {"buy", "sell", "of"}
 
 
 class TicketError(Exception):
@@ -172,6 +178,14 @@ def parse_yes(reply, order, batch_symbols=()):
     tokens = set(re.findall(r"[A-Z][A-Z.\-]{0,6}", raw.upper()))
     others = {s.upper() for s in batch_symbols} - {sym}
     named = tokens & others
+    # Any other ticker the user wrote in capitals ("yes, buy TSLA"), batch or not.
+    sym_l = sym.lower()
+    named |= {t for t in re.findall(r"\b[A-Z]{1,5}(?:[.\-][A-Z])?\b", raw)
+              if t != sym and t.lower() not in PLAIN_WORDS}
+    # A lowercase word right after buy / sell / of that is not this stock ("yes buy tsla").
+    for prev, nxt in zip(words, words[1:]):
+        if prev in TRADE_WORDS and nxt != sym_l and nxt not in PLAIN_WORDS:
+            named.add(nxt.upper())
     if named:
         return False, "the reply names %s, but this order is for %s" % (", ".join(sorted(named)), sym)
     nums = [float(n.replace(",", "")) for n in re.findall(r"\d[\d,]*(?:\.\d+)?", raw)]

@@ -41,6 +41,14 @@ class ExplicitYes(unittest.TestCase):
                   "yes, wait", "yes if it is under 340"):
             self.assertFalse(self.yes(r), r)
 
+    def test_yes_naming_a_stock_outside_the_batch_does_not(self):
+        for r in ("yes, buy TSLA", "yes TSLA", "YES BUY TSLA", "yes buy tsla", "yes $1,250 of NVDA",
+                  "yes BRK.B"):
+            self.assertFalse(self.yes(r), r)
+        for r in ("yes buy it", "YES BUY AAPL", "yes buy aapl", "yes, buy 1250 dollars of AAPL",
+                  "YES PLEASE", "yes buy the shares"):
+            self.assertTrue(self.yes(r), r)
+
     def test_amount_must_match_this_order(self):
         sell = {"symbol": "KO", "side": "sell", "qty": "3", "type": "market", "time_in_force": "day"}
         self.assertTrue(self.yes("yes sell 3 KO", sell))
